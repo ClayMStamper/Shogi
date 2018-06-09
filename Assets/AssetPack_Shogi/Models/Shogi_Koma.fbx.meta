@@ -1,0 +1,118 @@
+fileFormatVersion: 2
+guid: d85cbe6f5ce05e4499d98dbdc088c371
+timeCreated: 1467559837
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Shogi_Fuhyo
+    100002: Shogi_Ginsho
+    100004: Shogi_Gyokusho
+    100006: Shogi_Hisha
+    100008: Shogi_Kakugyo
+    100010: Shogi_Keima
+    100012: Shogi_Kinsho
+    100014: //RootNode
+    100016: Shogi_Kyosha
+    100018: Shogi_Osho
+    400000: Shogi_Fuhyo
+    400002: Shogi_Ginsho
+    400004: Shogi_Gyokusho
+    400006: Shogi_Hisha
+    400008: Shogi_Kakugyo
+    400010: Shogi_Keima
+    400012: Shogi_Kinsho
+    400014: //RootNode
+    400016: Shogi_Kyosha
+    400018: Shogi_Osho
+    2300000: Shogi_Fuhyo
+    2300002: Shogi_Ginsho
+    2300004: Shogi_Gyokusho
+    2300006: Shogi_Hisha
+    2300008: Shogi_Kakugyo
+    2300010: Shogi_Keima
+    2300012: Shogi_Kinsho
+    2300014: Shogi_Kyosha
+    2300016: Shogi_Osho
+    3300000: Shogi_Fuhyo
+    3300002: Shogi_Ginsho
+    3300004: Shogi_Gyokusho
+    3300006: Shogi_Hisha
+    3300008: Shogi_Kakugyo
+    3300010: Shogi_Keima
+    3300012: Shogi_Kinsho
+    3300014: Shogi_Kyosha
+    3300016: Shogi_Osho
+    4300000: Shogi_Hisha
+    4300002: Shogi_Kakugyo
+    4300004: Shogi_Osho
+    4300006: Shogi_Gyokusho
+    4300008: Shogi_Kinsho
+    4300010: Shogi_Ginsho
+    4300012: Shogi_Keima
+    4300014: Shogi_Kyosha
+    4300016: Shogi_Fuhyo
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

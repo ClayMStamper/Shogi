@@ -158,11 +158,18 @@ public class BoardManager : MonoBehaviour {
 			return;
 		}
 
-		//make sure piece is owned by player - todo
-
 		legalMoves = pieces [x, y].LegalMoves ();
 		selectedPiece = pieces [x, y];
 	//	SideTableManager.selectedPiece = selectedPiece;
+		highlightManager.ShowLegalMoves (legalMoves);
+
+	}
+
+	public void SelectPiece(Piece piece){
+
+		legalMoves = piece.LegalMoves ();
+		selectedPiece = piece;
+		//	SideTableManager.selectedPiece = selectedPiece;
 		highlightManager.ShowLegalMoves (legalMoves);
 
 	}
@@ -184,6 +191,20 @@ public class BoardManager : MonoBehaviour {
 		} else {
 			Debug.Log ("ILLEGAL MOVE");
 		}
+
+		//un-select piece
+		selectedPiece = null;
+		highlightManager.HideMoves ();
+
+	}
+	public void MovePiece(Square move){
+
+		//enemy piece is here
+		if (pieces[move.x, move.y] != null){
+			OnPieceWasCaptured(pieces [move.x, move.y]);
+		}
+
+		OnPieceWasMoved ();
 
 		//un-select piece
 		selectedPiece = null;
@@ -212,8 +233,8 @@ public class BoardManager : MonoBehaviour {
 		//switch turns
 		isPlayerOnesTurn = !isPlayerOnesTurn;
 
-		if (AI.GetInstance().isActive && isPlayerOnesTurn) {
-			AI.GetInstance ().Go ();
+		if (AI2.GetInstance().isActive && isPlayerOnesTurn) {
+			AI2.GetInstance ().Go ();
 		}
 
 	}

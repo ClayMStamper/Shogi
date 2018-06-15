@@ -199,6 +199,9 @@ public class BoardManager : MonoBehaviour {
 	}
 	public void MovePiece(Square move){
 
+		selectedX = move.x;
+		selectedY = move.y;
+
 		//enemy piece is here
 		if (pieces[move.x, move.y] != null){
 			OnPieceWasCaptured(pieces [move.x, move.y]);

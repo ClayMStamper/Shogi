@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Player 1 is trying to minimize
+ * Player 2 is trying to maximize
+ */
+
 public class AI2 : MonoBehaviour {
 
 	#region singleton
@@ -39,28 +44,33 @@ public class AI2 : MonoBehaviour {
 	Piece selectedPiece = null;
 	Square selectedMove;
 
+	int maxEval, minEval;                 
+
 	public void Go(){
 		
-		Piece bestPiece = pickPiece ();
+		PickPieceAndSquare ();
 
+		//selectedMove is set by PickPiece()
 		DoMove (selectedMove);
 
 	}
 
-	Piece pickPiece(){
+	void PickPieceAndSquare(){
 
 		Piece piece = null;
+		int bestSquareEval = int.MaxValue; //defaulted to worst possible eval (lower is better for the AI)
 
 		//replace this: it's random
 		do {
 			piece = allPieces[Random.Range (0, allPieces.Count)].GetComponent <Piece>();
 		} while (!piece.isPlayerOne && piece != null);
 
-		return piece;
+		selectedPiece = piece;
+
 
 	}
 
-	Square calculateSquare(){
+	Square CalculateSquare(){
 
 		Square bestMove = new Square ();
 
@@ -70,29 +80,30 @@ public class AI2 : MonoBehaviour {
 
 	void DoMove(Square moveTo){
 
-		BoardManager boardManager = BoardManager.GetInstance ();
-		Piece piece = null;
-
 		List <Square> legalMoves = new List<Square> ();
-		legalMoves = Square.coordsToMovesList (piece.LegalMoves ());
+		legalMoves = Square.coordsToMovesList (selectedPiece.LegalMoves ());
+
+		selectedMove = legalMoves [0];
+		selectedMove.Print ();
 
 		boardManager.SelectPiece (selectedPiece);
 
-	}
-
-	void Minimax(){
+		boardManager.MovePiece (selectedMove);
 
 	}
 
-	void CreateBoard(){
+	int Minimax(Board board, int depth, bool maximizing){
 
+		if (depth == 0) {
+			board.eval;
+		}
+
+		//is player 1s turn
+		if (maximizing) {
+			return 0;
+		}
+		return 0;
 	}
-
-}
-
-struct Board{
-
-	public Piece[,] pieces;
 
 }
 
@@ -101,6 +112,8 @@ public struct Square{
 
 	public int eval;
 	public int x, y;
+
+//	public Board currentBoard;
 
 	public Vector2Int pos{
 		get{return new Vector2Int (x, y);}
@@ -132,8 +145,124 @@ public struct Square{
 
 	}
 
+	Board GetCurrentBoard(){
+
+		Board board = new Board();
+
+
+
+		return board;
+
+	}
+
 	public void Print(){
 		Debug.Log ("available move: " + x + ", " + y);
+	}
+
+}
+
+struct Board{
+
+	public int eval;
+
+	public Piece[,] pieces;
+
+	//evaluate current board
+	Board (Piece [,] basePieces){
+
+		//set default values
+		pieces = basePieces;
+		eval = 0;
+
+		eval = Evaluate ();
+
+	}
+
+	//create new board
+	Board (Board baseBoard, Square moveTo, Square moveFrom){
+
+		//set default values
+		pieces = baseBoard.pieces;
+		eval = 0;
+
+		//adjust board and evaluate
+		MovePiece (moveTo, moveFrom);
+		eval = Evaluate ();
+
+	}
+
+	void MovePiece(Square moveTo, Square moveFrom){
+
+		//copy piece to new square
+		pieces [moveTo.x, moveTo.y] = pieces [moveFrom.x, moveFrom.y];
+
+		//erase old square
+		pieces [moveFrom.x, moveFrom.y] = null;
+
+	}
+
+	int Evaluate(){
+		
+		int score1 = 0, score2 = 0;
+
+		for(int i = 0; i < 9; i++){
+			for(int j=0; j < 9; j++){
+
+				if (pieces [i, j] != null) {
+
+					Piece piece = pieces [i, j];
+
+					if (pieces [i, j].isPlayerOne) { //case that piece AI
+						if (piece is Dragon) {
+							score1 -= 12;
+						} else if (piece is Gryphon || piece is Rook) {
+							score1 -= 10;
+						} else if (piece is Bishop) {
+							score1 -= 8;
+						} else if (piece is GoldPromo && piece.gameObject.name == "Pawn") {
+							score1 -= 7;
+						} else if (piece is Gold || piece is GoldPromo) {
+							score1 -= 6;
+						} else if (piece is Silver) {
+							score1 -= 5;
+						} else if (piece is Knight) {
+							score1 -= 4;
+						} else if (piece is Lancer) {
+							score1 -= 3;
+						} else if (piece is Pawn) {
+							score1 -= 1;
+						}
+
+					} else { //case that piece is player
+						if (piece is Dragon) {
+							score2 += 12;
+						} else if (piece is Gryphon || piece is Rook) {
+							score2 += 10;
+						} else if (piece is Bishop) {
+							score2 += 8;
+						} else if (piece is GoldPromo && piece.gameObject.name == "Pawn") {
+							score2 += 7;
+						} else if (piece is Gold || piece is GoldPromo) {
+							score2 += 6;
+						} else if (piece is Silver) {
+							score2 += 5;
+						} else if (piece is Knight) {
+							score2 += 4;
+						} else if (piece is Lancer) {
+							score2 += 3;
+						} else if (piece is Pawn) {
+							score2 += 1;
+						} 
+					}
+				}
+
+			}
+		}
+
+		Debug.Log ("Final score 1 is: " + score1);
+		Debug.Log ("Final score 2 is: " + score2);
+
+		return score1+score2;
 	}
 
 }

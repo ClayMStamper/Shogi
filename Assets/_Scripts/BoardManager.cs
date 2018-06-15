@@ -204,6 +204,7 @@ public class BoardManager : MonoBehaviour {
 
 		//enemy piece is here
 		if (pieces[move.x, move.y] != null){
+			Debug.Log ("Trying to capture");
 			OnPieceWasCaptured(pieces [move.x, move.y]);
 		}
 

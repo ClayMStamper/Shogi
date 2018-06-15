@@ -49,25 +49,34 @@ public class AI2 : MonoBehaviour {
 	public void Go(){
 
 		Board currentBoard = new Board (boardManager.pieces);
-		Minimax (currentBoard, 1, !boardManager.isPlayerOnesTurn);
+		Minimax (currentBoard, 5, !boardManager.isPlayerOnesTurn);
 
-		//selectedMove is set by PickPiece()
-		DoMove (selectedMove);
+		//selectedMove is set in minimax
+		DoMove ();
 
 	}
 
-	void DoMove(Square moveTo){
+	void DoMove(){
 
 		Debug.Log ("Piece selected to move: " + selectedPiece);
 		selectedMove.Print ();
 
+		if (selectedPiece == null) {
+			Debug.LogError ("FATAL: TRYING TO MOVE A NULL PIECE");
+		}
+
 		boardManager.SelectPiece (selectedPiece);
+		boardManager.legalMoves = selectedPiece.LegalMoves ();
+		boardManager.selectedX = selectedMove.x;
+		boardManager.selectedY = selectedMove.y;
 
 		boardManager.MovePiece (selectedMove);
 
 	}
 
 	int Minimax(Board board, int depth, bool maximizing){
+
+		Debug.Log ("Running minimax");
 
 		if (depth == 0) {
 			return board.eval;
@@ -78,7 +87,7 @@ public class AI2 : MonoBehaviour {
 		//is player 1s turn
 		if (!maximizing) {
 
-			minEval = int.MinValue;
+			minEval = int.MaxValue;
 
 			allMoves = board.GetAllLegalMoves (true);
 
@@ -98,11 +107,15 @@ public class AI2 : MonoBehaviour {
 
 					int eval = Minimax (newBoard, depth - 1, true);
 
+					Debug.Log ("Eval is: " + eval);
+					Debug.Log ("Min eval is: " + minEval);
+
 					if (eval < minEval) { //found the better move
+						Debug.Log ("New pice should be selected");
 						minEval = eval;
 						selectedMove = myRootSquare;
 						selectedPiece = myRootPiece;
-					}
+					} 
 					minEval = Mathf.Min (eval, minEval);
 					return minEval;
 
@@ -114,7 +127,7 @@ public class AI2 : MonoBehaviour {
 
 		} else {
 
-			maxEval = int.MaxValue;
+			maxEval = int.MinValue;
 
 			allMoves = board.GetAllLegalMoves (false);
 
@@ -225,7 +238,7 @@ struct Board{
 	public Board (Board baseBoard, Square moveTo, Square moveFrom){
 
 		//set default values
-		pieces = baseBoard.pieces;
+		pieces = (Piece[,])baseBoard.pieces.Clone();
 		eval = 0;
 
 		//adjust board and evaluate
@@ -360,8 +373,8 @@ struct Board{
 			}
 		}
 
-		Debug.Log ("Final score 1 is: " + score1);
-		Debug.Log ("Final score 2 is: " + score2);
+	//	Debug.Log ("Final score 1 is: " + score1);
+	//	Debug.Log ("Final score 2 is: " + score2);
 
 		return score1+score2;
 	}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 /*
  * Player 1 is trying to minimize
@@ -38,8 +39,7 @@ public class AI2 : MonoBehaviour {
 	[SerializeField]
 	BoardManager boardManager;
 
-	[SerializeField]
-	List <GameObject> allPieces;
+	public List <GameObject> allPieces;
 
 	Piece selectedPiece = null;
 	Square selectedMove;
@@ -47,43 +47,18 @@ public class AI2 : MonoBehaviour {
 	int maxEval, minEval;                 
 
 	public void Go(){
-		
-		PickPieceAndSquare ();
+
+		Board currentBoard = new Board (boardManager.pieces);
+		Minimax (currentBoard, 1, !boardManager.isPlayerOnesTurn);
 
 		//selectedMove is set by PickPiece()
 		DoMove (selectedMove);
 
 	}
 
-	void PickPieceAndSquare(){
-
-		Piece piece = null;
-		int bestSquareEval = int.MaxValue; //defaulted to worst possible eval (lower is better for the AI)
-
-		//replace this: it's random
-		do {
-			piece = allPieces[Random.Range (0, allPieces.Count)].GetComponent <Piece>();
-		} while (!piece.isPlayerOne && piece != null);
-
-		selectedPiece = piece;
-
-
-	}
-
-	Square CalculateSquare(){
-
-		Square bestMove = new Square ();
-
-		return bestMove;
-
-	}
-
 	void DoMove(Square moveTo){
 
-		List <Square> legalMoves = new List<Square> ();
-		legalMoves = Square.coordsToMovesList (selectedPiece.LegalMoves ());
-
-		selectedMove = legalMoves [0];
+		Debug.Log ("Piece selected to move: " + selectedPiece);
 		selectedMove.Print ();
 
 		boardManager.SelectPiece (selectedPiece);
@@ -95,23 +70,91 @@ public class AI2 : MonoBehaviour {
 	int Minimax(Board board, int depth, bool maximizing){
 
 		if (depth == 0) {
-			board.eval;
+			return board.eval;
 		}
 
+		List <Square> allMoves = new List<Square> ();
+
 		//is player 1s turn
-		if (maximizing) {
+		if (!maximizing) {
+
+			minEval = int.MinValue;
+
+			allMoves = board.GetAllLegalMoves (true);
+
+			foreach (Square moveTo in allMoves) {
+
+				Square myRootSquare = moveTo;
+				Piece myRootPiece = myRootSquare.moveFrom.Last ();
+
+				int i = moveTo.moveFrom.Count;
+
+				while (i > 0){
+					
+					i--;
+
+					Square movedFrom = new Square (new Vector2Int (moveTo.moveFrom [i].x, moveTo.moveFrom [i].y));
+					Board newBoard = new Board (board, moveTo, movedFrom);
+
+					int eval = Minimax (newBoard, depth - 1, true);
+
+					if (eval < minEval) { //found the better move
+						minEval = eval;
+						selectedMove = myRootSquare;
+						selectedPiece = myRootPiece;
+					}
+					minEval = Mathf.Min (eval, minEval);
+					return minEval;
+
+				}
+			}
+
+			Debug.LogError ("No moves availabele: something is wrong");
 			return 0;
+
+		} else {
+
+			maxEval = int.MaxValue;
+
+			allMoves = board.GetAllLegalMoves (false);
+
+			foreach (Square moveTo in allMoves) {
+
+				int i = moveTo.moveFrom.Count;
+
+				while (i > 0){
+
+					i--;
+
+					Square movedFrom = new Square (new Vector2Int (moveTo.moveFrom [i].x, moveTo.moveFrom [i].y));
+					Board newBoard = new Board (board, moveTo, movedFrom);
+
+					int eval = Minimax (newBoard, depth - 1, false);
+
+					if (eval > maxEval) { //found the better move
+						maxEval = eval;
+//						nextMove = moveTo;
+//						nextPiece = newBoard.pieces [moveTo.x, moveTo.y];
+					}
+
+					return maxEval;
+
+				}
+			}
+
+			Debug.LogError ("No moves availabele: something is wrong");
+			return 0;
+
 		}
-		return 0;
 	}
 
 }
 
-//"Move" nown: an available spot ont the board to move to
+// Abstraction of any coordinate on the board
 public struct Square{
 
-	public int eval;
 	public int x, y;
+	public List <Piece> moveFrom;
 
 //	public Board currentBoard;
 
@@ -120,10 +163,11 @@ public struct Square{
 		set{x = pos.x; y = pos.y;}
 	}
 
-	Square (Vector2Int move){
+	public Square (Vector2Int move){
 		x = move.x;
 		y = move.y;
-		eval = 0;
+
+		moveFrom = new List<Piece> ();
 	}
 
 	//converts vector array to Move array
@@ -164,11 +208,10 @@ public struct Square{
 struct Board{
 
 	public int eval;
-
 	public Piece[,] pieces;
 
 	//evaluate current board
-	Board (Piece [,] basePieces){
+	public Board (Piece [,] basePieces){
 
 		//set default values
 		pieces = basePieces;
@@ -179,7 +222,7 @@ struct Board{
 	}
 
 	//create new board
-	Board (Board baseBoard, Square moveTo, Square moveFrom){
+	public Board (Board baseBoard, Square moveTo, Square moveFrom){
 
 		//set default values
 		pieces = baseBoard.pieces;
@@ -198,6 +241,60 @@ struct Board{
 
 		//erase old square
 		pieces [moveFrom.x, moveFrom.y] = null;
+
+	}
+
+	public List <Square> GetAllLegalMoves(bool isPlayerOne){
+
+		List <Square> allMoves = new List<Square> ();
+
+		if (isPlayerOne) { // is minimizing
+
+			foreach (GameObject piece in AI2.GetInstance().allPieces) {
+
+				if (piece.GetComponent<Piece> ().isPlayerOne) {
+
+					List <Square> legalMoves = new List<Square> ();
+					legalMoves = Square.coordsToMovesList (piece.GetComponent<Piece> ().LegalMoves ());
+
+					foreach (Square move in legalMoves) {
+
+						move.moveFrom.Add (piece.GetComponent<Piece> ());
+
+						if (!allMoves.Contains (move)) {
+
+							allMoves.Add (move);
+
+						}
+					}
+				}
+			}
+
+		} else { // is maximizing
+
+			foreach (GameObject piece in AI2.GetInstance().allPieces) {
+
+				if (!piece.GetComponent<Piece> ().isPlayerOne) {
+
+					List <Square> legalMoves = new List<Square> ();
+					legalMoves = Square.coordsToMovesList (piece.GetComponent<Piece> ().LegalMoves ());
+
+					foreach (Square move in legalMoves){
+
+						move.moveFrom.Add (piece.GetComponent<Piece> ());
+
+						if (!allMoves.Contains (move)) {
+
+							allMoves.Add (move);
+
+						}
+					}
+				}
+			}
+
+		}
+
+		return allMoves;
 
 	}
 
@@ -231,6 +328,8 @@ struct Board{
 							score1 -= 3;
 						} else if (piece is Pawn) {
 							score1 -= 1;
+						} else if (piece is King) {
+							score1 -= 90;
 						}
 
 					} else { //case that piece is player
@@ -252,7 +351,9 @@ struct Board{
 							score2 += 3;
 						} else if (piece is Pawn) {
 							score2 += 1;
-						} 
+						} else if (piece is King) {
+							score2 += 90;
+						}
 					}
 				}
 

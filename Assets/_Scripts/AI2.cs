@@ -49,7 +49,7 @@ public class AI2 : MonoBehaviour {
 	public void Go(){
 
 		Board currentBoard = new Board (boardManager.pieces);
-		Minimax (currentBoard, 5, !boardManager.isPlayerOnesTurn);
+		Minimax (currentBoard, 2, !boardManager.isPlayerOnesTurn);
 
 		//selectedMove is set in minimax
 		DoMove ();
@@ -70,7 +70,11 @@ public class AI2 : MonoBehaviour {
 		boardManager.selectedX = selectedMove.x;
 		boardManager.selectedY = selectedMove.y;
 
-		boardManager.MovePiece (selectedMove);
+		if (!selectedPiece.isCaptured) {
+			boardManager.MovePiece (selectedMove);
+		} else {
+			boardManager.table1.DropPiece (selectedMove.x, selectedMove.y);
+		}
 
 	}
 
@@ -111,19 +115,19 @@ public class AI2 : MonoBehaviour {
 					Debug.Log ("Min eval is: " + minEval);
 
 					if (eval < minEval) { //found the better move
-						Debug.Log ("New pice should be selected");
+						Debug.Log ("New piece should be selected");
 						minEval = eval;
 						selectedMove = myRootSquare;
 						selectedPiece = myRootPiece;
 					} 
-					minEval = Mathf.Min (eval, minEval);
-					return minEval;
-
+			//		minEval = Mathf.Min (eval, minEval);
 				}
 			}
 
-			Debug.LogError ("No moves availabele: something is wrong");
-			return 0;
+			return minEval;
+
+		//	Debug.LogError ("No moves availabele: something is wrong");
+		//	return 0;
 
 		} else {
 
@@ -149,14 +153,10 @@ public class AI2 : MonoBehaviour {
 //						nextMove = moveTo;
 //						nextPiece = newBoard.pieces [moveTo.x, moveTo.y];
 					}
-
-					return maxEval;
-
 				}
 			}
 
-			Debug.LogError ("No moves availabele: something is wrong");
-			return 0;
+			return maxEval;
 
 		}
 	}
@@ -377,6 +377,16 @@ struct Board{
 	//	Debug.Log ("Final score 2 is: " + score2);
 
 		return score1+score2;
+	}
+
+	public void Print(){
+
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				Debug.Log ("Piece at " + i + ", " + j + ": " + pieces [i, j]);
+			}
+		}
+
 	}
 
 }

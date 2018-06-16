@@ -49,7 +49,7 @@ public class AI2 : MonoBehaviour {
 	public void Go(){
 
 		Board currentBoard = new Board (boardManager.pieces);
-		Minimax (currentBoard, 2, !boardManager.isPlayerOnesTurn);
+		Minimax (currentBoard, 2, !boardManager.isPlayerOnesTurn, int.MinValue, int.MaxValue);
 
 		//selectedMove is set in minimax
 		DoMove ();
@@ -67,8 +67,6 @@ public class AI2 : MonoBehaviour {
 
 		boardManager.SelectPiece (selectedPiece);
 		boardManager.legalMoves = selectedPiece.LegalMoves ();
-		boardManager.selectedX = selectedMove.x;
-		boardManager.selectedY = selectedMove.y;
 
 		if (!selectedPiece.isCaptured) {
 			boardManager.MovePiece (selectedMove);
@@ -78,7 +76,7 @@ public class AI2 : MonoBehaviour {
 
 	}
 
-	int Minimax(Board board, int depth, bool maximizing){
+	int Minimax(Board board, int depth, bool maximizing, int alpha, int beta){
 
 		Debug.Log ("Running minimax");
 
@@ -109,7 +107,7 @@ public class AI2 : MonoBehaviour {
 					Square movedFrom = new Square (new Vector2Int (moveTo.moveFrom [i].x, moveTo.moveFrom [i].y));
 					Board newBoard = new Board (board, moveTo, movedFrom);
 
-					int eval = Minimax (newBoard, depth - 1, true);
+					int eval = Minimax (newBoard, depth - 1, true, alpha, beta);
 
 					Debug.Log ("Eval is: " + eval);
 					Debug.Log ("Min eval is: " + minEval);
@@ -117,9 +115,21 @@ public class AI2 : MonoBehaviour {
 					if (eval < minEval) { //found the better move
 						Debug.Log ("New piece should be selected");
 						minEval = eval;
+						beta = minEval;
+						if (beta <= alpha) {
+							break;
+						}
 						selectedMove = myRootSquare;
 						selectedPiece = myRootPiece;
-					} 
+					} else if (eval == minEval) {
+						// this just adds in variability
+						if (Random.value > 0.5f) {
+							Debug.Log ("New piece should be selected");
+							minEval = eval;
+							selectedMove = myRootSquare;
+							selectedPiece = myRootPiece;
+						}
+					}
 			//		minEval = Mathf.Min (eval, minEval);
 				}
 			}
@@ -146,10 +156,14 @@ public class AI2 : MonoBehaviour {
 					Square movedFrom = new Square (new Vector2Int (moveTo.moveFrom [i].x, moveTo.moveFrom [i].y));
 					Board newBoard = new Board (board, moveTo, movedFrom);
 
-					int eval = Minimax (newBoard, depth - 1, false);
+					int eval = Minimax (newBoard, depth - 1, false, alpha, beta);
 
 					if (eval > maxEval) { //found the better move
 						maxEval = eval;
+						alpha = maxEval;
+						if (beta <= alpha) {
+							break;
+						}
 //						nextMove = moveTo;
 //						nextPiece = newBoard.pieces [moveTo.x, moveTo.y];
 					}

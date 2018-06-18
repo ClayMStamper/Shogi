@@ -287,10 +287,7 @@ public class SideTableManager : MonoBehaviour {
 					}
 				}
 			}
-
 		}
-
-
 	}
 
 	bool PosIsBlocked (int x, int y){

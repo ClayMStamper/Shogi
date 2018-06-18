@@ -175,6 +175,76 @@ public class AI2 : MonoBehaviour {
 		}
 	}
 
+	public bool[,] GetLegalDrops(Piece piece){
+
+		bool[,] legalMoves = new bool[9, 9];
+
+		if (piece.name != "Pawn") { // not a pawn
+
+			for (int i = 0; i < 9; i++) {
+				for (int j = 0; j < 9; j++) {
+
+					if (!PosIsBlocked (i, j)) {
+
+						legalMoves [i, j] = true;
+
+						//Debug.Log (i + ", " + j + ": Is Moveable");
+
+					} else {
+
+						legalMoves [i, j] = false;
+
+					}
+				}
+			}
+
+		} else { //is a pawn: apply special rules
+
+			for (int i = 0; i < 9; i++) {
+				for (int j = 0; j < 9; j++) {
+
+					if (PosIsBlocked (i, j)) {
+
+						legalMoves [i, j] = false;
+
+						if (boardManager.pieces [i, j] is Pawn && 
+							boardManager.pieces[i, j].isPlayerOne == piece.isPlayerOne) {
+
+							for (int k = 0; k < 9; k++) {
+
+								//sets moves in the file to illegal if a friendly
+								//pawn is in that file
+								legalMoves [i, k] = false;
+
+							}
+
+							break;
+
+						}
+
+					} else {
+
+						legalMoves [i, j] = true;
+
+					}
+				}
+			}
+		}
+
+		return legalMoves;
+
+	}
+
+	bool PosIsBlocked (int x, int y){
+
+		if (boardManager.pieces [x, y] != null) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
 }
 
 // Abstraction of any coordinate on the board
@@ -282,7 +352,12 @@ struct Board{
 				if (piece.GetComponent<Piece> ().isPlayerOne) {
 
 					List <Square> legalMoves = new List<Square> ();
-					legalMoves = Square.coordsToMovesList (piece.GetComponent<Piece> ().LegalMoves ());
+
+					if (!piece.GetComponent<Piece> ().isCaptured) {
+						legalMoves = Square.coordsToMovesList (piece.GetComponent<Piece> ().LegalMoves ());
+					} else {
+						legalMoves = Square.coordsToMovesList (AI2.GetInstance().GetLegalDrops (piece.GetComponent<Piece> ()));
+					}
 
 					foreach (Square move in legalMoves) {
 

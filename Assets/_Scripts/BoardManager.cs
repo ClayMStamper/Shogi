@@ -237,8 +237,8 @@ public class BoardManager : MonoBehaviour {
 		//switch turns
 		isPlayerOnesTurn = !isPlayerOnesTurn;
 
-		if (AI2.GetInstance().isActive && isPlayerOnesTurn) {
-			AI2.GetInstance ().Go ();
+		if (AI.GetInstance().isActive && isPlayerOnesTurn) {
+			AI.GetInstance ().Go ();
 		}
 
 	}

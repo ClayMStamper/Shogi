@@ -12,7 +12,7 @@ public class SideTableManager : MonoBehaviour {
 
 	//the points that your mouse / finger are hovered over
 	// defaulted to negative to indicate not being on the board
-	int selectedX = -1, selectedY = -1;
+	public int selectedX = -1, selectedY = -1;
 
 	//public static Piece selectedPiece;
 
@@ -224,7 +224,7 @@ public class SideTableManager : MonoBehaviour {
 			board.selectedPiece.isCaptured = false;					
 
 		} else {
-			Debug.Log ("ILLEGAL MOVE");
+			Debug.Log ("ILLEGAL DROP");
 		}
 
 		//un-select piece

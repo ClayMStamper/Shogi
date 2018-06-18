@@ -8,13 +8,13 @@ using System.Linq;
  * Player 2 is trying to maximize
  */
 
-public class AI2 : MonoBehaviour {
+public class AI : MonoBehaviour {
 
 	#region singleton
 
 	//ensure that there is only one of these in the scene
 
-	public static AI2 instance;
+	public static AI instance;
 
 	void Awake(){
 
@@ -26,7 +26,7 @@ public class AI2 : MonoBehaviour {
 
 	}
 
-	public static AI2 GetInstance(){
+	public static AI GetInstance(){
 		return instance;
 	}
 
@@ -41,7 +41,7 @@ public class AI2 : MonoBehaviour {
 
 	public List <GameObject> allPieces;
 
-	Piece selectedPiece = null;
+	public Piece selectedPiece = null;
 	Square selectedMove;
 
 	int maxEval, minEval;                 
@@ -66,11 +66,12 @@ public class AI2 : MonoBehaviour {
 		}
 
 		boardManager.SelectPiece (selectedPiece);
-		boardManager.legalMoves = selectedPiece.LegalMoves ();
 
-		if (!selectedPiece.isCaptured) {
+		if (!selectedPiece.isCaptured) { //moving piece
+			boardManager.legalMoves = selectedPiece.LegalMoves ();
 			boardManager.MovePiece (selectedMove);
-		} else {
+		} else { //dropping piece
+			boardManager.legalMoves = GetLegalDrops (selectedPiece);
 			boardManager.table1.DropPiece (selectedMove.x, selectedMove.y);
 		}
 
@@ -96,16 +97,20 @@ public class AI2 : MonoBehaviour {
 			foreach (Square moveTo in allMoves) {
 
 				Square myRootSquare = moveTo;
-				Piece myRootPiece = myRootSquare.moveFrom.Last ();
+				Piece myRootPiece = myRootSquare.pieceMoved.Last ();
 
-				int i = moveTo.moveFrom.Count;
+				//# of pieces that can move to the same square
+				//moveTo refers to the square, pieceMoved refers to the piece
+				int i = moveTo.pieceMoved.Count;
 
+				//will probably just iterate once unless multiple pieces are looking at the same spot
 				while (i > 0){
 					
 					i--;
 
-					Square movedFrom = new Square (new Vector2Int (moveTo.moveFrom [i].x, moveTo.moveFrom [i].y));
-					Board newBoard = new Board (board, moveTo, movedFrom);
+					//the square that the piece moved from
+					Square movedFrom = new Square (new Vector2Int (moveTo.pieceMoved [i].x, moveTo.pieceMoved [i].y));
+					Board newBoard = new Board (board, moveTo, movedFrom, moveTo.pieceMoved[i]);
 
 					int eval = Minimax (newBoard, depth - 1, true, alpha, beta);
 
@@ -147,14 +152,14 @@ public class AI2 : MonoBehaviour {
 
 			foreach (Square moveTo in allMoves) {
 
-				int i = moveTo.moveFrom.Count;
+				int i = moveTo.pieceMoved.Count;
 
 				while (i > 0){
 
 					i--;
 
-					Square movedFrom = new Square (new Vector2Int (moveTo.moveFrom [i].x, moveTo.moveFrom [i].y));
-					Board newBoard = new Board (board, moveTo, movedFrom);
+					Square movedFrom = new Square (new Vector2Int (moveTo.pieceMoved [i].x, moveTo.pieceMoved [i].y));
+					Board newBoard = new Board (board, moveTo, movedFrom, moveTo.pieceMoved[i]);
 
 					int eval = Minimax (newBoard, depth - 1, false, alpha, beta);
 
@@ -251,7 +256,7 @@ public class AI2 : MonoBehaviour {
 public struct Square{
 
 	public int x, y;
-	public List <Piece> moveFrom;
+	public List <Piece> pieceMoved;
 
 //	public Board currentBoard;
 
@@ -264,7 +269,7 @@ public struct Square{
 		x = move.x;
 		y = move.y;
 
-		moveFrom = new List<Piece> ();
+		pieceMoved = new List<Piece> ();
 	}
 
 	//converts vector array to Move array
@@ -302,16 +307,18 @@ public struct Square{
 
 }
 
-struct Board{
+public struct Board{
 
 	public int eval;
 	public Piece[,] pieces;
+	SideTable sideTable;
 
 	//evaluate current board
 	public Board (Piece [,] basePieces){
 
 		//set default values
 		pieces = basePieces;
+		sideTable = new SideTable (BoardManager.GetInstance().table1);
 		eval = 0;
 
 		eval = Evaluate ();
@@ -319,19 +326,28 @@ struct Board{
 	}
 
 	//create new board
-	public Board (Board baseBoard, Square moveTo, Square moveFrom){
+	public Board (Board baseBoard, Square moveTo, Square moveFrom, Piece moved){
+
+	//	Piece piece = AI.GetInstance ().selectedPiece;
 
 		//set default values
 		pieces = (Piece[,])baseBoard.pieces.Clone();
+		sideTable = new SideTable (BoardManager.GetInstance().table1);
 		eval = 0;
 
 		//adjust board and evaluate
-		MovePiece (moveTo, moveFrom);
+
+		if (moved.isCaptured) {
+			DropPiece (moveTo, moved);
+		} else {
+			MovePiece (moveTo, moveFrom, moved);
+		}
+
 		eval = Evaluate ();
 
 	}
 
-	void MovePiece(Square moveTo, Square moveFrom){
+	void MovePiece(Square moveTo, Square moveFrom, Piece moved){
 
 		//copy piece to new square
 		pieces [moveTo.x, moveTo.y] = pieces [moveFrom.x, moveFrom.y];
@@ -341,13 +357,27 @@ struct Board{
 
 	}
 
+	void DropPiece (Square moveTo, Piece moved){
+
+		//copy piece to its new square
+		pieces[moveTo.x, moveTo.y] = moved;
+
+		//Remove from sideTable
+		if (sideTable.sidePieces.Contains (moved)) {
+			sideTable.sidePieces.Remove (moved);
+		} else {
+			Debug.LogError ("Tried to drop piece that wasn't found on the side table. Check table constructor");
+		}
+
+	}
+
 	public List <Square> GetAllLegalMoves(bool isPlayerOne){
 
 		List <Square> allMoves = new List<Square> ();
 
 		if (isPlayerOne) { // is minimizing
 
-			foreach (GameObject piece in AI2.GetInstance().allPieces) {
+			foreach (GameObject piece in AI.GetInstance().allPieces) {
 
 				if (piece.GetComponent<Piece> ().isPlayerOne) {
 
@@ -356,12 +386,13 @@ struct Board{
 					if (!piece.GetComponent<Piece> ().isCaptured) {
 						legalMoves = Square.coordsToMovesList (piece.GetComponent<Piece> ().LegalMoves ());
 					} else {
-						legalMoves = Square.coordsToMovesList (AI2.GetInstance().GetLegalDrops (piece.GetComponent<Piece> ()));
+						legalMoves = Square.coordsToMovesList (AI.GetInstance().GetLegalDrops (piece.GetComponent<Piece> ()));
 					}
 
 					foreach (Square move in legalMoves) {
 
-						move.moveFrom.Add (piece.GetComponent<Piece> ());
+						//caches the piece that was doing the moving since moves are recorded by square, not piece
+						move.pieceMoved.Add (piece.GetComponent<Piece> ());
 
 						if (!allMoves.Contains (move)) {
 
@@ -374,7 +405,7 @@ struct Board{
 
 		} else { // is maximizing
 
-			foreach (GameObject piece in AI2.GetInstance().allPieces) {
+			foreach (GameObject piece in AI.GetInstance().allPieces) {
 
 				if (!piece.GetComponent<Piece> ().isPlayerOne) {
 
@@ -383,7 +414,7 @@ struct Board{
 
 					foreach (Square move in legalMoves){
 
-						move.moveFrom.Add (piece.GetComponent<Piece> ());
+						move.pieceMoved.Add (piece.GetComponent<Piece> ());
 
 						if (!allMoves.Contains (move)) {
 
@@ -473,6 +504,28 @@ struct Board{
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				Debug.Log ("Piece at " + i + ", " + j + ": " + pieces [i, j]);
+			}
+		}
+
+	}
+
+}
+
+public struct SideTable {
+
+	public List <Piece> sidePieces;
+
+	public SideTable (SideTableManager table){
+
+		sidePieces = new List<Piece> ();
+
+		for (int i = 3; i < 0; i++) {
+			for (int j = 3; j < 0; j++) {
+
+				foreach (Piece piece in table.pieceStacks[i,j]) {
+					sidePieces.Add (piece);
+				}
+
 			}
 		}
 

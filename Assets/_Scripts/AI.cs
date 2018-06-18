@@ -250,6 +250,10 @@ public class AI : MonoBehaviour {
 
 	}
 
+	public void ToggleIsActive(bool isActive){
+		this.isActive = isActive;
+	}
+
 }
 
 // Abstraction of any coordinate on the board

@@ -218,7 +218,7 @@ public class BoardManager : MonoBehaviour {
 
 	void OnPieceWasMoved(){
 
-		//Debug.Log ("On piece was moved");
+		CheckForPromotion ();
 
 		//set old pos to null 
 		pieces [selectedPiece.x, selectedPiece.y] = null;

@@ -189,6 +189,9 @@ public class BoardManager : MonoBehaviour {
 			OnPieceWasMoved ();
 
 		} else {
+			if (AI.GetInstance ().isActive && isPlayerOnesTurn) {
+				Debug.LogError ("Fatal: AI made an illegal move: " + selectedPiece + ": " + selectedX + ", " + selectedY);
+			}
 			Debug.Log ("ILLEGAL MOVE");
 		}
 

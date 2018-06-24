@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 112000002, guid: 9ad098d2af1004ba7ad35e434d084c71,
+  m_LightingDataAsset: {fileID: 112000002, guid: f277205506fbf49c28e9055b676abea5,
     type: 2}
   m_UseShadowmask: 0
 --- !u!196 &4
@@ -1223,7 +1223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recursionDepth: 2
-  isActive: 1
+  isActive: 0
   boardManager: {fileID: 1404062334}
   allPieces:
   - {fileID: 1124390074}

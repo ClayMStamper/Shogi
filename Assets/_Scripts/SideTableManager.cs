@@ -25,7 +25,7 @@ public class SideTableManager : MonoBehaviour {
 	Transform grid;
 
 	[SerializeField]
-	BoardManager board;
+	BoardManager boardManager;
 
 	void Awake (){
 
@@ -37,14 +37,14 @@ public class SideTableManager : MonoBehaviour {
 			}
 		}
 
-		board.legalMoves = new bool[9,9];
+		boardManager.legalMoves = new bool[9,9];
 
 	}
 
 	void Update(){
 
 		//return if its not my turn
-		if (board.isPlayerOnesTurn != name.Contains ("1")) {
+		if (boardManager.isPlayerOnesTurn != name.Contains ("1")) {
 			return;
 		}
 
@@ -146,7 +146,7 @@ public class SideTableManager : MonoBehaviour {
 			//Debug.Log ("Selected Y: " + selectedY);
 
 			// select piece
-			if (board.selectedPiece == null) {
+			if (boardManager.selectedPiece == null) {
 				
 				if (selectedX >= 0 && selectedY >= 0) {
 
@@ -173,16 +173,16 @@ public class SideTableManager : MonoBehaviour {
 			return;
 		}
 		//return if not my piece
-		if (pieceStacks [selectedX, selectedY].Peek().isPlayerOne != board.isPlayerOnesTurn) {
+		if (pieceStacks [selectedX, selectedY].Peek().isPlayerOne != boardManager.isPlayerOnesTurn) {
 			Debug.Log ("Not my piece");
 			//return;
 		}
 			
 		//selected piece = top of stack at x, y
-		board.selectedPiece = pieceStacks [selectedX, selectedY].Peek();
+		boardManager.selectedPiece = pieceStacks [selectedX, selectedY].Peek();
 
 		GetLegalMoves ();
-		HighlightManager.GetInstance().ShowLegalMoves (board.legalMoves);
+		HighlightManager.GetInstance().ShowLegalMoves (boardManager.legalMoves);
 
 		//Debug.Log ("Piece at: " + selectedX + ", " + selectedY + " = ");
 		//Debug.Log (pieceStacks [selectedX, selectedY].Peek ());
@@ -194,34 +194,34 @@ public class SideTableManager : MonoBehaviour {
 	public void DropPiece (int x, int y){
 
 		//check for move is legal
-		if (board.legalMoves [x, y]) {
+		if (boardManager.legalMoves [x, y]) {
 
 			//pop top of stack
 			//Debug.Log ((int)board.selectedPiece.transform.localPosition.x);
 			//Debug.Log ((int)board.selectedPiece.transform.localPosition.y);
 
-			Vector3 coord = board.selectedPiece.transform.localPosition;
+			Vector3 coord = boardManager.selectedPiece.transform.localPosition;
 			pieceStacks [Mathf.RoundToInt(coord.x) , Mathf.RoundToInt(coord.y)].Pop();
 
 			//set newPos to selected coordinate
-			board.pieces [x, y] = board.selectedPiece;
+			boardManager.pieces [x, y] = boardManager.selectedPiece;
 			//.5 compensation for truncated floats to ints 
-			board.selectedPiece.transform.position = new Vector3 (x + .5f, 0, y + .5f);
+			boardManager.selectedPiece.transform.position = new Vector3 (x + .5f, 0, y + .5f);
 			//cache new position
-			board.selectedPiece.GetCurrentPos ();
+			boardManager.selectedPiece.GetCurrentPos ();
 			//parent piece to the board object
-			board.selectedPiece.transform.SetParent (board.transform);
+			boardManager.selectedPiece.transform.SetParent (boardManager.transform);
 
 			//switch turns
-			board.isPlayerOnesTurn = !board.isPlayerOnesTurn;
+			boardManager.isPlayerOnesTurn = !boardManager.isPlayerOnesTurn;
 
-			if (board.selectedPiece.isPlayerOne) {
-				board.selectedPiece.transform.SetParent (GameObject.Find ("Player 1").transform);
+			if (boardManager.selectedPiece.isPlayerOne) {
+				boardManager.selectedPiece.transform.SetParent (GameObject.Find ("Player 1").transform);
 			} else {
-				board.selectedPiece.transform.SetParent (GameObject.Find ("Player 2").transform);
+				boardManager.selectedPiece.transform.SetParent (GameObject.Find ("Player 2").transform);
 			}
 
-			board.selectedPiece.isCaptured = false;					
+			boardManager.selectedPiece.isCaptured = false;					
 
 		} else {
 			Debug.Log ("ILLEGAL DROP");
@@ -229,28 +229,32 @@ public class SideTableManager : MonoBehaviour {
 
 		//un-select piece
 
-		board.selectedPiece = null;
+		boardManager.selectedPiece = null;
 		HighlightManager.GetInstance().HideMoves ();
+
+		if (AI.GetInstance().isActive && boardManager.isPlayerOnesTurn) {
+			AI.GetInstance ().Go ();
+		}
 
 	}
 
 	//all open spots are legal drops with the exception of pawns
 	void GetLegalMoves(){
 
-		if (board.selectedPiece.name != "Pawn") { // not a pawn
+		if (boardManager.selectedPiece.name != "Pawn") { // not a pawn
 			
 			for (int i = 0; i < 9; i++) {
 				for (int j = 0; j < 9; j++) {
 				
 					if (!PosIsBlocked (i, j)) {
 					
-						board.legalMoves [i, j] = true;
+						boardManager.legalMoves [i, j] = true;
 
 						//Debug.Log (i + ", " + j + ": Is Moveable");
 
 					} else {
 
-						board.legalMoves [i, j] = false;
+						boardManager.legalMoves [i, j] = false;
 
 					}
 				}
@@ -263,16 +267,16 @@ public class SideTableManager : MonoBehaviour {
 
 					if (PosIsBlocked (i, j)) {
 
-						board.legalMoves [i, j] = false;
+						boardManager.legalMoves [i, j] = false;
 
-						if (board.pieces [i, j] is Pawn && 
-						board.pieces[i, j].isPlayerOne == board.selectedPiece.isPlayerOne) {
+						if (boardManager.pieces [i, j] is Pawn && 
+						boardManager.pieces[i, j].isPlayerOne == boardManager.selectedPiece.isPlayerOne) {
 
 							for (int k = 0; k < 9; k++) {
 
 								//sets moves in the file to illegal if a friendly
 								//pawn is in that file
-								board.legalMoves [i, k] = false;
+								boardManager.legalMoves [i, k] = false;
 
 							}
 
@@ -282,7 +286,7 @@ public class SideTableManager : MonoBehaviour {
 
 					} else {
 
-						board.legalMoves [i, j] = true;
+						boardManager.legalMoves [i, j] = true;
 
 					}
 				}
@@ -292,7 +296,7 @@ public class SideTableManager : MonoBehaviour {
 
 	bool PosIsBlocked (int x, int y){
 
-		if (board.pieces [x, y] != null) {
+		if (boardManager.pieces [x, y] != null) {
 			return true;
 		} else {
 			return false;

@@ -1297,52 +1297,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e981b17a8bbc43f88f23e677469b5a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recursionDepth: 3
-  goodEnoughEval: 10
-  skipRate: 0.341
+  recursionDepth: 2
   isActive: 1
   boardManager: {fileID: 1404062334}
   allPieces:
-  - {fileID: 1124390076}
-  - {fileID: 1131758589}
-  - {fileID: 1915703571}
-  - {fileID: 490090232}
-  - {fileID: 1002927827}
-  - {fileID: 944846682}
-  - {fileID: 1306808909}
-  - {fileID: 793850073}
-  - {fileID: 2031047506}
-  - {fileID: 1885385733}
-  - {fileID: 1322618968}
-  - {fileID: 19592260}
-  - {fileID: 1226313682}
-  - {fileID: 1778052651}
-  - {fileID: 1347677303}
-  - {fileID: 385601579}
-  - {fileID: 255196922}
-  - {fileID: 710043728}
-  - {fileID: 78141637}
-  - {fileID: 290525409}
-  - {fileID: 385291374}
-  - {fileID: 1347991170}
-  - {fileID: 547205588}
-  - {fileID: 442109188}
-  - {fileID: 1163944248}
-  - {fileID: 1682087657}
-  - {fileID: 1110379099}
-  - {fileID: 825088267}
-  - {fileID: 809646123}
-  - {fileID: 334931902}
-  - {fileID: 1318567107}
-  - {fileID: 434311603}
-  - {fileID: 117736035}
-  - {fileID: 1007433235}
-  - {fileID: 529073475}
-  - {fileID: 1664068300}
-  - {fileID: 1072732259}
-  - {fileID: 509066793}
-  - {fileID: 1314279817}
-  - {fileID: 2104770293}
+  - {fileID: 1124390074}
+  - {fileID: 1131758587}
+  - {fileID: 1915703569}
+  - {fileID: 490090230}
+  - {fileID: 1002927825}
+  - {fileID: 944846680}
+  - {fileID: 1306808907}
+  - {fileID: 793850071}
+  - {fileID: 2031047504}
+  - {fileID: 1885385731}
+  - {fileID: 1322618966}
+  - {fileID: 19592258}
+  - {fileID: 1226313680}
+  - {fileID: 1778052649}
+  - {fileID: 1347677301}
+  - {fileID: 385601577}
+  - {fileID: 255196920}
+  - {fileID: 710043726}
+  - {fileID: 78141635}
+  - {fileID: 290525407}
+  - {fileID: 385291372}
+  - {fileID: 1347991168}
+  - {fileID: 547205586}
+  - {fileID: 442109186}
+  - {fileID: 1163944246}
+  - {fileID: 1682087655}
+  - {fileID: 1110379097}
+  - {fileID: 825088265}
+  - {fileID: 809646121}
+  - {fileID: 334931900}
+  - {fileID: 1318567105}
+  - {fileID: 434311601}
+  - {fileID: 117736033}
+  - {fileID: 1007433233}
+  - {fileID: 529073473}
+  - {fileID: 1664068298}
+  - {fileID: 1072732257}
+  - {fileID: 509066791}
+  - {fileID: 1314279815}
+  - {fileID: 2104770291}
   selectedPiece: {fileID: 1124390076}
 --- !u!1 &479675220
 GameObject:
@@ -4321,7 +4319,7 @@ MonoBehaviour:
   selectedX: -1
   selectedY: -1
   grid: {fileID: 896327795}
-  board: {fileID: 1404062334}
+  boardManager: {fileID: 1404062334}
 --- !u!1 &1489580840
 GameObject:
   m_ObjectHideFlags: 0
@@ -5072,7 +5070,7 @@ MonoBehaviour:
   selectedX: -1
   selectedY: -1
   grid: {fileID: 651133176}
-  board: {fileID: 1404062334}
+  boardManager: {fileID: 1404062334}
 --- !u!1 &1877545906
 GameObject:
   m_ObjectHideFlags: 0

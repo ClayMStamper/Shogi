@@ -33,9 +33,9 @@ public class AI : MonoBehaviour {
 	#endregion
 
 	public int recursionDepth = 2;
-	public int goodEnoughEval = 5;
-	[Range (0, 1)]
-	public float skipRate = 0.9f;
+//	public int goodEnoughEval = 5;
+//	[Range (0, 1)]
+//	public float skipRate = 0.9f;
 
 	public delegate void OnMovePickedCallback(Square move); 
 
@@ -44,7 +44,7 @@ public class AI : MonoBehaviour {
 	[SerializeField]
 	BoardManager boardManager;
 
-	public List <Piece> allPieces;
+	public List <GameObject> allPieces;
 
 	[HideInInspector]
 	public Piece selectedPiece = null;
@@ -72,6 +72,13 @@ public class AI : MonoBehaviour {
 		}
 
 		boardManager.SelectPiece (selectedPiece);
+		boardManager.selectedX = selectedMove.x;
+		boardManager.selectedY = selectedMove.y;
+		boardManager.legalMoves = selectedPiece.LegalMoves ();
+
+		if (!boardManager.legalMoves [selectedMove.x, selectedMove.y]) {
+			Debug.LogError ("Fatal: AI is about to make an illegal move");
+		}
 
 		if (!selectedPiece.isCaptured) { //moving piece
 			boardManager.legalMoves = selectedPiece.LegalMoves ();
@@ -93,8 +100,6 @@ public class AI : MonoBehaviour {
 
 		List <Square> allMoves = new List<Square> ();
 
-
-
 		//is player 1s turn
 		if (!maximizing) {
 
@@ -104,13 +109,13 @@ public class AI : MonoBehaviour {
 
 			foreach (Square moveTo in allMoves) {
 
-				if (Random.value <= skipRate) {
-					Debug.Log ("Skipping");
-					break;
-				}
+			//	if (Random.value <= skipRate) {
+			//		Debug.Log ("Skipping");
+				//	break;
+			//	}
 
 				Square myRootSquare = moveTo;
-				Piece myRootPiece = myRootSquare.pieceMoved.Last ();
+				GameObject myRootPiece = myRootSquare.pieceMoved.Last ();
 
 				//# of pieces that can move to the same square
 				//moveTo refers to the square, pieceMoved refers to the piece
@@ -122,8 +127,8 @@ public class AI : MonoBehaviour {
 					i--;
 
 					//the square that the piece hypothetically moves from
-					Square moveFrom = new Square (new Vector2Int (moveTo.pieceMoved [i].x, moveTo.pieceMoved [i].y));
-					Board newBoard = new Board (board, moveTo, moveFrom, moveTo.pieceMoved[i]);
+					Square moveFrom = new Square (new Vector2Int (moveTo.pieceMoved [i].GetComponent<Piece>().x, moveTo.pieceMoved [i].GetComponent<Piece>().y));
+					Board newBoard = new Board (board, moveTo, moveFrom, moveTo.pieceMoved[i].GetComponent<Piece>());
 
 					int eval = Minimax (newBoard, depth - 1, true, alpha, beta);
 
@@ -138,11 +143,11 @@ public class AI : MonoBehaviour {
 							break;
 						}
 						selectedMove = myRootSquare;
-						selectedPiece = myRootPiece;
+						selectedPiece = myRootPiece.GetComponent<Piece>();
 
-						if (eval <= -goodEnoughEval) {
-							return eval;
-						}
+					//	if (eval <= -goodEnoughEval) {
+						//	return eval;
+					//	}
 
 					} else if (eval == minEval) {
 						// this just adds in variability
@@ -150,7 +155,7 @@ public class AI : MonoBehaviour {
 							Debug.Log ("New piece should be selected");
 							minEval = eval;
 							selectedMove = myRootSquare;
-							selectedPiece = myRootPiece;
+							selectedPiece = myRootPiece.GetComponent<Piece>();
 						}
 					}
 				}
@@ -169,10 +174,10 @@ public class AI : MonoBehaviour {
 
 			foreach (Square moveTo in allMoves) {
 
-				if (Random.value <= skipRate) {
-					Debug.Log ("Skipping");
-					break;
-				}
+			//	if (Random.value <= skipRate) {
+			//		Debug.Log ("Skipping");
+			//		break;
+			//	}
 
 				int i = moveTo.pieceMoved.Count;
 
@@ -180,8 +185,8 @@ public class AI : MonoBehaviour {
 
 					i--;
 
-					Square movedFrom = new Square (new Vector2Int (moveTo.pieceMoved [i].x, moveTo.pieceMoved [i].y));
-					Board newBoard = new Board (board, moveTo, movedFrom, moveTo.pieceMoved[i]);
+					Square movedFrom = new Square (new Vector2Int (moveTo.pieceMoved [i].GetComponent<Piece>().x, moveTo.pieceMoved [i].GetComponent<Piece>().y));
+					Board newBoard = new Board (board, moveTo, movedFrom, moveTo.pieceMoved[i].GetComponent<Piece>());
 
 					int eval = Minimax (newBoard, depth - 1, false, alpha, beta);
 
@@ -192,9 +197,9 @@ public class AI : MonoBehaviour {
 							break;
 						}
 //						
-						if (eval >= goodEnoughEval) {
-							return eval;
-						}
+					//	if (eval >= goodEnoughEval) {
+						//	return eval;
+					//	}
 
 					}
 				}
@@ -285,7 +290,7 @@ public class AI : MonoBehaviour {
 public struct Square{
 
 	public int x, y;
-	public List <Piece> pieceMoved;
+	public List <GameObject> pieceMoved;
 
 //	public Board currentBoard;
 
@@ -298,7 +303,7 @@ public struct Square{
 		x = move.x;
 		y = move.y;
 
-		pieceMoved = new List<Piece> ();
+		pieceMoved = new List<GameObject> ();
 	}
 
 	//converts vector array to Move array
@@ -361,7 +366,7 @@ public struct Board{
 
 		//set default values
 		pieces = (Piece[,])baseBoard.pieces.Clone();
-		sideTable = new SideTable (BoardManager.GetInstance().table1);
+		sideTable = baseBoard.sideTable;
 		eval = 0;
 
 		//adjust board and evaluate
@@ -392,11 +397,12 @@ public struct Board{
 		pieces[moveTo.x, moveTo.y] = moved;
 
 		//Remove from sideTable
-		if (sideTable.sidePieces.Contains (moved)) {
+	//	if (sideTable.sidePieces.Contains (moved)) {
+	//		Debug.Log ("Piece that was dropped was found on side table! Dank.");
 			sideTable.sidePieces.Remove (moved);
-		} else {
-			Debug.LogError ("Tried to drop piece that wasn't found on the side table. Check table constructor");
-		}
+	//	} else {
+	//		Debug.LogError ("Tried to drop piece that wasn't found on the side table. Check table constructor");
+	//	}
 
 	}
 
@@ -406,22 +412,22 @@ public struct Board{
 
 		if (isPlayerOne) { // is minimizing
 
-			foreach (Piece piece in AI.GetInstance().allPieces) {
+			foreach (GameObject piece in AI.GetInstance().allPieces) {
 
-				if (piece.isPlayerOne) {
+				if (piece.GetComponent<Piece>().isPlayerOne) {
 
 					List <Square> legalMoves = new List<Square> ();
 
-					if (!piece.isCaptured) {
-						legalMoves = Square.coordsToMovesList (piece.LegalMoves ());
+					if (!piece.GetComponent<Piece>().isCaptured) {
+						legalMoves = Square.coordsToMovesList (piece.GetComponent<Piece>().LegalMoves ());
 					} else {
-						legalMoves = Square.coordsToMovesList (AI.GetInstance().GetLegalDrops (piece));
+						legalMoves = Square.coordsToMovesList (AI.GetInstance().GetLegalDrops (piece.GetComponent<Piece>()));
 					}
 
 					foreach (Square move in legalMoves) {
 
 						//caches the piece that was doing the moving since moves are recorded by square, not piece
-						move.pieceMoved.Add (piece);
+						move.pieceMoved.Add (piece.gameObject);
 
 						if (!allMoves.Contains (move)) {
 
@@ -434,16 +440,16 @@ public struct Board{
 
 		} else { // is maximizing
 
-			foreach (Piece piece in AI.GetInstance().allPieces) {
+			foreach (GameObject piece in AI.GetInstance().allPieces) {
 
-				if (!piece.isPlayerOne) {
+				if (!piece.GetComponent<Piece>().isPlayerOne) {
 
 					List <Square> legalMoves = new List<Square> ();
-					legalMoves = Square.coordsToMovesList (piece.LegalMoves ());
+					legalMoves = Square.coordsToMovesList (piece.GetComponent<Piece>().LegalMoves ());
 
 					foreach (Square move in legalMoves){
 
-						move.pieceMoved.Add (piece);
+						move.pieceMoved.Add (piece.gameObject);
 
 						if (!allMoves.Contains (move)) {
 
@@ -557,7 +563,6 @@ public struct SideTable {
 
 			}
 		}
-
 	}
 
 }

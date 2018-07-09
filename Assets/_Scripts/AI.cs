@@ -140,7 +140,7 @@ public class AI : MonoBehaviour {
 						minEval = eval;
 						beta = minEval;
 						if (beta <= alpha) {
-							break;
+							return board.eval;
 						}
 						selectedMove = myRootSquare;
 						selectedPiece = myRootPiece.GetComponent<Piece>();
@@ -194,7 +194,7 @@ public class AI : MonoBehaviour {
 						maxEval = eval;
 						alpha = maxEval;
 						if (beta <= alpha) {
-							break;
+							return board.eval;
 						}
 //						
 					//	if (eval >= goodEnoughEval) {

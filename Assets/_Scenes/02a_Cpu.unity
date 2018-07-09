@@ -1222,7 +1222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e981b17a8bbc43f88f23e677469b5a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recursionDepth: 3
+  recursionDepth: 2
   isActive: 1
   boardManager: {fileID: 1404062334}
   allPieces:

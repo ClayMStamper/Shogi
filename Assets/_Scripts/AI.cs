@@ -114,12 +114,12 @@ public class AI : MonoBehaviour {
 				//	break;
 			//	}
 
-				Square myRootSquare = moveTo;
-				GameObject myRootPiece = myRootSquare.pieceMoved.Last ();
+				Square root = moveTo;
+				GameObject rootPiece = root.piecesMoving.Last ();
 
 				//# of pieces that can move to the same square
 				//moveTo refers to the square, pieceMoved refers to the piece
-				int i = moveTo.pieceMoved.Count;
+				int i = moveTo.piecesMoving.Count;
 
 				//will probably just iterate once unless multiple pieces are looking at the same spot
 				while (i > 0){
@@ -127,8 +127,8 @@ public class AI : MonoBehaviour {
 					i--;
 
 					//the square that the piece hypothetically moves from
-					Square moveFrom = new Square (new Vector2Int (moveTo.pieceMoved [i].GetComponent<Piece>().x, moveTo.pieceMoved [i].GetComponent<Piece>().y));
-					Board newBoard = new Board (board, moveTo, moveFrom, moveTo.pieceMoved[i].GetComponent<Piece>());
+					Square moveFrom = new Square (new Vector2Int (moveTo.piecesMoving [i].GetComponent<Piece>().x, moveTo.piecesMoving [i].GetComponent<Piece>().y));
+					Board newBoard = new Board (board, moveTo, moveFrom, moveTo.piecesMoving[i].GetComponent<Piece>());
 
 					int eval = Minimax (newBoard, depth - 1, true, alpha, beta);
 
@@ -142,8 +142,8 @@ public class AI : MonoBehaviour {
 						if (beta <= alpha) {
 							return board.eval;
 						}
-						selectedMove = myRootSquare;
-						selectedPiece = myRootPiece.GetComponent<Piece>();
+						selectedMove = root;
+						selectedPiece = rootPiece.GetComponent<Piece>();
 
 					//	if (eval <= -goodEnoughEval) {
 						//	return eval;
@@ -154,8 +154,8 @@ public class AI : MonoBehaviour {
 						if (Random.value > 0.5f) {
 							Debug.Log ("New piece should be selected");
 							minEval = eval;
-							selectedMove = myRootSquare;
-							selectedPiece = myRootPiece.GetComponent<Piece>();
+							selectedMove = root;
+							selectedPiece = rootPiece.GetComponent<Piece>();
 						}
 					}
 				}
@@ -179,14 +179,14 @@ public class AI : MonoBehaviour {
 			//		break;
 			//	}
 
-				int i = moveTo.pieceMoved.Count;
+				int i = moveTo.piecesMoving.Count;
 
 				while (i > 0){
 
 					i--;
 
-					Square movedFrom = new Square (new Vector2Int (moveTo.pieceMoved [i].GetComponent<Piece>().x, moveTo.pieceMoved [i].GetComponent<Piece>().y));
-					Board newBoard = new Board (board, moveTo, movedFrom, moveTo.pieceMoved[i].GetComponent<Piece>());
+					Square movedFrom = new Square (new Vector2Int (moveTo.piecesMoving [i].GetComponent<Piece>().x, moveTo.piecesMoving [i].GetComponent<Piece>().y));
+					Board newBoard = new Board (board, moveTo, movedFrom, moveTo.piecesMoving[i].GetComponent<Piece>());
 
 					int eval = Minimax (newBoard, depth - 1, false, alpha, beta);
 
@@ -290,7 +290,7 @@ public class AI : MonoBehaviour {
 public struct Square{
 
 	public int x, y;
-	public List <GameObject> pieceMoved;
+	public List <GameObject> piecesMoving;
 
 //	public Board currentBoard;
 
@@ -303,7 +303,7 @@ public struct Square{
 		x = move.x;
 		y = move.y;
 
-		pieceMoved = new List<GameObject> ();
+		piecesMoving = new List<GameObject> ();
 	}
 
 	//converts vector array to Move array
@@ -427,7 +427,7 @@ public struct Board{
 					foreach (Square move in legalMoves) {
 
 						//caches the piece that was doing the moving since moves are recorded by square, not piece
-						move.pieceMoved.Add (piece.gameObject);
+						move.piecesMoving.Add (piece.gameObject);
 
 						if (!allMoves.Contains (move)) {
 
@@ -449,7 +449,7 @@ public struct Board{
 
 					foreach (Square move in legalMoves){
 
-						move.pieceMoved.Add (piece.gameObject);
+						move.piecesMoving.Add (piece.gameObject);
 
 						if (!allMoves.Contains (move)) {
 

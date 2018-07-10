@@ -6,27 +6,40 @@ using UnityEngine.UI;
 
 public class Button3D : MonoBehaviour {
 
+	public bool isActive = true;
+
 	public UnityEvent function;
 
 	bool beingClicked;
 
+	void Start(){
+		ToggleShaded (!isActive);
+	}
+
 	public void OnClick(){
 
-		Debug.Log (name + " was clicked");
-
-		ToggleBeingClicked (true);
+		if (isActive) {
+			OnClicked (true);
+		}
 
 	}
 
-	void ToggleBeingClicked(bool beingClicked){
+	void OnClicked(bool beingClicked){
 
 		this.beingClicked = beingClicked;
+		ToggleShaded (beingClicked);
 
-		Debug.Log ("Toggling being clickd to " + beingClicked);
+		if (beingClicked) {
+			StartCoroutine (HoldDown ());
+		} 
+
+	}
+
+	void ToggleShaded(bool shaded){
 
 		Color color = GetComponent <SpriteRenderer> ().color;
 
-		if (beingClicked) {
+		if (shaded) {
 			color.a = 0.7f;
 			StartCoroutine (HoldDown ());
 		} else {
@@ -70,7 +83,7 @@ public class Button3D : MonoBehaviour {
 
 				} 
 
-				ToggleBeingClicked (false);
+				OnClicked (false);
 				
 			} 
 

@@ -84,7 +84,7 @@ public class SideTableManager : MonoBehaviour {
 			coord = new Vector3Int (0, 0, 0);
 			break;
 		default:
-			Debug.LogError ("Piece name not recognized: failed to add to 'pieces'");
+			Debug.LogError ("Piece name: " + piece.name + ", not recognized: failed to add to 'pieces'");
 			break;
 		}
 

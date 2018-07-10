@@ -33,9 +33,6 @@ public class AI : MonoBehaviour {
 	#endregion
 
 	public int recursionDepth = 2;
-//	public int goodEnoughEval = 5;
-//	[Range (0, 1)]
-//	public float skipRate = 0.9f;
 
 	public delegate void OnMovePickedCallback(Square move); 
 
@@ -98,56 +95,52 @@ public class AI : MonoBehaviour {
 			return board.eval;
 		}
 
-		List <Square> allMoves = new List<Square> ();
+		List <Square> allSquaresToMoveTo = new List<Square> ();
 
 		//is player 1s turn
 		if (!maximizing) {
 
 			minEval = int.MaxValue;
 
-			allMoves = board.GetAllLegalMoves (true);
+			allSquaresToMoveTo = board.GetAllLegalMoves (true);
 
-			foreach (Square moveTo in allMoves) {
+			foreach (Square squareToMoveTo in allSquaresToMoveTo) {
 
 			//	if (Random.value <= skipRate) {
 			//		Debug.Log ("Skipping");
 				//	break;
 			//	}
 
-				Square root = moveTo;
+				Square root = squareToMoveTo;
 				GameObject rootPiece = root.piecesMoving.Last ();
 
 				//# of pieces that can move to the same square
 				//moveTo refers to the square, pieceMoved refers to the piece
-				int i = moveTo.piecesMoving.Count;
+				int j = squareToMoveTo.piecesMoving.Count;
 
 				//will probably just iterate once unless multiple pieces are looking at the same spot
-				while (i > 0){
+				while (j > 0){
 					
-					i--;
+					j--;
 
 					//the square that the piece hypothetically moves from
-					Square moveFrom = new Square (new Vector2Int (moveTo.piecesMoving [i].GetComponent<Piece>().x, moveTo.piecesMoving [i].GetComponent<Piece>().y));
-					Board newBoard = new Board (board, moveTo, moveFrom, moveTo.piecesMoving[i].GetComponent<Piece>());
+					Square moveFrom = new Square (new Vector2Int (squareToMoveTo.piecesMoving [j].GetComponent<Piece>().x, squareToMoveTo.piecesMoving [j].GetComponent<Piece>().y));
+					Board newBoard = new Board (board, squareToMoveTo, moveFrom, squareToMoveTo.piecesMoving[j].GetComponent<Piece>());
 
 					int eval = Minimax (newBoard, depth - 1, true, alpha, beta);
 
 					Debug.Log ("Eval is: " + eval);
 					Debug.Log ("Min eval is: " + minEval);
 
-					if (eval < minEval) { //found the better move
+					if (eval < beta) { //found the better move
 						Debug.Log ("New piece should be selected");
 						minEval = eval;
 						beta = minEval;
 						if (beta <= alpha) {
-							return board.eval;
+							break;
 						}
 						selectedMove = root;
 						selectedPiece = rootPiece.GetComponent<Piece>();
-
-					//	if (eval <= -goodEnoughEval) {
-						//	return eval;
-					//	}
 
 					} else if (eval == minEval) {
 						// this just adds in variability
@@ -170,9 +163,9 @@ public class AI : MonoBehaviour {
 
 			maxEval = int.MinValue;
 
-			allMoves = board.GetAllLegalMoves (false);
+			allSquaresToMoveTo = board.GetAllLegalMoves (false);
 
-			foreach (Square moveTo in allMoves) {
+			foreach (Square moveTo in allSquaresToMoveTo) {
 
 			//	if (Random.value <= skipRate) {
 			//		Debug.Log ("Skipping");
@@ -190,11 +183,11 @@ public class AI : MonoBehaviour {
 
 					int eval = Minimax (newBoard, depth - 1, false, alpha, beta);
 
-					if (eval > maxEval) { //found the better move
+					if (eval > alpha) { //found the better move
 						maxEval = eval;
 						alpha = maxEval;
 						if (beta <= alpha) {
-							return board.eval;
+							break;
 						}
 //						
 					//	if (eval >= goodEnoughEval) {

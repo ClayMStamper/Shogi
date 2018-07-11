@@ -5,14 +5,111 @@ using UnityEngine.UI;
 
 public class MenusManager : MonoBehaviour {
 
+#region singleton
+
+	public static MenusManager instance;
+
+	void Awake(){
+
+		if (instance == null) {
+			instance = this;
+		} else {
+			Destroy (gameObject);
+		}
+
+		DontDestroyOnLoad (gameObject);
+	
+	}
+
+	public static MenusManager GetInstance(){
+		return instance;
+	}
+
+#endregion
+
 	[SerializeField]
-	Sprite toglOn, toglOff;
+	Transform canvas;
 
-	public void Toggle(Toggle togl){
+	[SerializeField]
+	GameObject settingsContent = null, profileContent = null;
 
-		togl.image.sprite = (togl.isOn) ? toglOn : toglOff;
+	[HideInInspector]
+	public Transform buttonPressed;
+	[HideInInspector]
+	public GameObject openMenu;
 
-		Debug.Log (togl.image.sprite);
+	bool settingsOpen, profileOpen;
+
+	void Update(){
+
+		if (Input.GetMouseButtonDown (0)) {
+
+			RaycastHit hit;
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+
+			if (Physics.Raycast (ray, out hit, 100f)){
+
+				Debug.Log (hit.transform);
+
+				if (hit.transform.GetComponent<Button3D> ()) {
+
+					Button3D button = hit.transform.GetComponent<Button3D> ();
+					button.OnClick ();
+
+				}
+
+			}
+
+		}
 
 	}
+
+	public void toggleMenu(){
+			
+		if (openMenu != null) { // toggle off
+			//StartCoroutine (FadeOut (openMenu, 0.01f, true));
+			Destroy (openMenu);
+		} else { //toggle on
+
+			switch (buttonPressed.name) {
+			
+			case "Profile Button":
+				openMenu = Instantiate (profileContent, canvas);
+				break;
+			case "Settings Button":
+				openMenu = Instantiate (settingsContent, canvas);
+				break;
+			default:
+				Debug.LogError ("Button name: \"" + buttonPressed.name + "\" was not recognized");
+				break;
+
+			}
+
+		}
+	}
+
+	public IEnumerator FadeOut (GameObject obj, float fadeSpeed, bool destroy){
+
+		SpriteRenderer img = obj.GetComponent <SpriteRenderer> ();
+
+		while (img.color.a > 0 && img != null) {
+
+			Color newColor = img.color;
+			newColor.a -= fadeSpeed * Time.deltaTime;
+
+			img.color = newColor;
+
+			yield return null;
+
+			if (destroy) {
+				Destroy (obj);
+			} else { //reset
+				newColor.a = 1;
+				img.color = newColor;
+			}
+
+		}
+
+	}
+
 }

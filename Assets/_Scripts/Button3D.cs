@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class Button3D : MonoBehaviour {
 
 	public bool isActive = true;
+	[SerializeField]
+	private float clickToDragTolerance = 1.0f;
 
 	public UnityEvent function;
 
@@ -16,18 +18,29 @@ public class Button3D : MonoBehaviour {
 		ToggleShaded (!isActive);
 	}
 
+	MenusManager menusManager;
+
 	public void OnClick(){
 
+		if (menusManager == null) {
+			menusManager = MenusManager.GetInstance ();
+		}
+
 		if (isActive) {
-			OnClicked (true);
+			ToggleIsClicked (true);
 		}
 
 	}
 
-	void OnClicked(bool beingClicked){
+	void ToggleIsClicked(bool beingClicked){
 
 		this.beingClicked = beingClicked;
-		ToggleShaded (beingClicked);
+
+		if (!name.Contains ("Profile") && !(name.Contains ("Settings"))) {
+			ToggleShaded (beingClicked);
+		} else {
+			//do something about scrolls closing
+		}
 
 		if (beingClicked) {
 			StartCoroutine (HoldDown ());
@@ -54,11 +67,22 @@ public class Button3D : MonoBehaviour {
 
 		Debug.Log ("doing event");
 
+		if (name.Contains ("Profile") || (name.Contains ("Settings"))) {
+			//clicked a scroll
+
+			GetComponent <Animator> ().SetTrigger ("toggleOpen");
+			menusManager.buttonPressed = transform;
+			menusManager.toggleMenu ();
+
+		} 
+
 		function.Invoke ();
 
 	}
 
 	IEnumerator HoldDown(){
+
+		Vector3 clickPos = Input.mousePosition;
 
 		while (beingClicked) {
 
@@ -77,13 +101,18 @@ public class Button3D : MonoBehaviour {
 
 						Debug.Log ("Mouse is still on " + name + " on release");
 
+						if ((Input.mousePosition - clickPos).magnitude > clickToDragTolerance){
+							ToggleIsClicked (false);
+							break; //dragged mouse away
+						}
+
 						DoEvent ();
 
 					}
 
 				} 
 
-				OnClicked (false);
+				ToggleIsClicked (false);
 				
 			} 
 

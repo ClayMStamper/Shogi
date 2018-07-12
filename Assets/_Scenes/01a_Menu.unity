@@ -2063,11 +2063,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130de260f42cc4e25931770500c16098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: 0
-  piecesSkin: {fileID: 2800000, guid: 029a6bcd54d734caea44c308aaf76e6c, type: 3}
+  piecesMat: {fileID: 2100000, guid: 19ff47f70a5bfc045a8eee26db9ea5b2, type: 2}
   PiecesSkins:
   - {fileID: 2800000, guid: 029a6bcd54d734caea44c308aaf76e6c, type: 3}
   - {fileID: 2800000, guid: edb9010cfd62e4e49a6f4fed2c322bd9, type: 3}
+  chosenSkin: {fileID: 2800000, guid: 029a6bcd54d734caea44c308aaf76e6c, type: 3}
+  volume: 0
   highlightMoves: 0
   fingerMarker: 0
   showScore: 0

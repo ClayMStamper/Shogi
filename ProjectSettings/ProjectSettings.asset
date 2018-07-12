@@ -786,7 +786,7 @@ PlayerSettings:
   cloudServicesEnabled:
     Collab: 0
     UNet: 1
-  facebookSdkVersion: 7.9.4
+  facebookSdkVersion: pluginIncompatible
   apiCompatibilityLevel: 2
   cloudProjectId: 5be470c8-8751-4605-8a39-67ebb6813773
   projectName: Shogi

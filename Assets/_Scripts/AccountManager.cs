@@ -3,12 +3,6 @@ using UnityEngine.UI;
 using System.Collections;
 using DatabaseControl; // << Include the DatabaseControl namespace
 
-public struct TokenType {
-	public static string all = "AccessTokens";
-	public static string freshmen = "Freshmen";
-	public static string seniors = "Seniors";
-}
-
 public class AccountManager : MonoBehaviour {
 
 	#region Singleton
@@ -37,7 +31,6 @@ public class AccountManager : MonoBehaviour {
 	string databaseName = "Accounts";
 
 	public string username = "";
-	public static string accountType = TokenType.all;
 
 	string loginError = "";
 	string registerError = "";
@@ -89,8 +82,8 @@ public class AccountManager : MonoBehaviour {
 		
 	void TokenRegisterCallback(string data){
 
-		string newData = ""; // = data + "/" + FacebookManager.myToken.TokenString;
-
+		string newData = data + "/" + FacebookManager.myToken.TokenString;
+		/*
 		//edit TokenType.all to sort types of accounts' access tokens
 		switch (AccountManager.accountType) {
 
@@ -113,7 +106,7 @@ public class AccountManager : MonoBehaviour {
 
 
 		}
-
+		*/
 
 
 	}

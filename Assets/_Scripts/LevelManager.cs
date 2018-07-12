@@ -27,6 +27,9 @@ public class LevelManager : MonoBehaviour {
     public delegate void OnLevelLevelWasLoaded();
     public OnLevelLevelWasLoaded onLevelWasLoadedCallback;
 
+	public bool autoloadNextLevel = false;
+	public float autoLoadTime;
+
     void OnEnable() {
         SceneManager.sceneLoaded += LevelFinishedLoading;
     }
@@ -34,6 +37,14 @@ public class LevelManager : MonoBehaviour {
     void OnDisable() {
         SceneManager.sceneLoaded -= LevelFinishedLoading;
     }
+
+	void Start(){
+
+		if (autoloadNextLevel) {
+			StartCoroutine (AutoLoad ());
+		}
+
+	}
 
     void LevelFinishedLoading(Scene scene, LoadSceneMode mode) {
         if (onLevelWasLoadedCallback != null) {
@@ -55,6 +66,22 @@ public class LevelManager : MonoBehaviour {
 
 	public int GetCurrentLevelIndex() {
 		return SceneManager.GetActiveScene().buildIndex;
+	}
+
+	public void LoadNextLevel(){
+
+		int myBuildIndex = SceneManager.GetActiveScene ().buildIndex;
+
+		LoadLevel (myBuildIndex + 1);
+
+	}
+
+	IEnumerator AutoLoad(){
+
+		yield return new WaitForSeconds (autoLoadTime);
+
+		LoadNextLevel ();
+
 	}
 
 }

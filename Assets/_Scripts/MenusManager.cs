@@ -7,7 +7,7 @@ public class MenusManager : MonoBehaviour {
 
 #region singleton
 
-	public static MenusManager instance;
+	private static MenusManager instance;
 
 	void Awake(){
 
@@ -39,6 +39,12 @@ public class MenusManager : MonoBehaviour {
 	public GameObject openMenu;
 
 	bool settingsOpen, profileOpen;
+
+	void Start(){
+		if (canvas == null) {
+			canvas = WorldCanvas.GetInstance ().transform;
+		}
+	}
 
 	void Update(){
 

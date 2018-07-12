@@ -428,6 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 058b861e6cd914da8bd06667e9b50079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   canvas: {fileID: 611161506}
   settingsContent: {fileID: 1067540117427666, guid: 121077fe867db4b2382d7f8ff26c7b71,
     type: 2}
@@ -435,6 +436,8 @@ MonoBehaviour:
     type: 2}
   buttonPressed: {fileID: 0}
   openMenu: {fileID: 0}
+=======
+>>>>>>> c62899867cf5991104a404a9f29149992886a943
 --- !u!4 &480656389
 Transform:
   m_ObjectHideFlags: 0
@@ -446,7 +449,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 1
+=======
+  m_RootOrder: 3
+>>>>>>> c62899867cf5991104a404a9f29149992886a943
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &521185871
 GameObject:
@@ -496,7 +503,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
+<<<<<<< HEAD
   clickToDragTolerance: 1
+=======
+>>>>>>> c62899867cf5991104a404a9f29149992886a943
   function:
     m_PersistentCalls:
       m_Calls: []
@@ -983,7 +993,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
+<<<<<<< HEAD
   clickToDragTolerance: 1
+=======
+>>>>>>> c62899867cf5991104a404a9f29149992886a943
   function:
     m_PersistentCalls:
       m_Calls: []

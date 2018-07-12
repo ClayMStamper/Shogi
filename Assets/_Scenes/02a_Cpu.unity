@@ -2939,8 +2939,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 058b861e6cd914da8bd06667e9b50079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toglOn: {fileID: 21300006, guid: 5bd576ea01bfb43918cc5ed5adceac83, type: 3}
-  toglOff: {fileID: 21300002, guid: 5bd576ea01bfb43918cc5ed5adceac83, type: 3}
+  canvas: {fileID: 0}
+  settingsContent: {fileID: 0}
+  profileContent: {fileID: 0}
+  buttonPressed: {fileID: 0}
+  openMenu: {fileID: 0}
 --- !u!4 &1140404741
 Transform:
   m_ObjectHideFlags: 0

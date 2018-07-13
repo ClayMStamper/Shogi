@@ -17,7 +17,7 @@ public class Settings : MonoBehaviour {
 			Destroy (gameObject);
 		}
 
-		DontDestroyOnLoad (gameObject);
+	//	DontDestroyOnLoad (gameObject);
 
 	}
 
@@ -33,8 +33,8 @@ public class Settings : MonoBehaviour {
 	[SerializeField]
 	public Sprite toggleOn, toggleOff;
 
-	[SerializeField][Header ("Reference Textures")]
-	private Material piecesMat;
+	[Header ("Reference Textures")]
+	public Material piecesMat;
 	public Texture[] PiecesSkins;
 
 	[Header ("Settings Values")]
@@ -55,6 +55,9 @@ public class Settings : MonoBehaviour {
 		soundIsOn = PlayerPrefsManager.GetToggleIsOn (SOUND_KEY);
 		musicIsOn = PlayerPrefsManager.GetToggleIsOn (MUSIC_KEY);
 		warnWhenChecked = PlayerPrefsManager.GetToggleIsOn (CHECK_WARNING_KEY);
+
+		chosenSkin = PiecesSkins[PlayerPrefsManager.GetSkin ()];
+		SetSkin ();
 
 	}
 
@@ -95,6 +98,10 @@ public class Settings : MonoBehaviour {
 
 		}
 
+	}
+		
+	void SetSkin(){
+		piecesMat.mainTexture = chosenSkin;
 	}
 
 }

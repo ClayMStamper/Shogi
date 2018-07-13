@@ -42,6 +42,8 @@ public class MusicManager : MonoBehaviour {
 		levelManager.onLevelWasLoadedCallback += OnLevelLoaded;
 		audioSource = GetComponent <AudioSource> ();
 
+		fadeSpeed = 0.1f;
+
 		Play ();
 
 	}
@@ -113,7 +115,10 @@ public class MusicManager : MonoBehaviour {
 			yield return null;
 
 		}
-			
+
+		//after first fade
+		fadeSpeed = .5f;
+
 		yield return null;
 
 	}
@@ -124,12 +129,14 @@ public class MusicManager : MonoBehaviour {
 
 	public void Play(){
 
+		Debug.Log ("Should be playing");
+
 		audioSource.volume = Settings.GetInstance ().volume;
 
 
 		if (Settings.GetInstance ().musicIsOn) {
 			audioSource.volume = 0;
-			StopCoroutine (fadeOutClip (false));
+		//	StopCoroutine (fadeOutClip (false));
 			StartCoroutine (FadeInClip ());
 		} else {
 			StopCoroutine (FadeInClip());

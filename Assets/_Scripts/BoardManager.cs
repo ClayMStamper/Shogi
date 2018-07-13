@@ -314,6 +314,13 @@ public class BoardManager : MonoBehaviour {
 
 		CheckForPromotion ();
 
+		if (Settings.GetInstance ().showScore) {
+			try{
+				Score.GetInstance ().UpdateScore ();
+			} catch {
+				Debug.LogError ("Trying to update the score while disabled");
+			}
+		}
 
 		//switch turns
 		isPlayerOnesTurn = !isPlayerOnesTurn;

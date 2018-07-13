@@ -8,7 +8,7 @@ public class HighlightManager : MonoBehaviour {
 
 	//ensure that there is only one of these in the scene
 
-	public static HighlightManager instance;
+	private static HighlightManager instance;
 
 	void Awake(){
 

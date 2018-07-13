@@ -21,7 +21,7 @@ public class BoardManager : MonoBehaviour {
 			Destroy (gameObject);
 		}
 
-		DontDestroyOnLoad (gameObject);
+	//	DontDestroyOnLoad (gameObject);
 
 	}
 
@@ -33,6 +33,9 @@ public class BoardManager : MonoBehaviour {
 
 	[SerializeField]
 	AudioClip clickSound;
+
+	[SerializeField]
+	GameObject gameOverPopup;
 
 	//the points that your mouse / finger are hovered over
 	// defaulted to negative to indicate not being on the board
@@ -337,8 +340,7 @@ public class BoardManager : MonoBehaviour {
 
 		//king was captured
 		if (piece.GetComponent<King> ()) {
-			Debug.Log ("GAME IS OVER");
-			Debug.Break ();
+			gameOverPopup.SetActive (true);
 		}
 
 		//any captured piece is demoted if it was promoted

@@ -42,7 +42,11 @@ public class MenusManager : MonoBehaviour {
 
 	void Start(){
 		if (canvas == null) {
+			try {
 			canvas = WorldCanvas.GetInstance ().transform;
+			} catch {
+				//this scene doesnt need a canvas refernce
+			}
 		}
 	}
 

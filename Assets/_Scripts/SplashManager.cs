@@ -17,7 +17,7 @@ public class SplashManager : MonoBehaviour {
 	void Update(){
 
 		if (player.time >= 4.5f) {
-			LevelManager.GetInstance ().LoadNextLevel ();
+			LevelManager.GetInstance ().LoadLevel ("01a_Menu");
 		}
 
 	}

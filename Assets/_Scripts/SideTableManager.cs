@@ -221,7 +221,9 @@ public class SideTableManager : MonoBehaviour {
 				boardManager.selectedPiece.transform.SetParent (GameObject.Find ("Player 2").transform);
 			}
 
-			boardManager.selectedPiece.isCaptured = false;					
+			boardManager.selectedPiece.isCaptured = false;		
+
+			boardManager.GetComponent<AudioSource> ().Play ();
 
 		} else {
 			Debug.Log ("ILLEGAL DROP");

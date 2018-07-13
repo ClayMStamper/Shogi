@@ -293,10 +293,14 @@ public struct Square{
 	}
 
 	public Square (Vector2Int move){
+
 		x = move.x;
 		y = move.y;
 
 		piecesMoving = new List<GameObject> ();
+
+	//	Debug.Log ("Created new square at " + x + ", " + y);
+
 	}
 
 	//converts vector array to Move array
@@ -318,18 +322,8 @@ public struct Square{
 
 	}
 
-	Board GetCurrentBoard(){
-
-		Board board = new Board();
-
-
-
-		return board;
-
-	}
-
 	public void Print(){
-		Debug.Log ("available move: " + x + ", " + y);
+		Debug.Log ("available move: " + x + ", " + y + ")");
 	}
 
 }
@@ -338,6 +332,7 @@ public struct Board{
 
 	public int eval;
 	public Piece[,] pieces;
+	public List <Piece> pieceList;
 	SideTable sideTable;
 
 	//evaluate current board
@@ -345,9 +340,11 @@ public struct Board{
 
 		//set default values
 		pieces = basePieces;
+		pieceList = new List<Piece> ();
 		sideTable = new SideTable (BoardManager.GetInstance().table1);
 		eval = 0;
 
+		GetPieceList ();
 		eval = Evaluate ();
 
 	}
@@ -359,40 +356,60 @@ public struct Board{
 
 		//set default values
 		pieces = (Piece[,])baseBoard.pieces.Clone();
+		pieceList = new List<Piece> ();
 		sideTable = baseBoard.sideTable;
 		eval = 0;
+
+		Debug.Log ("Created new board with piece: " + moved.name + "and moveTo: " + moveTo.x + ", " + moveTo.y);
 
 		//adjust board and evaluate
 
 		if (moved.isCaptured) {
 			DropPiece (moveTo, moved);
 		} else {
+			Debug.Log ("Before move, " + moveTo.x + ", " + moveTo.y + " is: " + this.pieces[moveTo.x, moveTo.y]);
 			MovePiece (moveTo, moveFrom, moved);
+			Debug.Log ("After move, " + moveTo.x + ", " + moveTo.y + " is: " + this.pieces[moveTo.x, moveTo.y]);
 		}
 
-		eval = Evaluate ();
+		GetPieceList ();
+		this.eval = Evaluate ();
+
+	}
+
+	public void GetPieceList(){
+
+		for (int i = 0; i < 9; i++){
+			for (int j = 0; j < 9; j++){
+
+				if (pieces [i, j] != null) {
+					this.pieceList.Add (pieces [i, j]);
+				}
+
+			}
+		}
 
 	}
 
 	void MovePiece(Square moveTo, Square moveFrom, Piece moved){
 
 		//copy piece to new square
-		pieces [moveTo.x, moveTo.y] = pieces [moveFrom.x, moveFrom.y];
+		this.pieces [moveTo.x, moveTo.y] = moved;
 
 		//erase old square
-		pieces [moveFrom.x, moveFrom.y] = null;
+		this.pieces [moveFrom.x, moveFrom.y] = null;
 
 	}
 
 	void DropPiece (Square moveTo, Piece moved){
 
 		//copy piece to its new square
-		pieces[moveTo.x, moveTo.y] = moved;
+		this.pieces[moveTo.x, moveTo.y] = moved;
 
 		//Remove from sideTable
 	//	if (sideTable.sidePieces.Contains (moved)) {
 	//		Debug.Log ("Piece that was dropped was found on side table! Dank.");
-			sideTable.sidePieces.Remove (moved);
+			this.sideTable.sidePieces.Remove (moved);
 	//	} else {
 	//		Debug.LogError ("Tried to drop piece that wasn't found on the side table. Check table constructor");
 	//	}
@@ -405,19 +422,25 @@ public struct Board{
 
 		if (isPlayerOne) { // is minimizing
 
-			foreach (GameObject piece in AI.GetInstance().allPieces) {
+			string bishopMoves = "Bishop moves: ";
 
-				if (piece.GetComponent<Piece>().isPlayerOne) {
+			foreach (Piece piece in this.pieceList) {
+
+				if (piece.isPlayerOne) {
 
 					List <Square> legalMoves = new List<Square> ();
 
-					if (!piece.GetComponent<Piece>().isCaptured) {
-						legalMoves = Square.coordsToMovesList (piece.GetComponent<Piece>().LegalMoves ());
+					if (!piece.isCaptured) {
+						legalMoves = Square.coordsToMovesList (piece.LegalMoves ());
 					} else {
-						legalMoves = Square.coordsToMovesList (AI.GetInstance().GetLegalDrops (piece.GetComponent<Piece>()));
+						legalMoves = Square.coordsToMovesList (AI.GetInstance().GetLegalDrops (piece));
 					}
 
 					foreach (Square move in legalMoves) {
+
+						if (piece is Bishop) {
+							bishopMoves += ("\n Coord: " + move.x + ", " + move.y);
+						}
 
 						//caches the piece that was doing the moving since moves are recorded by square, not piece
 						move.piecesMoving.Add (piece.gameObject);
@@ -431,16 +454,24 @@ public struct Board{
 				}
 			}
 
+			Debug.Log (bishopMoves);
+
 		} else { // is maximizing
 
-			foreach (GameObject piece in AI.GetInstance().allPieces) {
+			string bishopMoves = "Bishop moves: ";
 
-				if (!piece.GetComponent<Piece>().isPlayerOne) {
+			foreach (Piece piece in this.pieceList) {
+
+				if (!piece.isPlayerOne) {
 
 					List <Square> legalMoves = new List<Square> ();
-					legalMoves = Square.coordsToMovesList (piece.GetComponent<Piece>().LegalMoves ());
+					legalMoves = Square.coordsToMovesList (piece.LegalMoves ());
 
 					foreach (Square move in legalMoves){
+
+						if (piece is Bishop) {
+							bishopMoves += ("\n Coord: " + move.x + ", " + move.y);
+						}
 
 						move.piecesMoving.Add (piece.gameObject);
 
@@ -452,6 +483,8 @@ public struct Board{
 					}
 				}
 			}
+
+			Debug.Log (bishopMoves);
 
 		}
 
@@ -490,7 +523,7 @@ public struct Board{
 						} else if (piece is Pawn) {
 							score1 -= 1;
 						} else if (piece is King) {
-							score1 -= 90;
+							score1 -= 900;
 						}
 
 					} else { //case that piece is player
@@ -513,7 +546,7 @@ public struct Board{
 						} else if (piece is Pawn) {
 							score2 += 1;
 						} else if (piece is King) {
-							score2 += 90;
+							score2 += 900;
 						}
 					}
 				}

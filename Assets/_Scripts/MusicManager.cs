@@ -66,6 +66,11 @@ public class MusicManager : MonoBehaviour {
 
 			//Debug.Log ("Volume: " + audioSource.volume);
 
+			if (Settings.GetInstance ().musicIsOn){
+				fadeBackIn = true;
+				break;
+			}
+
 			audioSource.volume -= Time.deltaTime * fadeSpeed;
 
 			yield return null;
@@ -100,7 +105,9 @@ public class MusicManager : MonoBehaviour {
 		while (audioSource.volume < Settings.GetInstance().volume){ 
 
 	//		Debug.Log ("Volume: " + audioSource.volume);
-
+			if (!Settings.GetInstance ().musicIsOn)
+				break;
+			
 			audioSource.volume += Time.deltaTime * fadeSpeed;
 
 			yield return null;
@@ -119,10 +126,13 @@ public class MusicManager : MonoBehaviour {
 
 		audioSource.volume = Settings.GetInstance ().volume;
 
+
 		if (Settings.GetInstance ().musicIsOn) {
 			audioSource.volume = 0;
+			StopCoroutine (fadeOutClip (false));
 			StartCoroutine (FadeInClip ());
 		} else {
+			StopCoroutine (FadeInClip());
 			StartCoroutine (fadeOutClip (false));
 		}
 

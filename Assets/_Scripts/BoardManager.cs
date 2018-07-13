@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 
 //On the "Board" object
+[RequireComponent (typeof (AudioSource))]
 public class BoardManager : MonoBehaviour {
 
 	#region singleton
@@ -29,6 +30,9 @@ public class BoardManager : MonoBehaviour {
 	}
 
 	#endregion
+
+	[SerializeField]
+	AudioClip clickSound;
 
 	//the points that your mouse / finger are hovered over
 	// defaulted to negative to indicate not being on the board
@@ -161,7 +165,12 @@ public class BoardManager : MonoBehaviour {
 		legalMoves = pieces [x, y].LegalMoves ();
 		selectedPiece = pieces [x, y];
 	//	SideTableManager.selectedPiece = selectedPiece;
-		highlightManager.ShowLegalMoves (legalMoves);
+		if (Settings.GetInstance ().highlightMoves) {
+			highlightManager.ShowLegalMoves (legalMoves);
+		}
+		bool[,] mySquare = new bool[9, 9];
+		mySquare [x, y] = true;
+		highlightManager.ShowLegalMoves (mySquare);
 
 	}
 
@@ -170,7 +179,12 @@ public class BoardManager : MonoBehaviour {
 		legalMoves = piece.LegalMoves ();
 		selectedPiece = piece;
 		//	SideTableManager.selectedPiece = selectedPiece;
-		highlightManager.ShowLegalMoves (legalMoves);
+		if (Settings.GetInstance ().highlightMoves) {
+			highlightManager.ShowLegalMoves (legalMoves);
+		} 
+		bool[,] mySquare = new bool[9, 9];
+		mySquare [piece.x, piece.y] = true;
+		highlightManager.ShowLegalMoves (mySquare);
 
 	}
 
@@ -178,19 +192,25 @@ public class BoardManager : MonoBehaviour {
 	//this happens if selectedPiece != null
 	public void MovePiece (){
 
+
 		//check for move is legal
 		if (legalMoves [selectedX, selectedY]) {
 
-			//enemy piece is here
-			if (pieces[selectedX, selectedY] != null){
-				OnPieceWasCaptured(pieces [selectedX, selectedY]);
-			}
-				
-			OnPieceWasMoved ();
+			//if (MovedIntoCheck ()) { //move will result in a loss
+			//	Debug.Log ("MOVING INTO CHECK!!!");
+			//} else { //perform move
 
+				//enemy piece is here
+				if (pieces [selectedX, selectedY] != null) {
+					OnPieceWasCaptured (pieces [selectedX, selectedY]);
+				}
+				
+				OnPieceWasMoved ();
+
+		//	}
 		} else {
 			if (AI.GetInstance ().isActive && isPlayerOnesTurn) {
-				Debug.LogError ("Fatal: AI made an illegal move: " + selectedPiece + ": " + selectedX + ", " + selectedY);
+				//Debug.LogError ("Fatal: AI made an illegal move: " + selectedPiece + ": " + selectedX + ", " + selectedY);
 			}
 			Debug.Log ("ILLEGAL MOVE");
 		}
@@ -204,6 +224,10 @@ public class BoardManager : MonoBehaviour {
 
 		selectedX = move.x;
 		selectedY = move.y;
+
+	//	if (MovedIntoCheck ()) {
+	//		Debug.Break ();
+	//	}
 
 		//enemy piece is here
 		if (pieces[move.x, move.y] != null){
@@ -219,7 +243,61 @@ public class BoardManager : MonoBehaviour {
 
 	}
 
+	bool MovedIntoCheck(){
+		
+		Square moveTo = new Square (new Vector2Int (selectedX, selectedY));
+		Square moveFrom = new Square (new Vector2Int (selectedPiece.x, selectedPiece.y));
+		Board baseBoard = new Board (pieces);
+
+		Board newBoard = new Board (baseBoard, moveTo, moveFrom, selectedPiece);
+
+		//bool[,] oppMoves = new bool[9, 9];
+		List <Square> oppMoves = newBoard.GetAllLegalMoves (!(selectedPiece.isPlayerOne == isPlayerOnesTurn));
+		List <Square> myMoves = newBoard.GetAllLegalMoves ((selectedPiece.isPlayerOne == isPlayerOnesTurn));
+
+		foreach (Square move in oppMoves) {
+			move.Print ();
+		}
+
+		foreach (Square move in myMoves) {
+			move.Print ();
+		}
+
+
+		King myKing = FindObjectOfType <King>();
+
+		foreach (King king in FindObjectsOfType <King>()){
+			if (king.isPlayerOne == isPlayerOnesTurn) {
+				myKing = king;
+			}
+		}
+
+		foreach (Square move in oppMoves) {
+
+			if (myKing.x == move.x && myKing.y == move.y) {
+
+				Debug.Log ("===FOUND CHECK MOVE===");
+				//moveTo.Print ();
+				//moveFrom.Print ();
+
+				Debug.Log (move.piecesMoving [0] + " can take my king, by moving to sqaure: " + move.x + ", " + move.y);
+				move.Print ();
+
+				return true;
+			}
+
+		}
+
+		return false;
+
+	}
+
 	void OnPieceWasMoved(){
+
+		if (Settings.GetInstance ().soundIsOn) {
+			GetComponent <AudioSource> ().clip = clickSound;
+			GetComponent <AudioSource> ().Play ();
+		}
 
 		CheckForPromotion ();
 

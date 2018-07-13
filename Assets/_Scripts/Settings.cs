@@ -58,43 +58,40 @@ public class Settings : MonoBehaviour {
 
 	}
 
-	public void Toggle(string key, Image toglImg){
+	public bool Toggle(string key){
 
 		switch (key) {
 
 		case HIGHLIGHT_KEY:
 			highlightMoves = !highlightMoves;
-			toglImg.sprite = highlightMoves ? toggleOn : toggleOff;
 			PlayerPrefsManager.SetToggleIsOn (HIGHLIGHT_KEY, highlightMoves);
-			break;
+			return highlightMoves;
 		case CHECK_WARNING_KEY:
 			warnWhenChecked = !warnWhenChecked;
-			toglImg.sprite = fingerMarker ? toggleOn : toggleOff;
 			PlayerPrefsManager.SetToggleIsOn (CHECK_WARNING_KEY, warnWhenChecked);
-			break;
+			return warnWhenChecked;
 		case FINGER_MARKER_KEY:
 			fingerMarker = !fingerMarker;
-			toglImg.sprite = showScore ? toggleOn : toggleOff;
 			PlayerPrefsManager.SetToggleIsOn (FINGER_MARKER_KEY, fingerMarker);
-			break;
+			return fingerMarker;
 		case SHOW_SCORE_KEY:
 			showScore = !showScore;
-			toglImg.sprite = soundIsOn ? toggleOn : toggleOff;
 			PlayerPrefsManager.SetToggleIsOn (SHOW_SCORE_KEY, showScore);
-			break;
+			return showScore;
 		case SOUND_KEY:
 			soundIsOn = !soundIsOn;
-			toglImg.sprite = musicIsOn ? toggleOn : toggleOff;
 			PlayerPrefsManager.SetToggleIsOn (SOUND_KEY, soundIsOn);
-			break;
+			return soundIsOn;
 		case MUSIC_KEY:
 			musicIsOn = !musicIsOn;
-			toglImg.sprite = warnWhenChecked ? toggleOn : toggleOff;
 			PlayerPrefsManager.SetToggleIsOn (MUSIC_KEY, musicIsOn);
-			break;
+
+			MusicManager.GetInstance ().Play ();
+
+			return musicIsOn;
 		default:
 			Debug.LogError (key + ": not recognized as a key. Toggle value couldn't be recorded");
-			break;
+			return false;
 
 		}
 

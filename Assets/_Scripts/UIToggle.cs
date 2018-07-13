@@ -9,20 +9,25 @@ public class UIToggle : MonoBehaviour {
 	private string key;
 	public bool value;
 
-	Settings settings;
+	public Settings settings;
+	public Image myImg;
 
-	void Awake(){
+	void Start(){
 
 		settings = Settings.GetInstance();
+		myImg = GetComponent <Image> ();
+
+		Debug.Log (myImg);
 
 		value = PlayerPrefsManager.GetToggleIsOn (key);
-		GetComponent <Image> ().sprite = value ? settings.toggleOn : settings.toggleOff;
+		myImg.sprite = value ? settings.toggleOn : settings.toggleOff;
 
 	}
 
 	public void Toggle(){
 
-		settings.Toggle (key, GetComponent <Image> ());
+		value = settings.Toggle (key);
+		myImg.sprite = value ? settings.toggleOn : settings.toggleOff;
 
 	}
 

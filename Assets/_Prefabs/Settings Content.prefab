@@ -1277,6 +1277,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: highlight
   value: 0
+  settings: {fileID: 0}
+  myImg: {fileID: 0}
 --- !u!114 &114102983748483534
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1883,6 +1885,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: sound
   value: 0
+  settings: {fileID: 0}
+  myImg: {fileID: 0}
 --- !u!114 &114298145459011410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1977,6 +1981,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: showScore
   value: 0
+  settings: {fileID: 0}
+  myImg: {fileID: 0}
 --- !u!114 &114331173759530316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2308,7 +2314,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 224565518814388380}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.54301906
+  m_Size: 0.5430191
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2396,6 +2402,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: music
   value: 0
+  settings: {fileID: 0}
+  myImg: {fileID: 0}
 --- !u!114 &114559509315144994
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3084,6 +3092,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: checkWarning
   value: 0
+  settings: {fileID: 0}
+  myImg: {fileID: 0}
 --- !u!114 &114894332526926318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3097,6 +3107,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: fingerMarker
   value: 0
+  settings: {fileID: 0}
+  myImg: {fileID: 0}
 --- !u!114 &114915101074174622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4520,7 +4532,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -133.04999}
+  m_AnchoredPosition: {x: 0, y: -133.05002}
   m_SizeDelta: {x: 31.2, y: 582.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224894734605570190

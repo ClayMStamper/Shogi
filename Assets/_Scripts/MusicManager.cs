@@ -42,13 +42,7 @@ public class MusicManager : MonoBehaviour {
 		levelManager.onLevelWasLoadedCallback += OnLevelLoaded;
 		audioSource = GetComponent <AudioSource> ();
 
-		audioSource.volume = Settings.GetInstance ().volume;
-
-		if (Settings.GetInstance ().musicIsOn) {
-			Debug.Log ("Should be starting");
-			audioSource.volume = 0;
-			StartCoroutine (FadeInClip ());
-		}
+		Play ();
 
 	}
 
@@ -58,13 +52,13 @@ public class MusicManager : MonoBehaviour {
 
 		if (audioSource.clip != clips [sceneIndex]) {
 			
-			StartCoroutine(fadeOutClip());
+			StartCoroutine(fadeOutClip(true));
 
 		}
 
 	}
 
-	IEnumerator fadeOutClip(){
+	IEnumerator fadeOutClip(bool fadeBackIn){
 
 		//Debug.Log ("Clip fading out");
 
@@ -78,7 +72,12 @@ public class MusicManager : MonoBehaviour {
 
 		}
 
-		StartCoroutine (FadeInClip ());
+		if (fadeBackIn) {
+			StartCoroutine (FadeInClip ());
+		} else {
+			audioSource.Pause ();
+		}
+
 		yield return null;
 
 	}
@@ -92,7 +91,11 @@ public class MusicManager : MonoBehaviour {
 
 		int sceneIndex = levelManager.GetCurrentLevelIndex();
 		audioSource.clip = clips [sceneIndex];
-		audioSource.Play ();
+		if (audioSource.isPlaying) {
+			audioSource.UnPause ();
+		} else {
+			audioSource.Play ();
+		}
 
 		while (audioSource.volume < Settings.GetInstance().volume){ 
 
@@ -110,6 +113,19 @@ public class MusicManager : MonoBehaviour {
 
 	public void UpdateVolume(){
 		audioSource.volume = Settings.GetInstance().volume;
+	}
+
+	public void Play(){
+
+		audioSource.volume = Settings.GetInstance ().volume;
+
+		if (Settings.GetInstance ().musicIsOn) {
+			audioSource.volume = 0;
+			StartCoroutine (FadeInClip ());
+		} else {
+			StartCoroutine (fadeOutClip (false));
+		}
+
 	}
 
 }

@@ -225,6 +225,14 @@ public class SideTableManager : MonoBehaviour {
 
 			boardManager.GetComponent<AudioSource> ().Play ();
 
+			if (Settings.GetInstance ().showScore) {
+				try{
+					Score.GetInstance ().UpdateScore ();
+				} catch {
+					Debug.LogError ("Trying to update the score while disabled");
+				}
+			}
+
 		} else {
 			Debug.Log ("ILLEGAL DROP");
 		}

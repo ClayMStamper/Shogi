@@ -128,7 +128,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.1
+  bundleVersion: 1.3
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -162,8 +162,9 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.CStampGames.ShogiWorld
     iOS: com.CStampGames.ShogiWorld
-  buildNumber: {}
-  AndroidBundleVersionCode: 2
+  buildNumber:
+    iOS: 1
+  AndroidBundleVersionCode: 4
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -786,7 +787,7 @@ PlayerSettings:
   cloudServicesEnabled:
     Collab: 0
     UNet: 1
-  facebookSdkVersion: pluginIncompatible
+  facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
   cloudProjectId: 5be470c8-8751-4605-8a39-67ebb6813773
   projectName: Shogi

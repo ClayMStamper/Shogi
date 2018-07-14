@@ -226,9 +226,17 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_AudioSource_ReadExtensionPropertyValue();
 		Register_UnityEngine_AudioSource_ReadExtensionPropertyValue();
 
+		//System.Single UnityEngine.AudioSource::get_volume()
+		void Register_UnityEngine_AudioSource_get_volume();
+		Register_UnityEngine_AudioSource_get_volume();
+
 		//System.Void UnityEngine.AudioSource::INTERNAL_CALL_ClearExtensionProperties(UnityEngine.AudioSource,UnityEngine.PropertyName&)
 		void Register_UnityEngine_AudioSource_INTERNAL_CALL_ClearExtensionProperties();
 		Register_UnityEngine_AudioSource_INTERNAL_CALL_ClearExtensionProperties();
+
+		//System.Void UnityEngine.AudioSource::INTERNAL_CALL_Pause(UnityEngine.AudioSource)
+		void Register_UnityEngine_AudioSource_INTERNAL_CALL_Pause();
+		Register_UnityEngine_AudioSource_INTERNAL_CALL_Pause();
 
 		//System.Void UnityEngine.AudioSource::INTERNAL_CALL_ReadExtensionName(UnityEngine.AudioSource,System.Int32,UnityEngine.PropertyName&)
 		void Register_UnityEngine_AudioSource_INTERNAL_CALL_ReadExtensionName();
@@ -237,6 +245,22 @@ void RegisterAllStrippedInternalCalls()
 		//System.Void UnityEngine.AudioSource::INTERNAL_CALL_ReadExtensionPropertyName(UnityEngine.AudioSource,System.Int32,UnityEngine.PropertyName&)
 		void Register_UnityEngine_AudioSource_INTERNAL_CALL_ReadExtensionPropertyName();
 		Register_UnityEngine_AudioSource_INTERNAL_CALL_ReadExtensionPropertyName();
+
+		//System.Void UnityEngine.AudioSource::INTERNAL_CALL_UnPause(UnityEngine.AudioSource)
+		void Register_UnityEngine_AudioSource_INTERNAL_CALL_UnPause();
+		Register_UnityEngine_AudioSource_INTERNAL_CALL_UnPause();
+
+		//System.Void UnityEngine.AudioSource::Play(System.UInt64)
+		void Register_UnityEngine_AudioSource_Play();
+		Register_UnityEngine_AudioSource_Play();
+
+		//System.Void UnityEngine.AudioSource::set_clip(UnityEngine.AudioClip)
+		void Register_UnityEngine_AudioSource_set_clip();
+		Register_UnityEngine_AudioSource_set_clip();
+
+		//System.Void UnityEngine.AudioSource::set_volume(System.Single)
+		void Register_UnityEngine_AudioSource_set_volume();
+		Register_UnityEngine_AudioSource_set_volume();
 
 		//UnityEngine.AudioClip UnityEngine.AudioSource::get_clip()
 		void Register_UnityEngine_AudioSource_get_clip();
@@ -615,14 +639,6 @@ void RegisterAllStrippedInternalCalls()
 		Register_UnityEngine_Cursor_get_lockState();
 
 	//End Registrations for type : UnityEngine.Cursor
-
-	//Start Registrations for type : UnityEngine.Debug
-
-		//System.Void UnityEngine.Debug::Break()
-		void Register_UnityEngine_Debug_Break();
-		Register_UnityEngine_Debug_Break();
-
-	//End Registrations for type : UnityEngine.Debug
 
 	//Start Registrations for type : UnityEngine.DebugLogHandler
 
@@ -1266,6 +1282,10 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_Object_Internal_CloneSingle();
 		Register_UnityEngine_Object_Internal_CloneSingle();
 
+		//UnityEngine.Object UnityEngine.Object::Internal_CloneSingleWithParent(UnityEngine.Object,UnityEngine.Transform,System.Boolean)
+		void Register_UnityEngine_Object_Internal_CloneSingleWithParent();
+		Register_UnityEngine_Object_Internal_CloneSingleWithParent();
+
 		//UnityEngine.Object[] UnityEngine.Object::FindObjectsOfType(System.Type)
 		void Register_UnityEngine_Object_FindObjectsOfType();
 		Register_UnityEngine_Object_FindObjectsOfType();
@@ -1299,6 +1319,18 @@ void RegisterAllStrippedInternalCalls()
 		Register_UnityEngine_Playables_PlayableHandle_GetPlayableType_Injected();
 
 	//End Registrations for type : UnityEngine.Playables.PlayableHandle
+
+	//Start Registrations for type : UnityEngine.PlayerPrefs
+
+		//System.Boolean UnityEngine.PlayerPrefs::TrySetInt(System.String,System.Int32)
+		void Register_UnityEngine_PlayerPrefs_TrySetInt();
+		Register_UnityEngine_PlayerPrefs_TrySetInt();
+
+		//System.Int32 UnityEngine.PlayerPrefs::GetInt(System.String,System.Int32)
+		void Register_UnityEngine_PlayerPrefs_GetInt();
+		Register_UnityEngine_PlayerPrefs_GetInt();
+
+	//End Registrations for type : UnityEngine.PlayerPrefs
 
 	//Start Registrations for type : UnityEngine.PropertyNameUtils
 
@@ -1732,6 +1764,18 @@ void RegisterAllStrippedInternalCalls()
 
 	//End Registrations for type : UnityEngine.Sprite
 
+	//Start Registrations for type : UnityEngine.SpriteRenderer
+
+		//System.Void UnityEngine.SpriteRenderer::INTERNAL_get_color(UnityEngine.Color&)
+		void Register_UnityEngine_SpriteRenderer_INTERNAL_get_color();
+		Register_UnityEngine_SpriteRenderer_INTERNAL_get_color();
+
+		//System.Void UnityEngine.SpriteRenderer::INTERNAL_set_color(UnityEngine.Color&)
+		void Register_UnityEngine_SpriteRenderer_INTERNAL_set_color();
+		Register_UnityEngine_SpriteRenderer_INTERNAL_set_color();
+
+	//End Registrations for type : UnityEngine.SpriteRenderer
+
 	//Start Registrations for type : UnityEngine.Sprites.DataUtility
 
 		//System.Void UnityEngine.Sprites.DataUtility::INTERNAL_CALL_GetInnerUV(UnityEngine.Sprite,UnityEngine.Vector4&)
@@ -2099,5 +2143,21 @@ void RegisterAllStrippedInternalCalls()
 		Register_UnityEngine_UnityLogWriter_WriteStringToUnityLog();
 
 	//End Registrations for type : UnityEngine.UnityLogWriter
+
+	//Start Registrations for type : UnityEngine.Video.VideoPlayer
+
+		//System.Double UnityEngine.Video.VideoPlayer::get_time()
+		void Register_UnityEngine_Video_VideoPlayer_get_time();
+		Register_UnityEngine_Video_VideoPlayer_get_time();
+
+		//System.Single UnityEngine.Video.VideoPlayer::get_playbackSpeed()
+		void Register_UnityEngine_Video_VideoPlayer_get_playbackSpeed();
+		Register_UnityEngine_Video_VideoPlayer_get_playbackSpeed();
+
+		//System.Void UnityEngine.Video.VideoPlayer::set_playbackSpeed(System.Single)
+		void Register_UnityEngine_Video_VideoPlayer_set_playbackSpeed();
+		Register_UnityEngine_Video_VideoPlayer_set_playbackSpeed();
+
+	//End Registrations for type : UnityEngine.Video.VideoPlayer
 
 }

@@ -422,25 +422,19 @@ public struct Board{
 
 		if (isPlayerOne) { // is minimizing
 
-			string bishopMoves = "Bishop moves: ";
+			foreach (GameObject piece in AI.GetInstance().allPieces) {
 
-			foreach (Piece piece in this.pieceList) {
-
-				if (piece.isPlayerOne) {
+				if (piece.GetComponent<Piece>().isPlayerOne) {
 
 					List <Square> legalMoves = new List<Square> ();
 
-					if (!piece.isCaptured) {
-						legalMoves = Square.coordsToMovesList (piece.LegalMoves ());
+					if (!piece.GetComponent<Piece>().isCaptured) {
+						legalMoves = Square.coordsToMovesList (piece.GetComponent<Piece>().LegalMoves ());
 					} else {
-						legalMoves = Square.coordsToMovesList (AI.GetInstance().GetLegalDrops (piece));
+						legalMoves = Square.coordsToMovesList (AI.GetInstance().GetLegalDrops (piece.GetComponent<Piece>()));
 					}
 
 					foreach (Square move in legalMoves) {
-
-						if (piece is Bishop) {
-							bishopMoves += ("\n Coord: " + move.x + ", " + move.y);
-						}
 
 						//caches the piece that was doing the moving since moves are recorded by square, not piece
 						move.piecesMoving.Add (piece.gameObject);
@@ -454,24 +448,16 @@ public struct Board{
 				}
 			}
 
-			Debug.Log (bishopMoves);
-
 		} else { // is maximizing
 
-			string bishopMoves = "Bishop moves: ";
+			foreach (GameObject piece in AI.GetInstance().allPieces) {
 
-			foreach (Piece piece in this.pieceList) {
-
-				if (!piece.isPlayerOne) {
+				if (!piece.GetComponent<Piece>().isPlayerOne) {
 
 					List <Square> legalMoves = new List<Square> ();
-					legalMoves = Square.coordsToMovesList (piece.LegalMoves ());
+					legalMoves = Square.coordsToMovesList (piece.GetComponent<Piece>().LegalMoves ());
 
 					foreach (Square move in legalMoves){
-
-						if (piece is Bishop) {
-							bishopMoves += ("\n Coord: " + move.x + ", " + move.y);
-						}
 
 						move.piecesMoving.Add (piece.gameObject);
 
@@ -483,8 +469,6 @@ public struct Board{
 					}
 				}
 			}
-
-			Debug.Log (bishopMoves);
 
 		}
 

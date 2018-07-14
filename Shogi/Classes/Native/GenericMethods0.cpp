@@ -9227,8 +9227,8 @@ public:
 	int32_t ___x_0;
 	// System.Int32 Square::y
 	int32_t ___y_1;
-	// System.Collections.Generic.List`1<UnityEngine.GameObject> Square::pieceMoved
-	List_1_t2585711361 * ___pieceMoved_2;
+	// System.Collections.Generic.List`1<UnityEngine.GameObject> Square::piecesMoving
+	List_1_t2585711361 * ___piecesMoving_2;
 
 public:
 	inline static int32_t get_offset_of_x_0() { return static_cast<int32_t>(offsetof(Square_t318479676, ___x_0)); }
@@ -9247,13 +9247,13 @@ public:
 		___y_1 = value;
 	}
 
-	inline static int32_t get_offset_of_pieceMoved_2() { return static_cast<int32_t>(offsetof(Square_t318479676, ___pieceMoved_2)); }
-	inline List_1_t2585711361 * get_pieceMoved_2() const { return ___pieceMoved_2; }
-	inline List_1_t2585711361 ** get_address_of_pieceMoved_2() { return &___pieceMoved_2; }
-	inline void set_pieceMoved_2(List_1_t2585711361 * value)
+	inline static int32_t get_offset_of_piecesMoving_2() { return static_cast<int32_t>(offsetof(Square_t318479676, ___piecesMoving_2)); }
+	inline List_1_t2585711361 * get_piecesMoving_2() const { return ___piecesMoving_2; }
+	inline List_1_t2585711361 ** get_address_of_piecesMoving_2() { return &___piecesMoving_2; }
+	inline void set_piecesMoving_2(List_1_t2585711361 * value)
 	{
-		___pieceMoved_2 = value;
-		Il2CppCodeGenWriteBarrier((&___pieceMoved_2), value);
+		___piecesMoving_2 = value;
+		Il2CppCodeGenWriteBarrier((&___piecesMoving_2), value);
 	}
 };
 
@@ -9265,14 +9265,14 @@ struct Square_t318479676_marshaled_pinvoke
 {
 	int32_t ___x_0;
 	int32_t ___y_1;
-	List_1_t2585711361 * ___pieceMoved_2;
+	List_1_t2585711361 * ___piecesMoving_2;
 };
 // Native definition for COM marshalling of Square
 struct Square_t318479676_marshaled_com
 {
 	int32_t ___x_0;
 	int32_t ___y_1;
-	List_1_t2585711361 * ___pieceMoved_2;
+	List_1_t2585711361 * ___piecesMoving_2;
 };
 #endif // SQUARE_T318479676_H
 #ifndef UILINEINFO_T4195266810_H

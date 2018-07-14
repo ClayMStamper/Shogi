@@ -193,6 +193,12 @@ extern const Il2CppType MessageEventArgs_t1170575784_0_0_0;
 extern const Il2CppType WeakReference_t1334886716_0_0_0;
 extern const Il2CppType KeyValuePair_2_t3699644050_0_0_0;
 extern const Il2CppType KeyValuePair_2_t1954424602_0_0_0;
+extern const Il2CppType AudioSpatializerExtensionDefinition_t597896186_0_0_0;
+extern const Il2CppType AudioAmbisonicExtensionDefinition_t4118426890_0_0_0;
+extern const Il2CppType AudioSourceExtension_t3064908834_0_0_0;
+extern const Il2CppType ScriptableObject_t2528358522_0_0_0;
+extern const Il2CppType AudioClipPlayable_t785069022_0_0_0;
+extern const Il2CppType AudioMixerPlayable_t3520548497_0_0_0;
 extern const Il2CppType Font_t1956802104_0_0_0;
 extern const Il2CppType UIVertex_t4057497605_0_0_0;
 extern const Il2CppType UICharInfo_t75501106_0_0_0;
@@ -203,12 +209,6 @@ extern const Il2CppType AnimationLayerMixerPlayable_t3631223897_0_0_0;
 extern const Il2CppType AnimationMixerPlayable_t821371386_0_0_0;
 extern const Il2CppType AnimationMotionXToDeltaPlayable_t272231551_0_0_0;
 extern const Il2CppType AnimationOffsetPlayable_t2887420414_0_0_0;
-extern const Il2CppType AudioSpatializerExtensionDefinition_t597896186_0_0_0;
-extern const Il2CppType AudioAmbisonicExtensionDefinition_t4118426890_0_0_0;
-extern const Il2CppType AudioSourceExtension_t3064908834_0_0_0;
-extern const Il2CppType ScriptableObject_t2528358522_0_0_0;
-extern const Il2CppType AudioClipPlayable_t785069022_0_0_0;
-extern const Il2CppType AudioMixerPlayable_t3520548497_0_0_0;
 extern const Il2CppType AchievementDescription_t3217594527_0_0_0;
 extern const Il2CppType IAchievementDescription_t2514275728_0_0_0;
 extern const Il2CppType UserProfile_t3137328177_0_0_0;
@@ -236,6 +236,7 @@ extern const Il2CppType Rigidbody2D_t939494601_0_0_0;
 extern const Il2CppType RaycastHit_t1056001966_0_0_0;
 extern const Il2CppType ContactPoint_t3758755253_0_0_0;
 extern const Il2CppType KeyValuePair_2_t968067334_0_0_0;
+extern const Il2CppType VideoClipPlayable_t2598186649_0_0_0;
 extern const Il2CppType EventSystem_t1003666588_0_0_0;
 extern const Il2CppType UIBehaviour_t3495933518_0_0_0;
 extern const Il2CppType MonoBehaviour_t3962482529_0_0_0;
@@ -433,6 +434,9 @@ extern const Il2CppType TriggerRule_t1946298321_0_0_0;
 extern const Il2CppType Piece_t629532540_0_0_0;
 extern const Il2CppType Square_t318479676_0_0_0;
 extern const Il2CppType Stack_1_t1472921995_0_0_0;
+extern const Il2CppType King_t3414620291_0_0_0;
+extern const Il2CppType AudioClip_t3680889665_0_0_0;
+extern const Il2CppType Texture_t3661962703_0_0_0;
 extern const Il2CppType VertexAnim_t2231884842_0_0_0;
 extern const Il2CppType Vector3U5BU5D_t1718750761_0_0_0;
 extern const Il2CppType IList_1_t1242665951_0_0_0;
@@ -483,7 +487,7 @@ extern const Il2CppType TMP_StyleSheet_t917564226_0_0_0;
 extern const Il2CppType BoxCollider_t1640800422_0_0_0;
 extern const Il2CppType Rigidbody_t3916780224_0_0_0;
 extern const Il2CppType TMP_SpriteAnimator_t2836635477_0_0_0;
-extern const Il2CppType King_t3414620291_0_0_0;
+extern const Il2CppType AudioSource_t3935305588_0_0_0;
 extern const Il2CppType SideTableManager_t1501483693_0_0_0;
 extern const Il2CppType GoldPromo_t452873548_0_0_0;
 extern const Il2CppType Gryphon_t1175293610_0_0_0;
@@ -495,6 +499,7 @@ extern const Il2CppType Bishop_t3007754754_0_0_0;
 extern const Il2CppType Rook_t4142165287_0_0_0;
 extern const Il2CppType Lancer_t2990257595_0_0_0;
 extern const Il2CppType Silver_t2180369776_0_0_0;
+extern const Il2CppType Button3D_t3014406560_0_0_0;
 extern const Il2CppType TextMesh_t1536577757_0_0_0;
 extern const Il2CppType TextMeshProFloatingText_t845872552_0_0_0;
 extern const Il2CppType Light_t3756812086_0_0_0;
@@ -638,6 +643,7 @@ extern const Il2CppType GameObject_GetComponents_m965402322_gp_0_0_0_0;
 extern const Il2CppType GameObject_GetComponentsInChildren_m740063143_gp_0_0_0_0;
 extern const Il2CppType GameObject_GetComponentsInParent_m823960623_gp_0_0_0_0;
 extern const Il2CppType NoAllocHelpers_SafeLength_m3904382575_gp_0_0_0_0;
+extern const Il2CppType Object_Instantiate_m3512583457_gp_0_0_0_0;
 extern const Il2CppType Object_FindObjectsOfType_m329972044_gp_0_0_0_0;
 extern const Il2CppType Mesh_GetAllocArrayFromChannel_m2774808082_gp_0_0_0_0;
 extern const Il2CppType Mesh_SetListForChannel_m4100805706_gp_0_0_0_0;
@@ -1138,6 +1144,18 @@ static const RuntimeType* GenInst_IntPtr_t_0_0_0_WeakReference_t1334886716_0_0_0
 extern const Il2CppGenericInst GenInst_IntPtr_t_0_0_0_WeakReference_t1334886716_0_0_0_IntPtr_t_0_0_0 = { 3, GenInst_IntPtr_t_0_0_0_WeakReference_t1334886716_0_0_0_IntPtr_t_0_0_0_Types };
 static const RuntimeType* GenInst_IntPtr_t_0_0_0_WeakReference_t1334886716_0_0_0_WeakReference_t1334886716_0_0_0_Types[] = { (&IntPtr_t_0_0_0), (&WeakReference_t1334886716_0_0_0), (&WeakReference_t1334886716_0_0_0) };
 extern const Il2CppGenericInst GenInst_IntPtr_t_0_0_0_WeakReference_t1334886716_0_0_0_WeakReference_t1334886716_0_0_0 = { 3, GenInst_IntPtr_t_0_0_0_WeakReference_t1334886716_0_0_0_WeakReference_t1334886716_0_0_0_Types };
+static const RuntimeType* GenInst_AudioSpatializerExtensionDefinition_t597896186_0_0_0_Types[] = { (&AudioSpatializerExtensionDefinition_t597896186_0_0_0) };
+extern const Il2CppGenericInst GenInst_AudioSpatializerExtensionDefinition_t597896186_0_0_0 = { 1, GenInst_AudioSpatializerExtensionDefinition_t597896186_0_0_0_Types };
+static const RuntimeType* GenInst_AudioAmbisonicExtensionDefinition_t4118426890_0_0_0_Types[] = { (&AudioAmbisonicExtensionDefinition_t4118426890_0_0_0) };
+extern const Il2CppGenericInst GenInst_AudioAmbisonicExtensionDefinition_t4118426890_0_0_0 = { 1, GenInst_AudioAmbisonicExtensionDefinition_t4118426890_0_0_0_Types };
+static const RuntimeType* GenInst_AudioSourceExtension_t3064908834_0_0_0_Types[] = { (&AudioSourceExtension_t3064908834_0_0_0) };
+extern const Il2CppGenericInst GenInst_AudioSourceExtension_t3064908834_0_0_0 = { 1, GenInst_AudioSourceExtension_t3064908834_0_0_0_Types };
+static const RuntimeType* GenInst_ScriptableObject_t2528358522_0_0_0_Types[] = { (&ScriptableObject_t2528358522_0_0_0) };
+extern const Il2CppGenericInst GenInst_ScriptableObject_t2528358522_0_0_0 = { 1, GenInst_ScriptableObject_t2528358522_0_0_0_Types };
+static const RuntimeType* GenInst_AudioClipPlayable_t785069022_0_0_0_Types[] = { (&AudioClipPlayable_t785069022_0_0_0) };
+extern const Il2CppGenericInst GenInst_AudioClipPlayable_t785069022_0_0_0 = { 1, GenInst_AudioClipPlayable_t785069022_0_0_0_Types };
+static const RuntimeType* GenInst_AudioMixerPlayable_t3520548497_0_0_0_Types[] = { (&AudioMixerPlayable_t3520548497_0_0_0) };
+extern const Il2CppGenericInst GenInst_AudioMixerPlayable_t3520548497_0_0_0 = { 1, GenInst_AudioMixerPlayable_t3520548497_0_0_0_Types };
 static const RuntimeType* GenInst_Font_t1956802104_0_0_0_Types[] = { (&Font_t1956802104_0_0_0) };
 extern const Il2CppGenericInst GenInst_Font_t1956802104_0_0_0 = { 1, GenInst_Font_t1956802104_0_0_0_Types };
 static const RuntimeType* GenInst_UIVertex_t4057497605_0_0_0_Types[] = { (&UIVertex_t4057497605_0_0_0) };
@@ -1158,18 +1176,6 @@ static const RuntimeType* GenInst_AnimationMotionXToDeltaPlayable_t272231551_0_0
 extern const Il2CppGenericInst GenInst_AnimationMotionXToDeltaPlayable_t272231551_0_0_0 = { 1, GenInst_AnimationMotionXToDeltaPlayable_t272231551_0_0_0_Types };
 static const RuntimeType* GenInst_AnimationOffsetPlayable_t2887420414_0_0_0_Types[] = { (&AnimationOffsetPlayable_t2887420414_0_0_0) };
 extern const Il2CppGenericInst GenInst_AnimationOffsetPlayable_t2887420414_0_0_0 = { 1, GenInst_AnimationOffsetPlayable_t2887420414_0_0_0_Types };
-static const RuntimeType* GenInst_AudioSpatializerExtensionDefinition_t597896186_0_0_0_Types[] = { (&AudioSpatializerExtensionDefinition_t597896186_0_0_0) };
-extern const Il2CppGenericInst GenInst_AudioSpatializerExtensionDefinition_t597896186_0_0_0 = { 1, GenInst_AudioSpatializerExtensionDefinition_t597896186_0_0_0_Types };
-static const RuntimeType* GenInst_AudioAmbisonicExtensionDefinition_t4118426890_0_0_0_Types[] = { (&AudioAmbisonicExtensionDefinition_t4118426890_0_0_0) };
-extern const Il2CppGenericInst GenInst_AudioAmbisonicExtensionDefinition_t4118426890_0_0_0 = { 1, GenInst_AudioAmbisonicExtensionDefinition_t4118426890_0_0_0_Types };
-static const RuntimeType* GenInst_AudioSourceExtension_t3064908834_0_0_0_Types[] = { (&AudioSourceExtension_t3064908834_0_0_0) };
-extern const Il2CppGenericInst GenInst_AudioSourceExtension_t3064908834_0_0_0 = { 1, GenInst_AudioSourceExtension_t3064908834_0_0_0_Types };
-static const RuntimeType* GenInst_ScriptableObject_t2528358522_0_0_0_Types[] = { (&ScriptableObject_t2528358522_0_0_0) };
-extern const Il2CppGenericInst GenInst_ScriptableObject_t2528358522_0_0_0 = { 1, GenInst_ScriptableObject_t2528358522_0_0_0_Types };
-static const RuntimeType* GenInst_AudioClipPlayable_t785069022_0_0_0_Types[] = { (&AudioClipPlayable_t785069022_0_0_0) };
-extern const Il2CppGenericInst GenInst_AudioClipPlayable_t785069022_0_0_0 = { 1, GenInst_AudioClipPlayable_t785069022_0_0_0_Types };
-static const RuntimeType* GenInst_AudioMixerPlayable_t3520548497_0_0_0_Types[] = { (&AudioMixerPlayable_t3520548497_0_0_0) };
-extern const Il2CppGenericInst GenInst_AudioMixerPlayable_t3520548497_0_0_0 = { 1, GenInst_AudioMixerPlayable_t3520548497_0_0_0_Types };
 static const RuntimeType* GenInst_Boolean_t97287965_0_0_0_String_t_0_0_0_Types[] = { (&Boolean_t97287965_0_0_0), (&String_t_0_0_0) };
 extern const Il2CppGenericInst GenInst_Boolean_t97287965_0_0_0_String_t_0_0_0 = { 2, GenInst_Boolean_t97287965_0_0_0_String_t_0_0_0_Types };
 static const RuntimeType* GenInst_Boolean_t97287965_0_0_0_RuntimeObject_0_0_0_Types[] = { (&Boolean_t97287965_0_0_0), (&RuntimeObject_0_0_0) };
@@ -1262,6 +1268,8 @@ static const RuntimeType* GenInst_String_t_0_0_0_RuntimeObject_0_0_0_Types[] = {
 extern const Il2CppGenericInst GenInst_String_t_0_0_0_RuntimeObject_0_0_0 = { 2, GenInst_String_t_0_0_0_RuntimeObject_0_0_0_Types };
 static const RuntimeType* GenInst_KeyValuePair_2_t968067334_0_0_0_Types[] = { (&KeyValuePair_2_t968067334_0_0_0) };
 extern const Il2CppGenericInst GenInst_KeyValuePair_2_t968067334_0_0_0 = { 1, GenInst_KeyValuePair_2_t968067334_0_0_0_Types };
+static const RuntimeType* GenInst_VideoClipPlayable_t2598186649_0_0_0_Types[] = { (&VideoClipPlayable_t2598186649_0_0_0) };
+extern const Il2CppGenericInst GenInst_VideoClipPlayable_t2598186649_0_0_0 = { 1, GenInst_VideoClipPlayable_t2598186649_0_0_0_Types };
 static const RuntimeType* GenInst_EventSystem_t1003666588_0_0_0_Types[] = { (&EventSystem_t1003666588_0_0_0) };
 extern const Il2CppGenericInst GenInst_EventSystem_t1003666588_0_0_0 = { 1, GenInst_EventSystem_t1003666588_0_0_0_Types };
 static const RuntimeType* GenInst_UIBehaviour_t3495933518_0_0_0_Types[] = { (&UIBehaviour_t3495933518_0_0_0) };
@@ -2040,6 +2048,12 @@ static const RuntimeType* GenInst_Square_t318479676_0_0_0_Types[] = { (&Square_t
 extern const Il2CppGenericInst GenInst_Square_t318479676_0_0_0 = { 1, GenInst_Square_t318479676_0_0_0_Types };
 static const RuntimeType* GenInst_Stack_1_t1472921995_0_0_0_Types[] = { (&Stack_1_t1472921995_0_0_0) };
 extern const Il2CppGenericInst GenInst_Stack_1_t1472921995_0_0_0 = { 1, GenInst_Stack_1_t1472921995_0_0_0_Types };
+static const RuntimeType* GenInst_King_t3414620291_0_0_0_Types[] = { (&King_t3414620291_0_0_0) };
+extern const Il2CppGenericInst GenInst_King_t3414620291_0_0_0 = { 1, GenInst_King_t3414620291_0_0_0_Types };
+static const RuntimeType* GenInst_AudioClip_t3680889665_0_0_0_Types[] = { (&AudioClip_t3680889665_0_0_0) };
+extern const Il2CppGenericInst GenInst_AudioClip_t3680889665_0_0_0 = { 1, GenInst_AudioClip_t3680889665_0_0_0_Types };
+static const RuntimeType* GenInst_Texture_t3661962703_0_0_0_Types[] = { (&Texture_t3661962703_0_0_0) };
+extern const Il2CppGenericInst GenInst_Texture_t3661962703_0_0_0 = { 1, GenInst_Texture_t3661962703_0_0_0_Types };
 static const RuntimeType* GenInst_Char_t3634460470_0_0_0_Int32_t2950945753_0_0_0_Types[] = { (&Char_t3634460470_0_0_0), (&Int32_t2950945753_0_0_0) };
 extern const Il2CppGenericInst GenInst_Char_t3634460470_0_0_0_Int32_t2950945753_0_0_0 = { 2, GenInst_Char_t3634460470_0_0_0_Int32_t2950945753_0_0_0_Types };
 static const RuntimeType* GenInst_String_t_0_0_0_String_t_0_0_0_Int32_t2950945753_0_0_0_Types[] = { (&String_t_0_0_0), (&String_t_0_0_0), (&Int32_t2950945753_0_0_0) };
@@ -2150,8 +2164,8 @@ static const RuntimeType* GenInst_Rigidbody_t3916780224_0_0_0_Types[] = { (&Rigi
 extern const Il2CppGenericInst GenInst_Rigidbody_t3916780224_0_0_0 = { 1, GenInst_Rigidbody_t3916780224_0_0_0_Types };
 static const RuntimeType* GenInst_TMP_SpriteAnimator_t2836635477_0_0_0_Types[] = { (&TMP_SpriteAnimator_t2836635477_0_0_0) };
 extern const Il2CppGenericInst GenInst_TMP_SpriteAnimator_t2836635477_0_0_0 = { 1, GenInst_TMP_SpriteAnimator_t2836635477_0_0_0_Types };
-static const RuntimeType* GenInst_King_t3414620291_0_0_0_Types[] = { (&King_t3414620291_0_0_0) };
-extern const Il2CppGenericInst GenInst_King_t3414620291_0_0_0 = { 1, GenInst_King_t3414620291_0_0_0_Types };
+static const RuntimeType* GenInst_AudioSource_t3935305588_0_0_0_Types[] = { (&AudioSource_t3935305588_0_0_0) };
+extern const Il2CppGenericInst GenInst_AudioSource_t3935305588_0_0_0 = { 1, GenInst_AudioSource_t3935305588_0_0_0_Types };
 static const RuntimeType* GenInst_SideTableManager_t1501483693_0_0_0_Types[] = { (&SideTableManager_t1501483693_0_0_0) };
 extern const Il2CppGenericInst GenInst_SideTableManager_t1501483693_0_0_0 = { 1, GenInst_SideTableManager_t1501483693_0_0_0_Types };
 static const RuntimeType* GenInst_GoldPromo_t452873548_0_0_0_Types[] = { (&GoldPromo_t452873548_0_0_0) };
@@ -2174,6 +2188,8 @@ static const RuntimeType* GenInst_Lancer_t2990257595_0_0_0_Types[] = { (&Lancer_
 extern const Il2CppGenericInst GenInst_Lancer_t2990257595_0_0_0 = { 1, GenInst_Lancer_t2990257595_0_0_0_Types };
 static const RuntimeType* GenInst_Silver_t2180369776_0_0_0_Types[] = { (&Silver_t2180369776_0_0_0) };
 extern const Il2CppGenericInst GenInst_Silver_t2180369776_0_0_0 = { 1, GenInst_Silver_t2180369776_0_0_0_Types };
+static const RuntimeType* GenInst_Button3D_t3014406560_0_0_0_Types[] = { (&Button3D_t3014406560_0_0_0) };
+extern const Il2CppGenericInst GenInst_Button3D_t3014406560_0_0_0 = { 1, GenInst_Button3D_t3014406560_0_0_0_Types };
 static const RuntimeType* GenInst_TextMesh_t1536577757_0_0_0_Types[] = { (&TextMesh_t1536577757_0_0_0) };
 extern const Il2CppGenericInst GenInst_TextMesh_t1536577757_0_0_0 = { 1, GenInst_TextMesh_t1536577757_0_0_0_Types };
 static const RuntimeType* GenInst_TextMeshProFloatingText_t845872552_0_0_0_Types[] = { (&TextMeshProFloatingText_t845872552_0_0_0) };
@@ -2566,6 +2582,8 @@ static const RuntimeType* GenInst_GameObject_GetComponentsInParent_m823960623_gp
 extern const Il2CppGenericInst GenInst_GameObject_GetComponentsInParent_m823960623_gp_0_0_0_0 = { 1, GenInst_GameObject_GetComponentsInParent_m823960623_gp_0_0_0_0_Types };
 static const RuntimeType* GenInst_NoAllocHelpers_SafeLength_m3904382575_gp_0_0_0_0_Types[] = { (&NoAllocHelpers_SafeLength_m3904382575_gp_0_0_0_0) };
 extern const Il2CppGenericInst GenInst_NoAllocHelpers_SafeLength_m3904382575_gp_0_0_0_0 = { 1, GenInst_NoAllocHelpers_SafeLength_m3904382575_gp_0_0_0_0_Types };
+static const RuntimeType* GenInst_Object_Instantiate_m3512583457_gp_0_0_0_0_Types[] = { (&Object_Instantiate_m3512583457_gp_0_0_0_0) };
+extern const Il2CppGenericInst GenInst_Object_Instantiate_m3512583457_gp_0_0_0_0 = { 1, GenInst_Object_Instantiate_m3512583457_gp_0_0_0_0_Types };
 static const RuntimeType* GenInst_Object_FindObjectsOfType_m329972044_gp_0_0_0_0_Types[] = { (&Object_FindObjectsOfType_m329972044_gp_0_0_0_0) };
 extern const Il2CppGenericInst GenInst_Object_FindObjectsOfType_m329972044_gp_0_0_0_0 = { 1, GenInst_Object_FindObjectsOfType_m329972044_gp_0_0_0_0_Types };
 static const RuntimeType* GenInst_Mesh_GetAllocArrayFromChannel_m2774808082_gp_0_0_0_0_Types[] = { (&Mesh_GetAllocArrayFromChannel_m2774808082_gp_0_0_0_0) };
@@ -2684,7 +2702,7 @@ static const RuntimeType* GenInst_TMP_TextInfo_Resize_m670922699_gp_0_0_0_0_Type
 extern const Il2CppGenericInst GenInst_TMP_TextInfo_Resize_m670922699_gp_0_0_0_0 = { 1, GenInst_TMP_TextInfo_Resize_m670922699_gp_0_0_0_0_Types };
 static const RuntimeType* GenInst_TMP_XmlTagStack_1_t3882766083_gp_0_0_0_0_Types[] = { (&TMP_XmlTagStack_1_t3882766083_gp_0_0_0_0) };
 extern const Il2CppGenericInst GenInst_TMP_XmlTagStack_1_t3882766083_gp_0_0_0_0 = { 1, GenInst_TMP_XmlTagStack_1_t3882766083_gp_0_0_0_0_Types };
-extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[989] = 
+extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[995] = 
 {
 	&GenInst_RuntimeObject_0_0_0,
 	&GenInst_Int32_t2950945753_0_0_0,
@@ -2902,6 +2920,12 @@ extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[989] =
 	&GenInst_IntPtr_t_0_0_0_WeakReference_t1334886716_0_0_0_KeyValuePair_2_t1954424602_0_0_0,
 	&GenInst_IntPtr_t_0_0_0_WeakReference_t1334886716_0_0_0_IntPtr_t_0_0_0,
 	&GenInst_IntPtr_t_0_0_0_WeakReference_t1334886716_0_0_0_WeakReference_t1334886716_0_0_0,
+	&GenInst_AudioSpatializerExtensionDefinition_t597896186_0_0_0,
+	&GenInst_AudioAmbisonicExtensionDefinition_t4118426890_0_0_0,
+	&GenInst_AudioSourceExtension_t3064908834_0_0_0,
+	&GenInst_ScriptableObject_t2528358522_0_0_0,
+	&GenInst_AudioClipPlayable_t785069022_0_0_0,
+	&GenInst_AudioMixerPlayable_t3520548497_0_0_0,
 	&GenInst_Font_t1956802104_0_0_0,
 	&GenInst_UIVertex_t4057497605_0_0_0,
 	&GenInst_UICharInfo_t75501106_0_0_0,
@@ -2912,12 +2936,6 @@ extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[989] =
 	&GenInst_AnimationMixerPlayable_t821371386_0_0_0,
 	&GenInst_AnimationMotionXToDeltaPlayable_t272231551_0_0_0,
 	&GenInst_AnimationOffsetPlayable_t2887420414_0_0_0,
-	&GenInst_AudioSpatializerExtensionDefinition_t597896186_0_0_0,
-	&GenInst_AudioAmbisonicExtensionDefinition_t4118426890_0_0_0,
-	&GenInst_AudioSourceExtension_t3064908834_0_0_0,
-	&GenInst_ScriptableObject_t2528358522_0_0_0,
-	&GenInst_AudioClipPlayable_t785069022_0_0_0,
-	&GenInst_AudioMixerPlayable_t3520548497_0_0_0,
 	&GenInst_Boolean_t97287965_0_0_0_String_t_0_0_0,
 	&GenInst_Boolean_t97287965_0_0_0_RuntimeObject_0_0_0,
 	&GenInst_AchievementDescription_t3217594527_0_0_0,
@@ -2964,6 +2982,7 @@ extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[989] =
 	&GenInst_ContactPoint_t3758755253_0_0_0,
 	&GenInst_String_t_0_0_0_RuntimeObject_0_0_0,
 	&GenInst_KeyValuePair_2_t968067334_0_0_0,
+	&GenInst_VideoClipPlayable_t2598186649_0_0_0,
 	&GenInst_EventSystem_t1003666588_0_0_0,
 	&GenInst_UIBehaviour_t3495933518_0_0_0,
 	&GenInst_MonoBehaviour_t3962482529_0_0_0,
@@ -3353,6 +3372,9 @@ extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[989] =
 	&GenInst_Piece_t629532540_0_0_0,
 	&GenInst_Square_t318479676_0_0_0,
 	&GenInst_Stack_1_t1472921995_0_0_0,
+	&GenInst_King_t3414620291_0_0_0,
+	&GenInst_AudioClip_t3680889665_0_0_0,
+	&GenInst_Texture_t3661962703_0_0_0,
 	&GenInst_Char_t3634460470_0_0_0_Int32_t2950945753_0_0_0,
 	&GenInst_String_t_0_0_0_String_t_0_0_0_Int32_t2950945753_0_0_0,
 	&GenInst_RuntimeObject_0_0_0_RuntimeObject_0_0_0_Int32_t2950945753_0_0_0,
@@ -3408,7 +3430,7 @@ extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[989] =
 	&GenInst_BoxCollider_t1640800422_0_0_0,
 	&GenInst_Rigidbody_t3916780224_0_0_0,
 	&GenInst_TMP_SpriteAnimator_t2836635477_0_0_0,
-	&GenInst_King_t3414620291_0_0_0,
+	&GenInst_AudioSource_t3935305588_0_0_0,
 	&GenInst_SideTableManager_t1501483693_0_0_0,
 	&GenInst_GoldPromo_t452873548_0_0_0,
 	&GenInst_Gryphon_t1175293610_0_0_0,
@@ -3420,6 +3442,7 @@ extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[989] =
 	&GenInst_Rook_t4142165287_0_0_0,
 	&GenInst_Lancer_t2990257595_0_0_0,
 	&GenInst_Silver_t2180369776_0_0_0,
+	&GenInst_Button3D_t3014406560_0_0_0,
 	&GenInst_TextMesh_t1536577757_0_0_0,
 	&GenInst_TextMeshProFloatingText_t845872552_0_0_0,
 	&GenInst_Light_t3756812086_0_0_0,
@@ -3616,6 +3639,7 @@ extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[989] =
 	&GenInst_GameObject_GetComponentsInChildren_m740063143_gp_0_0_0_0,
 	&GenInst_GameObject_GetComponentsInParent_m823960623_gp_0_0_0_0,
 	&GenInst_NoAllocHelpers_SafeLength_m3904382575_gp_0_0_0_0,
+	&GenInst_Object_Instantiate_m3512583457_gp_0_0_0_0,
 	&GenInst_Object_FindObjectsOfType_m329972044_gp_0_0_0_0,
 	&GenInst_Mesh_GetAllocArrayFromChannel_m2774808082_gp_0_0_0_0,
 	&GenInst_Mesh_SetListForChannel_m4100805706_gp_0_0_0_0,

@@ -7525,7 +7525,6 @@ extern "C" void CustomYieldInstruction_get_Current_m2910483123 ();
 extern "C" void CustomYieldInstruction_MoveNext_m1374112450 ();
 extern "C" void CustomYieldInstruction_Reset_m3141101090 ();
 extern "C" void Debug_get_unityLogger_m2239795986 ();
-extern "C" void Debug_Break_m1902912390 ();
 extern "C" void Debug_Log_m4051431634 ();
 extern "C" void Debug_LogFormat_m309087137 ();
 extern "C" void Debug_LogError_m2850623458 ();
@@ -7663,6 +7662,7 @@ extern "C" void Gradient_Finalize_m3995355035 ();
 extern "C" void GUIElement__ctor_m3257342989 ();
 extern "C" void GUILayer_HitTest_m512928460 ();
 extern "C" void GUILayer_INTERNAL_CALL_HitTest_m1069802956 ();
+extern "C" void HeaderAttribute__ctor_m1154052380 ();
 extern "C" void HideInInspector__ctor_m1179782685 ();
 extern "C" void Input_GetKeyInt_m4146877895 ();
 extern "C" void Input_GetKeyDownInt_m3509480073 ();
@@ -7731,6 +7731,7 @@ extern "C" void ManagedStreamHelpers_ManagedStreamLength_m2930872960 ();
 extern "C" void Material__ctor_m1662457592 ();
 extern "C" void Material__ctor_m249231841 ();
 extern "C" void Material_get_mainTexture_m692510677 ();
+extern "C" void Material_set_mainTexture_m544811714 ();
 extern "C" void Material_SetFloatImpl_m1844818093 ();
 extern "C" void Material_SetIntImpl_m724477324 ();
 extern "C" void Material_SetColorImpl_m3160281768 ();
@@ -7765,6 +7766,7 @@ extern "C" void Material_SetColor_m355160541 ();
 extern "C" void Material_SetVector_m2633010038 ();
 extern "C" void Material_SetMatrix_m4094650785 ();
 extern "C" void Material_SetMatrix_m751249077 ();
+extern "C" void Material_SetTexture_m1829349465 ();
 extern "C" void Material_SetTexture_m3009528825 ();
 extern "C" void Material_GetFloat_m2836278142 ();
 extern "C" void Material_GetColor_m4231777338 ();
@@ -7895,6 +7897,7 @@ extern "C" void NoAllocHelpers_ExtractArrayFromList_m2239661248 ();
 extern "C" void NoAllocHelpers_SafeLength_m3994544446 ();
 extern "C" void Object__ctor_m1087895580 ();
 extern "C" void Object_Internal_CloneSingle_m1021157572 ();
+extern "C" void Object_Internal_CloneSingleWithParent_m2666483490 ();
 extern "C" void Object_GetOffsetOfInstanceIDInCPlusPlusObject_m1567230257 ();
 extern "C" void Object_Destroy_m3118546832 ();
 extern "C" void Object_Destroy_m565254235 ();
@@ -7913,7 +7916,9 @@ extern "C" void Object_op_Implicit_m3574996620 ();
 extern "C" void Object_CompareBaseObjects_m2405226032 ();
 extern "C" void Object_IsNativeObjectAlive_m3095908075 ();
 extern "C" void Object_GetCachedPtr_m151292858 ();
+extern "C" void Object_Instantiate_m4029422268 ();
 extern "C" void Object_CheckNullArgument_m4237608654 ();
+extern "C" void Object_FindObjectOfType_m67275058 ();
 extern "C" void Object_op_Equality_m1810815630 ();
 extern "C" void Object_op_Inequality_m4071470834 ();
 extern "C" void Object__cctor_m2398773973 ();
@@ -7950,6 +7955,11 @@ extern "C" void PlayableOutputHandle_GetHashCode_m2803245663_AdjustorThunk ();
 extern "C" void PlayableOutputHandle_op_Equality_m388301694 ();
 extern "C" void PlayableOutputHandle_Equals_m334596297_AdjustorThunk ();
 extern "C" void PlayableOutputHandle_CompareVersion_m841260813 ();
+extern "C" void PlayerPrefs_TrySetInt_m835861542 ();
+extern "C" void PlayerPrefs_SetInt_m2842000469 ();
+extern "C" void PlayerPrefs_GetInt_m1299643124 ();
+extern "C" void PlayerPrefs_GetInt_m3797620966 ();
+extern "C" void PlayerPrefsException__ctor_m1374997736 ();
 extern "C" void PropertyAttribute__ctor_m1017741868 ();
 extern "C" void PropertyName__ctor_m1858502781_AdjustorThunk ();
 extern "C" void PropertyName__ctor_m3511806171_AdjustorThunk ();
@@ -8160,6 +8170,10 @@ extern "C" void Sprite_get_packed_m1179604684 ();
 extern "C" void Sprite_get_border_m2985609076 ();
 extern "C" void Sprite_INTERNAL_get_border_m3728071101 ();
 extern "C" void Sprite_get_pixelsPerUnit_m524644775 ();
+extern "C" void SpriteRenderer_get_color_m904197748 ();
+extern "C" void SpriteRenderer_set_color_m3056777566 ();
+extern "C" void SpriteRenderer_INTERNAL_get_color_m1411745087 ();
+extern "C" void SpriteRenderer_INTERNAL_set_color_m82712814 ();
 extern "C" void DataUtility_GetInnerUV_m2896140645 ();
 extern "C" void DataUtility_INTERNAL_CALL_GetInnerUV_m1230966310 ();
 extern "C" void DataUtility_GetOuterUV_m2509686757 ();
@@ -8355,6 +8369,7 @@ extern "C" void Vector3_Dot_m606404487 ();
 extern "C" void Vector3_Distance_m886789632 ();
 extern "C" void Vector3_ClampMagnitude_m2732959745 ();
 extern "C" void Vector3_Magnitude_m3447562852 ();
+extern "C" void Vector3_get_magnitude_m27958459_AdjustorThunk ();
 extern "C" void Vector3_SqrMagnitude_m3025115945 ();
 extern "C" void Vector3_get_sqrMagnitude_m1474274574_AdjustorThunk ();
 extern "C" void Vector3_Min_m1803158933 ();
@@ -8417,6 +8432,89 @@ extern "C" void ScriptingUtils_CreateDelegate_m650796149 ();
 extern "C" void TypeInferenceRuleAttribute__ctor_m3137488504 ();
 extern "C" void TypeInferenceRuleAttribute__ctor_m2736695831 ();
 extern "C" void TypeInferenceRuleAttribute_ToString_m4089326196 ();
+extern "C" void AudioClipPlayable_GetHandle_m1762771314_AdjustorThunk ();
+extern "C" void AudioClipPlayable_Equals_m3705880618_AdjustorThunk ();
+extern "C" void AudioMixerPlayable_GetHandle_m57919556_AdjustorThunk ();
+extern "C" void AudioMixerPlayable_Equals_m1649866213_AdjustorThunk ();
+extern "C" void AudioClip__ctor_m1211547677 ();
+extern "C" void AudioClip_get_ambisonic_m3815052287 ();
+extern "C" void AudioClip_InvokePCMReaderCallback_Internal_m224395634 ();
+extern "C" void AudioClip_InvokePCMSetPositionCallback_Internal_m3097960898 ();
+extern "C" void PCMReaderCallback__ctor_m4269754975 ();
+extern "C" void PCMReaderCallback_Invoke_m2948796957 ();
+extern "C" void PCMReaderCallback_BeginInvoke_m3391809637 ();
+extern "C" void PCMReaderCallback_EndInvoke_m3916876196 ();
+extern "C" void PCMSetPositionCallback__ctor_m2909837933 ();
+extern "C" void PCMSetPositionCallback_Invoke_m2167694991 ();
+extern "C" void PCMSetPositionCallback_BeginInvoke_m2701134198 ();
+extern "C" void PCMSetPositionCallback_EndInvoke_m1405765992 ();
+extern "C" void AudioExtensionDefinition_GetExtensionType_m1450823952 ();
+extern "C" void AudioExtensionManager_GetAudioListener_m817760607 ();
+extern "C" void AudioExtensionManager_AddSpatializerExtension_m820561940 ();
+extern "C" void AudioExtensionManager_AddAmbisonicDecoderExtension_m3197702864 ();
+extern "C" void AudioExtensionManager_WriteExtensionProperties_m1988587615 ();
+extern "C" void AudioExtensionManager_AddSpatializerExtension_m3915849352 ();
+extern "C" void AudioExtensionManager_WriteExtensionProperties_m3028464154 ();
+extern "C" void AudioExtensionManager_GetListenerSpatializerExtensionType_m3035569206 ();
+extern "C" void AudioExtensionManager_GetListenerSpatializerExtensionEditorType_m630287782 ();
+extern "C" void AudioExtensionManager_GetSourceSpatializerExtensionType_m3221230995 ();
+extern "C" void AudioExtensionManager_AddExtensionToManager_m3475649283 ();
+extern "C" void AudioExtensionManager_RemoveExtensionFromManager_m442924172 ();
+extern "C" void AudioExtensionManager_Update_m3269307447 ();
+extern "C" void AudioExtensionManager_GetReadyToPlay_m1557263244 ();
+extern "C" void AudioExtensionManager_RegisterBuiltinDefinitions_m2742744104 ();
+extern "C" void AudioExtensionManager__cctor_m1361600190 ();
+extern "C" void AudioListener_GetNumExtensionProperties_m3139224773 ();
+extern "C" void AudioListener_ReadExtensionName_m929423100 ();
+extern "C" void AudioListener_INTERNAL_CALL_ReadExtensionName_m4145804327 ();
+extern "C" void AudioListener_ReadExtensionPropertyName_m3416271339 ();
+extern "C" void AudioListener_INTERNAL_CALL_ReadExtensionPropertyName_m330480156 ();
+extern "C" void AudioListener_ReadExtensionPropertyValue_m2443832840 ();
+extern "C" void AudioListener_ClearExtensionProperties_m3849891634 ();
+extern "C" void AudioListener_INTERNAL_CALL_ClearExtensionProperties_m2036387607 ();
+extern "C" void AudioListener_AddExtension_m994751216 ();
+extern "C" void AudioListenerExtension_get_audioListener_m3597041395 ();
+extern "C" void AudioListenerExtension_set_audioListener_m3412289012 ();
+extern "C" void AudioListenerExtension_WriteExtensionProperty_m4064727398 ();
+extern "C" void AudioListenerExtension_ExtensionUpdate_m1303405084 ();
+extern "C" void AudioSettings_GetSpatializerPluginName_m1324100978 ();
+extern "C" void AudioSettings_InvokeOnAudioConfigurationChanged_m3131294153 ();
+extern "C" void AudioSettings_InvokeOnAudioManagerUpdate_m4044425648 ();
+extern "C" void AudioSettings_InvokeOnAudioSourcePlay_m3298744573 ();
+extern "C" void AudioSettings_GetAmbisonicDecoderPluginName_m19603540 ();
+extern "C" void AudioConfigurationChangeHandler__ctor_m1059338375 ();
+extern "C" void AudioConfigurationChangeHandler_Invoke_m1233557945 ();
+extern "C" void AudioConfigurationChangeHandler_BeginInvoke_m4104069447 ();
+extern "C" void AudioConfigurationChangeHandler_EndInvoke_m4175380841 ();
+extern "C" void AudioSource_get_volume_m3936891178 ();
+extern "C" void AudioSource_set_volume_m1273312851 ();
+extern "C" void AudioSource_get_clip_m1234340632 ();
+extern "C" void AudioSource_set_clip_m31653938 ();
+extern "C" void AudioSource_Play_m3389845180 ();
+extern "C" void AudioSource_Play_m48294159 ();
+extern "C" void AudioSource_Pause_m1501822765 ();
+extern "C" void AudioSource_INTERNAL_CALL_Pause_m1443225006 ();
+extern "C" void AudioSource_UnPause_m3033034686 ();
+extern "C" void AudioSource_INTERNAL_CALL_UnPause_m2866508363 ();
+extern "C" void AudioSource_get_isPlaying_m1896551654 ();
+extern "C" void AudioSource_get_spatializeInternal_m2117549793 ();
+extern "C" void AudioSource_get_spatialize_m3609701298 ();
+extern "C" void AudioSource_GetNumExtensionProperties_m1231815209 ();
+extern "C" void AudioSource_ReadExtensionName_m725112169 ();
+extern "C" void AudioSource_INTERNAL_CALL_ReadExtensionName_m36001502 ();
+extern "C" void AudioSource_ReadExtensionPropertyName_m2761820692 ();
+extern "C" void AudioSource_INTERNAL_CALL_ReadExtensionPropertyName_m3643462071 ();
+extern "C" void AudioSource_ReadExtensionPropertyValue_m72717540 ();
+extern "C" void AudioSource_ClearExtensionProperties_m2116074582 ();
+extern "C" void AudioSource_INTERNAL_CALL_ClearExtensionProperties_m2159298662 ();
+extern "C" void AudioSource_AddSpatializerExtension_m2560794359 ();
+extern "C" void AudioSource_AddAmbisonicExtension_m304476911 ();
+extern "C" void AudioSourceExtension_get_audioSource_m1465006871 ();
+extern "C" void AudioSourceExtension_set_audioSource_m3729768988 ();
+extern "C" void AudioSourceExtension_WriteExtensionProperty_m2866033202 ();
+extern "C" void AudioSourceExtension_Play_m420799475 ();
+extern "C" void AudioSourceExtension_Stop_m387892536 ();
+extern "C" void AudioSourceExtension_ExtensionUpdate_m2790353999 ();
 extern "C" void Font__ctor_m4193154730 ();
 extern "C" void Font_Internal_CreateFont_m3912844329 ();
 extern "C" void Font_get_material_m1471867149 ();
@@ -8499,80 +8597,6 @@ extern "C" void Animator_ResetTrigger_m2321267720 ();
 extern "C" void Animator_get_hasBoundPlayables_m2940726619 ();
 extern "C" void Animator_SetTriggerString_m2612407758 ();
 extern "C" void Animator_ResetTriggerString_m394341254 ();
-extern "C" void AudioClipPlayable_GetHandle_m1762771314_AdjustorThunk ();
-extern "C" void AudioClipPlayable_Equals_m3705880618_AdjustorThunk ();
-extern "C" void AudioMixerPlayable_GetHandle_m57919556_AdjustorThunk ();
-extern "C" void AudioMixerPlayable_Equals_m1649866213_AdjustorThunk ();
-extern "C" void AudioClip__ctor_m1211547677 ();
-extern "C" void AudioClip_get_ambisonic_m3815052287 ();
-extern "C" void AudioClip_InvokePCMReaderCallback_Internal_m224395634 ();
-extern "C" void AudioClip_InvokePCMSetPositionCallback_Internal_m3097960898 ();
-extern "C" void PCMReaderCallback__ctor_m4269754975 ();
-extern "C" void PCMReaderCallback_Invoke_m2948796957 ();
-extern "C" void PCMReaderCallback_BeginInvoke_m3391809637 ();
-extern "C" void PCMReaderCallback_EndInvoke_m3916876196 ();
-extern "C" void PCMSetPositionCallback__ctor_m2909837933 ();
-extern "C" void PCMSetPositionCallback_Invoke_m2167694991 ();
-extern "C" void PCMSetPositionCallback_BeginInvoke_m2701134198 ();
-extern "C" void PCMSetPositionCallback_EndInvoke_m1405765992 ();
-extern "C" void AudioExtensionDefinition_GetExtensionType_m1450823952 ();
-extern "C" void AudioExtensionManager_GetAudioListener_m817760607 ();
-extern "C" void AudioExtensionManager_AddSpatializerExtension_m820561940 ();
-extern "C" void AudioExtensionManager_AddAmbisonicDecoderExtension_m3197702864 ();
-extern "C" void AudioExtensionManager_WriteExtensionProperties_m1988587615 ();
-extern "C" void AudioExtensionManager_AddSpatializerExtension_m3915849352 ();
-extern "C" void AudioExtensionManager_WriteExtensionProperties_m3028464154 ();
-extern "C" void AudioExtensionManager_GetListenerSpatializerExtensionType_m3035569206 ();
-extern "C" void AudioExtensionManager_GetListenerSpatializerExtensionEditorType_m630287782 ();
-extern "C" void AudioExtensionManager_GetSourceSpatializerExtensionType_m3221230995 ();
-extern "C" void AudioExtensionManager_AddExtensionToManager_m3475649283 ();
-extern "C" void AudioExtensionManager_RemoveExtensionFromManager_m442924172 ();
-extern "C" void AudioExtensionManager_Update_m3269307447 ();
-extern "C" void AudioExtensionManager_GetReadyToPlay_m1557263244 ();
-extern "C" void AudioExtensionManager_RegisterBuiltinDefinitions_m2742744104 ();
-extern "C" void AudioExtensionManager__cctor_m1361600190 ();
-extern "C" void AudioListener_GetNumExtensionProperties_m3139224773 ();
-extern "C" void AudioListener_ReadExtensionName_m929423100 ();
-extern "C" void AudioListener_INTERNAL_CALL_ReadExtensionName_m4145804327 ();
-extern "C" void AudioListener_ReadExtensionPropertyName_m3416271339 ();
-extern "C" void AudioListener_INTERNAL_CALL_ReadExtensionPropertyName_m330480156 ();
-extern "C" void AudioListener_ReadExtensionPropertyValue_m2443832840 ();
-extern "C" void AudioListener_ClearExtensionProperties_m3849891634 ();
-extern "C" void AudioListener_INTERNAL_CALL_ClearExtensionProperties_m2036387607 ();
-extern "C" void AudioListener_AddExtension_m994751216 ();
-extern "C" void AudioListenerExtension_get_audioListener_m3597041395 ();
-extern "C" void AudioListenerExtension_set_audioListener_m3412289012 ();
-extern "C" void AudioListenerExtension_WriteExtensionProperty_m4064727398 ();
-extern "C" void AudioListenerExtension_ExtensionUpdate_m1303405084 ();
-extern "C" void AudioSettings_GetSpatializerPluginName_m1324100978 ();
-extern "C" void AudioSettings_InvokeOnAudioConfigurationChanged_m3131294153 ();
-extern "C" void AudioSettings_InvokeOnAudioManagerUpdate_m4044425648 ();
-extern "C" void AudioSettings_InvokeOnAudioSourcePlay_m3298744573 ();
-extern "C" void AudioSettings_GetAmbisonicDecoderPluginName_m19603540 ();
-extern "C" void AudioConfigurationChangeHandler__ctor_m1059338375 ();
-extern "C" void AudioConfigurationChangeHandler_Invoke_m1233557945 ();
-extern "C" void AudioConfigurationChangeHandler_BeginInvoke_m4104069447 ();
-extern "C" void AudioConfigurationChangeHandler_EndInvoke_m4175380841 ();
-extern "C" void AudioSource_get_clip_m1234340632 ();
-extern "C" void AudioSource_get_isPlaying_m1896551654 ();
-extern "C" void AudioSource_get_spatializeInternal_m2117549793 ();
-extern "C" void AudioSource_get_spatialize_m3609701298 ();
-extern "C" void AudioSource_GetNumExtensionProperties_m1231815209 ();
-extern "C" void AudioSource_ReadExtensionName_m725112169 ();
-extern "C" void AudioSource_INTERNAL_CALL_ReadExtensionName_m36001502 ();
-extern "C" void AudioSource_ReadExtensionPropertyName_m2761820692 ();
-extern "C" void AudioSource_INTERNAL_CALL_ReadExtensionPropertyName_m3643462071 ();
-extern "C" void AudioSource_ReadExtensionPropertyValue_m72717540 ();
-extern "C" void AudioSource_ClearExtensionProperties_m2116074582 ();
-extern "C" void AudioSource_INTERNAL_CALL_ClearExtensionProperties_m2159298662 ();
-extern "C" void AudioSource_AddSpatializerExtension_m2560794359 ();
-extern "C" void AudioSource_AddAmbisonicExtension_m304476911 ();
-extern "C" void AudioSourceExtension_get_audioSource_m1465006871 ();
-extern "C" void AudioSourceExtension_set_audioSource_m3729768988 ();
-extern "C" void AudioSourceExtension_WriteExtensionProperty_m2866033202 ();
-extern "C" void AudioSourceExtension_Play_m420799475 ();
-extern "C" void AudioSourceExtension_Stop_m387892536 ();
-extern "C" void AudioSourceExtension_ExtensionUpdate_m2790353999 ();
 extern "C" void GameCenterPlatform__ctor_m3480810288 ();
 extern "C" void GameCenterPlatform_Internal_Authenticate_m305655954 ();
 extern "C" void GameCenterPlatform_Internal_Authenticated_m4062952167 ();
@@ -9037,6 +9061,35 @@ extern "C" void UpdatedEventHandler_BeginInvoke_m1792117005 ();
 extern "C" void UpdatedEventHandler_EndInvoke_m3937028961 ();
 extern "C" void WebRequestUtils_RedirectTo_m55747000 ();
 extern "C" void WebRequestUtils__cctor_m4190982137 ();
+extern "C" void VideoClipPlayable_GetHandle_m2166158330_AdjustorThunk ();
+extern "C" void VideoClipPlayable_Equals_m2063112376_AdjustorThunk ();
+extern "C" void VideoPlayer_get_time_m623957222 ();
+extern "C" void VideoPlayer_get_playbackSpeed_m840801563 ();
+extern "C" void VideoPlayer_set_playbackSpeed_m3883618264 ();
+extern "C" void VideoPlayer_InvokePrepareCompletedCallback_Internal_m891859246 ();
+extern "C" void VideoPlayer_InvokeFrameReadyCallback_Internal_m795190166 ();
+extern "C" void VideoPlayer_InvokeLoopPointReachedCallback_Internal_m3470582081 ();
+extern "C" void VideoPlayer_InvokeStartedCallback_Internal_m3936194096 ();
+extern "C" void VideoPlayer_InvokeFrameDroppedCallback_Internal_m984464440 ();
+extern "C" void VideoPlayer_InvokeErrorReceivedCallback_Internal_m3291790132 ();
+extern "C" void VideoPlayer_InvokeSeekCompletedCallback_Internal_m716586074 ();
+extern "C" void VideoPlayer_InvokeClockResyncOccurredCallback_Internal_m1660582043 ();
+extern "C" void ErrorEventHandler__ctor_m1187192887 ();
+extern "C" void ErrorEventHandler_Invoke_m2692795411 ();
+extern "C" void ErrorEventHandler_BeginInvoke_m2704839404 ();
+extern "C" void ErrorEventHandler_EndInvoke_m2574503704 ();
+extern "C" void EventHandler__ctor_m838423014 ();
+extern "C" void EventHandler_Invoke_m264911794 ();
+extern "C" void EventHandler_BeginInvoke_m2714081538 ();
+extern "C" void EventHandler_EndInvoke_m1665908986 ();
+extern "C" void FrameReadyEventHandler__ctor_m4117293896 ();
+extern "C" void FrameReadyEventHandler_Invoke_m4235069853 ();
+extern "C" void FrameReadyEventHandler_BeginInvoke_m3423367811 ();
+extern "C" void FrameReadyEventHandler_EndInvoke_m2202588656 ();
+extern "C" void TimeEventHandler__ctor_m25310196 ();
+extern "C" void TimeEventHandler_Invoke_m2893540100 ();
+extern "C" void TimeEventHandler_BeginInvoke_m2542334896 ();
+extern "C" void TimeEventHandler_EndInvoke_m2619486746 ();
 extern "C" void AbstractEventData__ctor_m2094677034 ();
 extern "C" void AbstractEventData_Reset_m2321187134 ();
 extern "C" void AbstractEventData_Use_m3777213589 ();
@@ -11891,6 +11944,7 @@ extern "C" void Bishop__ctor_m45888738 ();
 extern "C" void Bishop_LegalMoves_m1358366001 ();
 extern "C" void Board__ctor_m1811414826_AdjustorThunk ();
 extern "C" void Board__ctor_m2951873698_AdjustorThunk ();
+extern "C" void Board_GetPieceList_m1556017383_AdjustorThunk ();
 extern "C" void Board_MovePiece_m4119037261_AdjustorThunk ();
 extern "C" void Board_DropPiece_m3051249051_AdjustorThunk ();
 extern "C" void Board_GetAllLegalMoves_m1605165912_AdjustorThunk ();
@@ -11908,11 +11962,25 @@ extern "C" void BoardManager_SelectPiece_m1528109131 ();
 extern "C" void BoardManager_SelectPiece_m1219950543 ();
 extern "C" void BoardManager_MovePiece_m2763143045 ();
 extern "C" void BoardManager_MovePiece_m981867160 ();
+extern "C" void BoardManager_MovedIntoCheck_m757932787 ();
 extern "C" void BoardManager_OnPieceWasMoved_m217098308 ();
 extern "C" void BoardManager_OnPieceWasCaptured_m3126619381 ();
 extern "C" void BoardManager_CheckForPromotion_m3558921077 ();
 extern "C" void BoardManager_Promote_m520465836 ();
 extern "C" void BoardManager_Demote_m96894121 ();
+extern "C" void Button3D__ctor_m135420387 ();
+extern "C" void Button3D_Start_m1947531577 ();
+extern "C" void Button3D_OnClick_m84441484 ();
+extern "C" void Button3D_ToggleIsClicked_m2232787729 ();
+extern "C" void Button3D_ToggleShaded_m1782226113 ();
+extern "C" void Button3D_DoEvent_m3100080204 ();
+extern "C" void Button3D_HoldDown_m3427918507 ();
+extern "C" void U3CHoldDownU3Ec__Iterator0__ctor_m2146233905 ();
+extern "C" void U3CHoldDownU3Ec__Iterator0_MoveNext_m1205810365 ();
+extern "C" void U3CHoldDownU3Ec__Iterator0_System_Collections_Generic_IEnumeratorU3CobjectU3E_get_Current_m3882921124 ();
+extern "C" void U3CHoldDownU3Ec__Iterator0_System_Collections_IEnumerator_get_Current_m3026971288 ();
+extern "C" void U3CHoldDownU3Ec__Iterator0_Dispose_m4087197097 ();
+extern "C" void U3CHoldDownU3Ec__Iterator0_Reset_m2475200141 ();
 extern "C" void ChatController__ctor_m1046855848 ();
 extern "C" void ChatController_OnEnable_m2623215102 ();
 extern "C" void ChatController_OnDisable_m198214062 ();
@@ -11959,17 +12027,58 @@ extern "C" void LevelManager_Awake_m2824870717 ();
 extern "C" void LevelManager_GetInstance_m1318637769 ();
 extern "C" void LevelManager_OnEnable_m2149928519 ();
 extern "C" void LevelManager_OnDisable_m3948100834 ();
+extern "C" void LevelManager_Start_m2992410788 ();
 extern "C" void LevelManager_LevelFinishedLoading_m1592233492 ();
 extern "C" void LevelManager_LoadLevel_m1243507911 ();
 extern "C" void LevelManager_LoadLevel_m4007554001 ();
 extern "C" void LevelManager_GetCurrentLevelName_m1129045385 ();
 extern "C" void LevelManager_GetCurrentLevelIndex_m1775161760 ();
+extern "C" void LevelManager_LoadNextLevel_m1268751314 ();
+extern "C" void LevelManager_AutoLoad_m1743039525 ();
+extern "C" void U3CAutoLoadU3Ec__Iterator0__ctor_m1817460361 ();
+extern "C" void U3CAutoLoadU3Ec__Iterator0_MoveNext_m3900002685 ();
+extern "C" void U3CAutoLoadU3Ec__Iterator0_System_Collections_Generic_IEnumeratorU3CobjectU3E_get_Current_m1073919888 ();
+extern "C" void U3CAutoLoadU3Ec__Iterator0_System_Collections_IEnumerator_get_Current_m3795892599 ();
+extern "C" void U3CAutoLoadU3Ec__Iterator0_Dispose_m4195465041 ();
+extern "C" void U3CAutoLoadU3Ec__Iterator0_Reset_m2101169781 ();
 extern "C" void OnLevelLevelWasLoaded__ctor_m399145774 ();
 extern "C" void OnLevelLevelWasLoaded_Invoke_m4055529413 ();
 extern "C" void OnLevelLevelWasLoaded_BeginInvoke_m963828064 ();
 extern "C" void OnLevelLevelWasLoaded_EndInvoke_m2686581186 ();
 extern "C" void MenusManager__ctor_m818268866 ();
-extern "C" void MenusManager_Toggle_m3482526191 ();
+extern "C" void MenusManager_Awake_m1047007679 ();
+extern "C" void MenusManager_GetInstance_m2376382051 ();
+extern "C" void MenusManager_Start_m2816079970 ();
+extern "C" void MenusManager_Update_m3697064682 ();
+extern "C" void MenusManager_toggleMenu_m3519333414 ();
+extern "C" void MenusManager_FadeOut_m1296032301 ();
+extern "C" void U3CFadeOutU3Ec__Iterator0__ctor_m3901707339 ();
+extern "C" void U3CFadeOutU3Ec__Iterator0_MoveNext_m1253475114 ();
+extern "C" void U3CFadeOutU3Ec__Iterator0_System_Collections_Generic_IEnumeratorU3CobjectU3E_get_Current_m2907020284 ();
+extern "C" void U3CFadeOutU3Ec__Iterator0_System_Collections_IEnumerator_get_Current_m2258584459 ();
+extern "C" void U3CFadeOutU3Ec__Iterator0_Dispose_m146625119 ();
+extern "C" void U3CFadeOutU3Ec__Iterator0_Reset_m1129465924 ();
+extern "C" void MusicManager__ctor_m1726626480 ();
+extern "C" void MusicManager_Awake_m513288735 ();
+extern "C" void MusicManager_GetInstance_m2977320308 ();
+extern "C" void MusicManager_Start_m485694106 ();
+extern "C" void MusicManager_OnLevelLoaded_m2703379102 ();
+extern "C" void MusicManager_fadeOutClip_m3691131900 ();
+extern "C" void MusicManager_FadeInClip_m1704528126 ();
+extern "C" void MusicManager_UpdateVolume_m3913536767 ();
+extern "C" void MusicManager_Play_m2198507011 ();
+extern "C" void U3CFadeInClipU3Ec__Iterator1__ctor_m3498188734 ();
+extern "C" void U3CFadeInClipU3Ec__Iterator1_MoveNext_m2957383509 ();
+extern "C" void U3CFadeInClipU3Ec__Iterator1_System_Collections_Generic_IEnumeratorU3CobjectU3E_get_Current_m4006984333 ();
+extern "C" void U3CFadeInClipU3Ec__Iterator1_System_Collections_IEnumerator_get_Current_m2686023965 ();
+extern "C" void U3CFadeInClipU3Ec__Iterator1_Dispose_m4116809444 ();
+extern "C" void U3CFadeInClipU3Ec__Iterator1_Reset_m1265359662 ();
+extern "C" void U3CfadeOutClipU3Ec__Iterator0__ctor_m818558993 ();
+extern "C" void U3CfadeOutClipU3Ec__Iterator0_MoveNext_m2620499579 ();
+extern "C" void U3CfadeOutClipU3Ec__Iterator0_System_Collections_Generic_IEnumeratorU3CobjectU3E_get_Current_m2960775883 ();
+extern "C" void U3CfadeOutClipU3Ec__Iterator0_System_Collections_IEnumerator_get_Current_m3795587078 ();
+extern "C" void U3CfadeOutClipU3Ec__Iterator0_Dispose_m2812019979 ();
+extern "C" void U3CfadeOutClipU3Ec__Iterator0_Reset_m2626751628 ();
 extern "C" void Pawn__ctor_m1524085516 ();
 extern "C" void Pawn_LegalMoves_m2019092760 ();
 extern "C" void Piece__ctor_m3720280348 ();
@@ -11982,8 +12091,24 @@ extern "C" void Piece_Start_m1743191660 ();
 extern "C" void Piece_GetCurrentPos_m3042609243 ();
 extern "C" void Piece_LegalMoves_m4180356377 ();
 extern "C" void Piece_PosIsBlocked_m1827013387 ();
+extern "C" void PlayerPrefsManager__ctor_m3008225098 ();
+extern "C" void PlayerPrefsManager_SetToggleIsOn_m3783874588 ();
+extern "C" void PlayerPrefsManager_GetToggleIsOn_m3659829774 ();
+extern "C" void PlayerPrefsManager_SetSkin_m1148812312 ();
+extern "C" void PlayerPrefsManager_GetSkin_m3873300240 ();
 extern "C" void Rook__ctor_m3571177427 ();
 extern "C" void Rook_LegalMoves_m838896217 ();
+extern "C" void Score__ctor_m3360019448 ();
+extern "C" void Score_Awake_m236258088 ();
+extern "C" void Score_GetInstance_m2012264267 ();
+extern "C" void Score_Start_m1283685750 ();
+extern "C" void Score_UpdateScore_m3308475079 ();
+extern "C" void Settings__ctor_m2539891666 ();
+extern "C" void Settings_Awake_m1564446969 ();
+extern "C" void Settings_GetInstance_m322422102 ();
+extern "C" void Settings_OnEnable_m338459036 ();
+extern "C" void Settings_Toggle_m3572846120 ();
+extern "C" void Settings_SetSkin_m1424436446 ();
 extern "C" void SideTable__ctor_m2257006486_AdjustorThunk ();
 extern "C" void SideTableManager__ctor_m2265425222 ();
 extern "C" void SideTableManager_Awake_m3703434075 ();
@@ -11999,11 +12124,20 @@ extern "C" void SideTableManager_PosIsBlocked_m3711344220 ();
 extern "C" void Silver__ctor_m3827428701 ();
 extern "C" void Silver_LegalMoves_m3765651766 ();
 extern "C" void Silver_SetMoveLegal_m3424999827 ();
+extern "C" void SplashManager__ctor_m2287625594 ();
+extern "C" void SplashManager_Start_m2569979456 ();
+extern "C" void SplashManager_Update_m1235642163 ();
+extern "C" void SplashManager_SpeedUp_m3797067533 ();
+extern "C" void U3CSpeedUpU3Ec__Iterator0__ctor_m364982771 ();
+extern "C" void U3CSpeedUpU3Ec__Iterator0_MoveNext_m3794985275 ();
+extern "C" void U3CSpeedUpU3Ec__Iterator0_System_Collections_Generic_IEnumeratorU3CobjectU3E_get_Current_m2067055256 ();
+extern "C" void U3CSpeedUpU3Ec__Iterator0_System_Collections_IEnumerator_get_Current_m3627761607 ();
+extern "C" void U3CSpeedUpU3Ec__Iterator0_Dispose_m2241431275 ();
+extern "C" void U3CSpeedUpU3Ec__Iterator0_Reset_m443302371 ();
 extern "C" void Square__ctor_m1821885637_AdjustorThunk ();
 extern "C" void Square_get_pos_m3561855135_AdjustorThunk ();
 extern "C" void Square_set_pos_m1156527821_AdjustorThunk ();
 extern "C" void Square_coordsToMovesList_m1753881444 ();
-extern "C" void Square_GetCurrentBoard_m2704077195_AdjustorThunk ();
 extern "C" void Square_Print_m2400900420_AdjustorThunk ();
 extern "C" void Benchmark01__ctor_m2403538276 ();
 extern "C" void Benchmark01_Start_m4262200517 ();
@@ -12254,7 +12388,17 @@ extern "C" void LineSelectionEvent__ctor_m2090058403 ();
 extern "C" void LinkSelectionEvent__ctor_m3955020989 ();
 extern "C" void SpriteSelectionEvent__ctor_m23613475 ();
 extern "C" void WordSelectionEvent__ctor_m3341154825 ();
-extern const Il2CppMethodPointer g_MethodPointers[12236] = 
+extern "C" void UIButton__ctor_m2610808546 ();
+extern "C" void UIButton_Start_m2230180354 ();
+extern "C" void UIButton_SetSkin_m3119720259 ();
+extern "C" void UIButton_SetSkin_m1255556053 ();
+extern "C" void UIToggle__ctor_m243404431 ();
+extern "C" void UIToggle_Start_m4167712475 ();
+extern "C" void UIToggle_Toggle_m60044039 ();
+extern "C" void WorldCanvas__ctor_m4016163073 ();
+extern "C" void WorldCanvas_Awake_m1676683625 ();
+extern "C" void WorldCanvas_GetInstance_m979522828 ();
+extern const Il2CppMethodPointer g_MethodPointers[12380] = 
 {
 	Locale_GetText_m3374010885,
 	Locale_GetText_m1601577974,
@@ -19763,7 +19907,6 @@ extern const Il2CppMethodPointer g_MethodPointers[12236] =
 	CustomYieldInstruction_MoveNext_m1374112450,
 	CustomYieldInstruction_Reset_m3141101090,
 	Debug_get_unityLogger_m2239795986,
-	Debug_Break_m1902912390,
 	Debug_Log_m4051431634,
 	Debug_LogFormat_m309087137,
 	Debug_LogError_m2850623458,
@@ -19901,6 +20044,7 @@ extern const Il2CppMethodPointer g_MethodPointers[12236] =
 	GUIElement__ctor_m3257342989,
 	GUILayer_HitTest_m512928460,
 	GUILayer_INTERNAL_CALL_HitTest_m1069802956,
+	HeaderAttribute__ctor_m1154052380,
 	HideInInspector__ctor_m1179782685,
 	Input_GetKeyInt_m4146877895,
 	Input_GetKeyDownInt_m3509480073,
@@ -19969,6 +20113,7 @@ extern const Il2CppMethodPointer g_MethodPointers[12236] =
 	Material__ctor_m1662457592,
 	Material__ctor_m249231841,
 	Material_get_mainTexture_m692510677,
+	Material_set_mainTexture_m544811714,
 	Material_SetFloatImpl_m1844818093,
 	Material_SetIntImpl_m724477324,
 	Material_SetColorImpl_m3160281768,
@@ -20003,6 +20148,7 @@ extern const Il2CppMethodPointer g_MethodPointers[12236] =
 	Material_SetVector_m2633010038,
 	Material_SetMatrix_m4094650785,
 	Material_SetMatrix_m751249077,
+	Material_SetTexture_m1829349465,
 	Material_SetTexture_m3009528825,
 	Material_GetFloat_m2836278142,
 	Material_GetColor_m4231777338,
@@ -20133,6 +20279,7 @@ extern const Il2CppMethodPointer g_MethodPointers[12236] =
 	NoAllocHelpers_SafeLength_m3994544446,
 	Object__ctor_m1087895580,
 	Object_Internal_CloneSingle_m1021157572,
+	Object_Internal_CloneSingleWithParent_m2666483490,
 	Object_GetOffsetOfInstanceIDInCPlusPlusObject_m1567230257,
 	Object_Destroy_m3118546832,
 	Object_Destroy_m565254235,
@@ -20151,7 +20298,9 @@ extern const Il2CppMethodPointer g_MethodPointers[12236] =
 	Object_CompareBaseObjects_m2405226032,
 	Object_IsNativeObjectAlive_m3095908075,
 	Object_GetCachedPtr_m151292858,
+	Object_Instantiate_m4029422268,
 	Object_CheckNullArgument_m4237608654,
+	Object_FindObjectOfType_m67275058,
 	Object_op_Equality_m1810815630,
 	Object_op_Inequality_m4071470834,
 	Object__cctor_m2398773973,
@@ -20188,6 +20337,11 @@ extern const Il2CppMethodPointer g_MethodPointers[12236] =
 	PlayableOutputHandle_op_Equality_m388301694,
 	PlayableOutputHandle_Equals_m334596297_AdjustorThunk,
 	PlayableOutputHandle_CompareVersion_m841260813,
+	PlayerPrefs_TrySetInt_m835861542,
+	PlayerPrefs_SetInt_m2842000469,
+	PlayerPrefs_GetInt_m1299643124,
+	PlayerPrefs_GetInt_m3797620966,
+	PlayerPrefsException__ctor_m1374997736,
 	PropertyAttribute__ctor_m1017741868,
 	PropertyName__ctor_m1858502781_AdjustorThunk,
 	PropertyName__ctor_m3511806171_AdjustorThunk,
@@ -20398,6 +20552,10 @@ extern const Il2CppMethodPointer g_MethodPointers[12236] =
 	Sprite_get_border_m2985609076,
 	Sprite_INTERNAL_get_border_m3728071101,
 	Sprite_get_pixelsPerUnit_m524644775,
+	SpriteRenderer_get_color_m904197748,
+	SpriteRenderer_set_color_m3056777566,
+	SpriteRenderer_INTERNAL_get_color_m1411745087,
+	SpriteRenderer_INTERNAL_set_color_m82712814,
 	DataUtility_GetInnerUV_m2896140645,
 	DataUtility_INTERNAL_CALL_GetInnerUV_m1230966310,
 	DataUtility_GetOuterUV_m2509686757,
@@ -20593,6 +20751,7 @@ extern const Il2CppMethodPointer g_MethodPointers[12236] =
 	Vector3_Distance_m886789632,
 	Vector3_ClampMagnitude_m2732959745,
 	Vector3_Magnitude_m3447562852,
+	Vector3_get_magnitude_m27958459_AdjustorThunk,
 	Vector3_SqrMagnitude_m3025115945,
 	Vector3_get_sqrMagnitude_m1474274574_AdjustorThunk,
 	Vector3_Min_m1803158933,
@@ -20655,6 +20814,89 @@ extern const Il2CppMethodPointer g_MethodPointers[12236] =
 	TypeInferenceRuleAttribute__ctor_m3137488504,
 	TypeInferenceRuleAttribute__ctor_m2736695831,
 	TypeInferenceRuleAttribute_ToString_m4089326196,
+	AudioClipPlayable_GetHandle_m1762771314_AdjustorThunk,
+	AudioClipPlayable_Equals_m3705880618_AdjustorThunk,
+	AudioMixerPlayable_GetHandle_m57919556_AdjustorThunk,
+	AudioMixerPlayable_Equals_m1649866213_AdjustorThunk,
+	AudioClip__ctor_m1211547677,
+	AudioClip_get_ambisonic_m3815052287,
+	AudioClip_InvokePCMReaderCallback_Internal_m224395634,
+	AudioClip_InvokePCMSetPositionCallback_Internal_m3097960898,
+	PCMReaderCallback__ctor_m4269754975,
+	PCMReaderCallback_Invoke_m2948796957,
+	PCMReaderCallback_BeginInvoke_m3391809637,
+	PCMReaderCallback_EndInvoke_m3916876196,
+	PCMSetPositionCallback__ctor_m2909837933,
+	PCMSetPositionCallback_Invoke_m2167694991,
+	PCMSetPositionCallback_BeginInvoke_m2701134198,
+	PCMSetPositionCallback_EndInvoke_m1405765992,
+	AudioExtensionDefinition_GetExtensionType_m1450823952,
+	AudioExtensionManager_GetAudioListener_m817760607,
+	AudioExtensionManager_AddSpatializerExtension_m820561940,
+	AudioExtensionManager_AddAmbisonicDecoderExtension_m3197702864,
+	AudioExtensionManager_WriteExtensionProperties_m1988587615,
+	AudioExtensionManager_AddSpatializerExtension_m3915849352,
+	AudioExtensionManager_WriteExtensionProperties_m3028464154,
+	AudioExtensionManager_GetListenerSpatializerExtensionType_m3035569206,
+	AudioExtensionManager_GetListenerSpatializerExtensionEditorType_m630287782,
+	AudioExtensionManager_GetSourceSpatializerExtensionType_m3221230995,
+	AudioExtensionManager_AddExtensionToManager_m3475649283,
+	AudioExtensionManager_RemoveExtensionFromManager_m442924172,
+	AudioExtensionManager_Update_m3269307447,
+	AudioExtensionManager_GetReadyToPlay_m1557263244,
+	AudioExtensionManager_RegisterBuiltinDefinitions_m2742744104,
+	AudioExtensionManager__cctor_m1361600190,
+	AudioListener_GetNumExtensionProperties_m3139224773,
+	AudioListener_ReadExtensionName_m929423100,
+	AudioListener_INTERNAL_CALL_ReadExtensionName_m4145804327,
+	AudioListener_ReadExtensionPropertyName_m3416271339,
+	AudioListener_INTERNAL_CALL_ReadExtensionPropertyName_m330480156,
+	AudioListener_ReadExtensionPropertyValue_m2443832840,
+	AudioListener_ClearExtensionProperties_m3849891634,
+	AudioListener_INTERNAL_CALL_ClearExtensionProperties_m2036387607,
+	AudioListener_AddExtension_m994751216,
+	AudioListenerExtension_get_audioListener_m3597041395,
+	AudioListenerExtension_set_audioListener_m3412289012,
+	AudioListenerExtension_WriteExtensionProperty_m4064727398,
+	AudioListenerExtension_ExtensionUpdate_m1303405084,
+	AudioSettings_GetSpatializerPluginName_m1324100978,
+	AudioSettings_InvokeOnAudioConfigurationChanged_m3131294153,
+	AudioSettings_InvokeOnAudioManagerUpdate_m4044425648,
+	AudioSettings_InvokeOnAudioSourcePlay_m3298744573,
+	AudioSettings_GetAmbisonicDecoderPluginName_m19603540,
+	AudioConfigurationChangeHandler__ctor_m1059338375,
+	AudioConfigurationChangeHandler_Invoke_m1233557945,
+	AudioConfigurationChangeHandler_BeginInvoke_m4104069447,
+	AudioConfigurationChangeHandler_EndInvoke_m4175380841,
+	AudioSource_get_volume_m3936891178,
+	AudioSource_set_volume_m1273312851,
+	AudioSource_get_clip_m1234340632,
+	AudioSource_set_clip_m31653938,
+	AudioSource_Play_m3389845180,
+	AudioSource_Play_m48294159,
+	AudioSource_Pause_m1501822765,
+	AudioSource_INTERNAL_CALL_Pause_m1443225006,
+	AudioSource_UnPause_m3033034686,
+	AudioSource_INTERNAL_CALL_UnPause_m2866508363,
+	AudioSource_get_isPlaying_m1896551654,
+	AudioSource_get_spatializeInternal_m2117549793,
+	AudioSource_get_spatialize_m3609701298,
+	AudioSource_GetNumExtensionProperties_m1231815209,
+	AudioSource_ReadExtensionName_m725112169,
+	AudioSource_INTERNAL_CALL_ReadExtensionName_m36001502,
+	AudioSource_ReadExtensionPropertyName_m2761820692,
+	AudioSource_INTERNAL_CALL_ReadExtensionPropertyName_m3643462071,
+	AudioSource_ReadExtensionPropertyValue_m72717540,
+	AudioSource_ClearExtensionProperties_m2116074582,
+	AudioSource_INTERNAL_CALL_ClearExtensionProperties_m2159298662,
+	AudioSource_AddSpatializerExtension_m2560794359,
+	AudioSource_AddAmbisonicExtension_m304476911,
+	AudioSourceExtension_get_audioSource_m1465006871,
+	AudioSourceExtension_set_audioSource_m3729768988,
+	AudioSourceExtension_WriteExtensionProperty_m2866033202,
+	AudioSourceExtension_Play_m420799475,
+	AudioSourceExtension_Stop_m387892536,
+	AudioSourceExtension_ExtensionUpdate_m2790353999,
 	Font__ctor_m4193154730,
 	Font_Internal_CreateFont_m3912844329,
 	Font_get_material_m1471867149,
@@ -20737,80 +20979,6 @@ extern const Il2CppMethodPointer g_MethodPointers[12236] =
 	Animator_get_hasBoundPlayables_m2940726619,
 	Animator_SetTriggerString_m2612407758,
 	Animator_ResetTriggerString_m394341254,
-	AudioClipPlayable_GetHandle_m1762771314_AdjustorThunk,
-	AudioClipPlayable_Equals_m3705880618_AdjustorThunk,
-	AudioMixerPlayable_GetHandle_m57919556_AdjustorThunk,
-	AudioMixerPlayable_Equals_m1649866213_AdjustorThunk,
-	AudioClip__ctor_m1211547677,
-	AudioClip_get_ambisonic_m3815052287,
-	AudioClip_InvokePCMReaderCallback_Internal_m224395634,
-	AudioClip_InvokePCMSetPositionCallback_Internal_m3097960898,
-	PCMReaderCallback__ctor_m4269754975,
-	PCMReaderCallback_Invoke_m2948796957,
-	PCMReaderCallback_BeginInvoke_m3391809637,
-	PCMReaderCallback_EndInvoke_m3916876196,
-	PCMSetPositionCallback__ctor_m2909837933,
-	PCMSetPositionCallback_Invoke_m2167694991,
-	PCMSetPositionCallback_BeginInvoke_m2701134198,
-	PCMSetPositionCallback_EndInvoke_m1405765992,
-	AudioExtensionDefinition_GetExtensionType_m1450823952,
-	AudioExtensionManager_GetAudioListener_m817760607,
-	AudioExtensionManager_AddSpatializerExtension_m820561940,
-	AudioExtensionManager_AddAmbisonicDecoderExtension_m3197702864,
-	AudioExtensionManager_WriteExtensionProperties_m1988587615,
-	AudioExtensionManager_AddSpatializerExtension_m3915849352,
-	AudioExtensionManager_WriteExtensionProperties_m3028464154,
-	AudioExtensionManager_GetListenerSpatializerExtensionType_m3035569206,
-	AudioExtensionManager_GetListenerSpatializerExtensionEditorType_m630287782,
-	AudioExtensionManager_GetSourceSpatializerExtensionType_m3221230995,
-	AudioExtensionManager_AddExtensionToManager_m3475649283,
-	AudioExtensionManager_RemoveExtensionFromManager_m442924172,
-	AudioExtensionManager_Update_m3269307447,
-	AudioExtensionManager_GetReadyToPlay_m1557263244,
-	AudioExtensionManager_RegisterBuiltinDefinitions_m2742744104,
-	AudioExtensionManager__cctor_m1361600190,
-	AudioListener_GetNumExtensionProperties_m3139224773,
-	AudioListener_ReadExtensionName_m929423100,
-	AudioListener_INTERNAL_CALL_ReadExtensionName_m4145804327,
-	AudioListener_ReadExtensionPropertyName_m3416271339,
-	AudioListener_INTERNAL_CALL_ReadExtensionPropertyName_m330480156,
-	AudioListener_ReadExtensionPropertyValue_m2443832840,
-	AudioListener_ClearExtensionProperties_m3849891634,
-	AudioListener_INTERNAL_CALL_ClearExtensionProperties_m2036387607,
-	AudioListener_AddExtension_m994751216,
-	AudioListenerExtension_get_audioListener_m3597041395,
-	AudioListenerExtension_set_audioListener_m3412289012,
-	AudioListenerExtension_WriteExtensionProperty_m4064727398,
-	AudioListenerExtension_ExtensionUpdate_m1303405084,
-	AudioSettings_GetSpatializerPluginName_m1324100978,
-	AudioSettings_InvokeOnAudioConfigurationChanged_m3131294153,
-	AudioSettings_InvokeOnAudioManagerUpdate_m4044425648,
-	AudioSettings_InvokeOnAudioSourcePlay_m3298744573,
-	AudioSettings_GetAmbisonicDecoderPluginName_m19603540,
-	AudioConfigurationChangeHandler__ctor_m1059338375,
-	AudioConfigurationChangeHandler_Invoke_m1233557945,
-	AudioConfigurationChangeHandler_BeginInvoke_m4104069447,
-	AudioConfigurationChangeHandler_EndInvoke_m4175380841,
-	AudioSource_get_clip_m1234340632,
-	AudioSource_get_isPlaying_m1896551654,
-	AudioSource_get_spatializeInternal_m2117549793,
-	AudioSource_get_spatialize_m3609701298,
-	AudioSource_GetNumExtensionProperties_m1231815209,
-	AudioSource_ReadExtensionName_m725112169,
-	AudioSource_INTERNAL_CALL_ReadExtensionName_m36001502,
-	AudioSource_ReadExtensionPropertyName_m2761820692,
-	AudioSource_INTERNAL_CALL_ReadExtensionPropertyName_m3643462071,
-	AudioSource_ReadExtensionPropertyValue_m72717540,
-	AudioSource_ClearExtensionProperties_m2116074582,
-	AudioSource_INTERNAL_CALL_ClearExtensionProperties_m2159298662,
-	AudioSource_AddSpatializerExtension_m2560794359,
-	AudioSource_AddAmbisonicExtension_m304476911,
-	AudioSourceExtension_get_audioSource_m1465006871,
-	AudioSourceExtension_set_audioSource_m3729768988,
-	AudioSourceExtension_WriteExtensionProperty_m2866033202,
-	AudioSourceExtension_Play_m420799475,
-	AudioSourceExtension_Stop_m387892536,
-	AudioSourceExtension_ExtensionUpdate_m2790353999,
 	GameCenterPlatform__ctor_m3480810288,
 	GameCenterPlatform_Internal_Authenticate_m305655954,
 	GameCenterPlatform_Internal_Authenticated_m4062952167,
@@ -21275,6 +21443,35 @@ extern const Il2CppMethodPointer g_MethodPointers[12236] =
 	UpdatedEventHandler_EndInvoke_m3937028961,
 	WebRequestUtils_RedirectTo_m55747000,
 	WebRequestUtils__cctor_m4190982137,
+	VideoClipPlayable_GetHandle_m2166158330_AdjustorThunk,
+	VideoClipPlayable_Equals_m2063112376_AdjustorThunk,
+	VideoPlayer_get_time_m623957222,
+	VideoPlayer_get_playbackSpeed_m840801563,
+	VideoPlayer_set_playbackSpeed_m3883618264,
+	VideoPlayer_InvokePrepareCompletedCallback_Internal_m891859246,
+	VideoPlayer_InvokeFrameReadyCallback_Internal_m795190166,
+	VideoPlayer_InvokeLoopPointReachedCallback_Internal_m3470582081,
+	VideoPlayer_InvokeStartedCallback_Internal_m3936194096,
+	VideoPlayer_InvokeFrameDroppedCallback_Internal_m984464440,
+	VideoPlayer_InvokeErrorReceivedCallback_Internal_m3291790132,
+	VideoPlayer_InvokeSeekCompletedCallback_Internal_m716586074,
+	VideoPlayer_InvokeClockResyncOccurredCallback_Internal_m1660582043,
+	ErrorEventHandler__ctor_m1187192887,
+	ErrorEventHandler_Invoke_m2692795411,
+	ErrorEventHandler_BeginInvoke_m2704839404,
+	ErrorEventHandler_EndInvoke_m2574503704,
+	EventHandler__ctor_m838423014,
+	EventHandler_Invoke_m264911794,
+	EventHandler_BeginInvoke_m2714081538,
+	EventHandler_EndInvoke_m1665908986,
+	FrameReadyEventHandler__ctor_m4117293896,
+	FrameReadyEventHandler_Invoke_m4235069853,
+	FrameReadyEventHandler_BeginInvoke_m3423367811,
+	FrameReadyEventHandler_EndInvoke_m2202588656,
+	TimeEventHandler__ctor_m25310196,
+	TimeEventHandler_Invoke_m2893540100,
+	TimeEventHandler_BeginInvoke_m2542334896,
+	TimeEventHandler_EndInvoke_m2619486746,
 	AbstractEventData__ctor_m2094677034,
 	AbstractEventData_Reset_m2321187134,
 	AbstractEventData_Use_m3777213589,
@@ -24129,6 +24326,7 @@ extern const Il2CppMethodPointer g_MethodPointers[12236] =
 	Bishop_LegalMoves_m1358366001,
 	Board__ctor_m1811414826_AdjustorThunk,
 	Board__ctor_m2951873698_AdjustorThunk,
+	Board_GetPieceList_m1556017383_AdjustorThunk,
 	Board_MovePiece_m4119037261_AdjustorThunk,
 	Board_DropPiece_m3051249051_AdjustorThunk,
 	Board_GetAllLegalMoves_m1605165912_AdjustorThunk,
@@ -24146,11 +24344,25 @@ extern const Il2CppMethodPointer g_MethodPointers[12236] =
 	BoardManager_SelectPiece_m1219950543,
 	BoardManager_MovePiece_m2763143045,
 	BoardManager_MovePiece_m981867160,
+	BoardManager_MovedIntoCheck_m757932787,
 	BoardManager_OnPieceWasMoved_m217098308,
 	BoardManager_OnPieceWasCaptured_m3126619381,
 	BoardManager_CheckForPromotion_m3558921077,
 	BoardManager_Promote_m520465836,
 	BoardManager_Demote_m96894121,
+	Button3D__ctor_m135420387,
+	Button3D_Start_m1947531577,
+	Button3D_OnClick_m84441484,
+	Button3D_ToggleIsClicked_m2232787729,
+	Button3D_ToggleShaded_m1782226113,
+	Button3D_DoEvent_m3100080204,
+	Button3D_HoldDown_m3427918507,
+	U3CHoldDownU3Ec__Iterator0__ctor_m2146233905,
+	U3CHoldDownU3Ec__Iterator0_MoveNext_m1205810365,
+	U3CHoldDownU3Ec__Iterator0_System_Collections_Generic_IEnumeratorU3CobjectU3E_get_Current_m3882921124,
+	U3CHoldDownU3Ec__Iterator0_System_Collections_IEnumerator_get_Current_m3026971288,
+	U3CHoldDownU3Ec__Iterator0_Dispose_m4087197097,
+	U3CHoldDownU3Ec__Iterator0_Reset_m2475200141,
 	ChatController__ctor_m1046855848,
 	ChatController_OnEnable_m2623215102,
 	ChatController_OnDisable_m198214062,
@@ -24197,17 +24409,58 @@ extern const Il2CppMethodPointer g_MethodPointers[12236] =
 	LevelManager_GetInstance_m1318637769,
 	LevelManager_OnEnable_m2149928519,
 	LevelManager_OnDisable_m3948100834,
+	LevelManager_Start_m2992410788,
 	LevelManager_LevelFinishedLoading_m1592233492,
 	LevelManager_LoadLevel_m1243507911,
 	LevelManager_LoadLevel_m4007554001,
 	LevelManager_GetCurrentLevelName_m1129045385,
 	LevelManager_GetCurrentLevelIndex_m1775161760,
+	LevelManager_LoadNextLevel_m1268751314,
+	LevelManager_AutoLoad_m1743039525,
+	U3CAutoLoadU3Ec__Iterator0__ctor_m1817460361,
+	U3CAutoLoadU3Ec__Iterator0_MoveNext_m3900002685,
+	U3CAutoLoadU3Ec__Iterator0_System_Collections_Generic_IEnumeratorU3CobjectU3E_get_Current_m1073919888,
+	U3CAutoLoadU3Ec__Iterator0_System_Collections_IEnumerator_get_Current_m3795892599,
+	U3CAutoLoadU3Ec__Iterator0_Dispose_m4195465041,
+	U3CAutoLoadU3Ec__Iterator0_Reset_m2101169781,
 	OnLevelLevelWasLoaded__ctor_m399145774,
 	OnLevelLevelWasLoaded_Invoke_m4055529413,
 	OnLevelLevelWasLoaded_BeginInvoke_m963828064,
 	OnLevelLevelWasLoaded_EndInvoke_m2686581186,
 	MenusManager__ctor_m818268866,
-	MenusManager_Toggle_m3482526191,
+	MenusManager_Awake_m1047007679,
+	MenusManager_GetInstance_m2376382051,
+	MenusManager_Start_m2816079970,
+	MenusManager_Update_m3697064682,
+	MenusManager_toggleMenu_m3519333414,
+	MenusManager_FadeOut_m1296032301,
+	U3CFadeOutU3Ec__Iterator0__ctor_m3901707339,
+	U3CFadeOutU3Ec__Iterator0_MoveNext_m1253475114,
+	U3CFadeOutU3Ec__Iterator0_System_Collections_Generic_IEnumeratorU3CobjectU3E_get_Current_m2907020284,
+	U3CFadeOutU3Ec__Iterator0_System_Collections_IEnumerator_get_Current_m2258584459,
+	U3CFadeOutU3Ec__Iterator0_Dispose_m146625119,
+	U3CFadeOutU3Ec__Iterator0_Reset_m1129465924,
+	MusicManager__ctor_m1726626480,
+	MusicManager_Awake_m513288735,
+	MusicManager_GetInstance_m2977320308,
+	MusicManager_Start_m485694106,
+	MusicManager_OnLevelLoaded_m2703379102,
+	MusicManager_fadeOutClip_m3691131900,
+	MusicManager_FadeInClip_m1704528126,
+	MusicManager_UpdateVolume_m3913536767,
+	MusicManager_Play_m2198507011,
+	U3CFadeInClipU3Ec__Iterator1__ctor_m3498188734,
+	U3CFadeInClipU3Ec__Iterator1_MoveNext_m2957383509,
+	U3CFadeInClipU3Ec__Iterator1_System_Collections_Generic_IEnumeratorU3CobjectU3E_get_Current_m4006984333,
+	U3CFadeInClipU3Ec__Iterator1_System_Collections_IEnumerator_get_Current_m2686023965,
+	U3CFadeInClipU3Ec__Iterator1_Dispose_m4116809444,
+	U3CFadeInClipU3Ec__Iterator1_Reset_m1265359662,
+	U3CfadeOutClipU3Ec__Iterator0__ctor_m818558993,
+	U3CfadeOutClipU3Ec__Iterator0_MoveNext_m2620499579,
+	U3CfadeOutClipU3Ec__Iterator0_System_Collections_Generic_IEnumeratorU3CobjectU3E_get_Current_m2960775883,
+	U3CfadeOutClipU3Ec__Iterator0_System_Collections_IEnumerator_get_Current_m3795587078,
+	U3CfadeOutClipU3Ec__Iterator0_Dispose_m2812019979,
+	U3CfadeOutClipU3Ec__Iterator0_Reset_m2626751628,
 	Pawn__ctor_m1524085516,
 	Pawn_LegalMoves_m2019092760,
 	Piece__ctor_m3720280348,
@@ -24220,8 +24473,24 @@ extern const Il2CppMethodPointer g_MethodPointers[12236] =
 	Piece_GetCurrentPos_m3042609243,
 	Piece_LegalMoves_m4180356377,
 	Piece_PosIsBlocked_m1827013387,
+	PlayerPrefsManager__ctor_m3008225098,
+	PlayerPrefsManager_SetToggleIsOn_m3783874588,
+	PlayerPrefsManager_GetToggleIsOn_m3659829774,
+	PlayerPrefsManager_SetSkin_m1148812312,
+	PlayerPrefsManager_GetSkin_m3873300240,
 	Rook__ctor_m3571177427,
 	Rook_LegalMoves_m838896217,
+	Score__ctor_m3360019448,
+	Score_Awake_m236258088,
+	Score_GetInstance_m2012264267,
+	Score_Start_m1283685750,
+	Score_UpdateScore_m3308475079,
+	Settings__ctor_m2539891666,
+	Settings_Awake_m1564446969,
+	Settings_GetInstance_m322422102,
+	Settings_OnEnable_m338459036,
+	Settings_Toggle_m3572846120,
+	Settings_SetSkin_m1424436446,
 	SideTable__ctor_m2257006486_AdjustorThunk,
 	SideTableManager__ctor_m2265425222,
 	SideTableManager_Awake_m3703434075,
@@ -24237,11 +24506,20 @@ extern const Il2CppMethodPointer g_MethodPointers[12236] =
 	Silver__ctor_m3827428701,
 	Silver_LegalMoves_m3765651766,
 	Silver_SetMoveLegal_m3424999827,
+	SplashManager__ctor_m2287625594,
+	SplashManager_Start_m2569979456,
+	SplashManager_Update_m1235642163,
+	SplashManager_SpeedUp_m3797067533,
+	U3CSpeedUpU3Ec__Iterator0__ctor_m364982771,
+	U3CSpeedUpU3Ec__Iterator0_MoveNext_m3794985275,
+	U3CSpeedUpU3Ec__Iterator0_System_Collections_Generic_IEnumeratorU3CobjectU3E_get_Current_m2067055256,
+	U3CSpeedUpU3Ec__Iterator0_System_Collections_IEnumerator_get_Current_m3627761607,
+	U3CSpeedUpU3Ec__Iterator0_Dispose_m2241431275,
+	U3CSpeedUpU3Ec__Iterator0_Reset_m443302371,
 	Square__ctor_m1821885637_AdjustorThunk,
 	Square_get_pos_m3561855135_AdjustorThunk,
 	Square_set_pos_m1156527821_AdjustorThunk,
 	Square_coordsToMovesList_m1753881444,
-	Square_GetCurrentBoard_m2704077195_AdjustorThunk,
 	Square_Print_m2400900420_AdjustorThunk,
 	Benchmark01__ctor_m2403538276,
 	Benchmark01_Start_m4262200517,
@@ -24492,4 +24770,14 @@ extern const Il2CppMethodPointer g_MethodPointers[12236] =
 	LinkSelectionEvent__ctor_m3955020989,
 	SpriteSelectionEvent__ctor_m23613475,
 	WordSelectionEvent__ctor_m3341154825,
+	UIButton__ctor_m2610808546,
+	UIButton_Start_m2230180354,
+	UIButton_SetSkin_m3119720259,
+	UIButton_SetSkin_m1255556053,
+	UIToggle__ctor_m243404431,
+	UIToggle_Start_m4167712475,
+	UIToggle_Toggle_m60044039,
+	WorldCanvas__ctor_m4016163073,
+	WorldCanvas_Awake_m1676683625,
+	WorldCanvas_GetInstance_m979522828,
 };

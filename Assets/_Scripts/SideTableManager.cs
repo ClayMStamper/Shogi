@@ -215,6 +215,7 @@ public class SideTableManager : MonoBehaviour {
 			//switch turns
 			boardManager.isPlayerOnesTurn = !boardManager.isPlayerOnesTurn;
 
+			//organize piece gameobject
 			if (boardManager.selectedPiece.isPlayerOne) {
 				boardManager.selectedPiece.transform.SetParent (GameObject.Find ("Player 1").transform);
 			} else {
@@ -225,6 +226,7 @@ public class SideTableManager : MonoBehaviour {
 
 			boardManager.GetComponent<AudioSource> ().Play ();
 
+			//update score
 			if (Settings.GetInstance ().showScore) {
 				try{
 					Score.GetInstance ().UpdateScore ();
@@ -238,10 +240,10 @@ public class SideTableManager : MonoBehaviour {
 		}
 
 		//un-select piece
-
 		boardManager.selectedPiece = null;
 		HighlightManager.GetInstance().HideMoves ();
 
+		//AI Go
 		if (AI.GetInstance().isActive && boardManager.isPlayerOnesTurn) {
 			AI.GetInstance ().Go ();
 		}

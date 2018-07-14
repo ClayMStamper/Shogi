@@ -6,7 +6,7 @@ public class Silver : Piece {
 
 	bool[,] moves;
 
-	public override bool[,] LegalMoves (){
+	public override bool[,] LegalMoves (Board board){
 
 		moves = new bool[9, 9];
 

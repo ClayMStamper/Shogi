@@ -9,7 +9,7 @@ public class Gryphon : Piece {
 	//"moves" is the return variable
 	bool[,] moves = new bool[9, 9];
 
-	public override bool[,] LegalMoves (){
+	public override bool[,] LegalMoves (Board board){
 
 		moves = new bool[9, 9];
 

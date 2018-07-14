@@ -165,7 +165,7 @@ public class BoardManager : MonoBehaviour {
 			return;
 		}
 
-		legalMoves = pieces [x, y].LegalMoves ();
+		legalMoves = pieces [x, y].LegalMoves (new Board (pieces));
 		selectedPiece = pieces [x, y];
 	//	SideTableManager.selectedPiece = selectedPiece;
 		if (Settings.GetInstance ().highlightMoves) {
@@ -179,7 +179,7 @@ public class BoardManager : MonoBehaviour {
 
 	public void SelectPiece(Piece piece){
 
-		legalMoves = piece.LegalMoves ();
+		legalMoves = piece.LegalMoves (new Board (pieces));
 		selectedPiece = piece;
 		//	SideTableManager.selectedPiece = selectedPiece;
 		if (Settings.GetInstance ().highlightMoves) {
@@ -283,7 +283,7 @@ public class BoardManager : MonoBehaviour {
 				//moveTo.Print ();
 				//moveFrom.Print ();
 
-				Debug.Log (move.piecesMoving [0] + " can take my king, by moving to sqaure: " + move.x + ", " + move.y);
+				Debug.Log (move.pieceMoving  + " can take my king, by moving to sqaure: " + move.x + ", " + move.y);
 				move.Print ();
 
 				return true;

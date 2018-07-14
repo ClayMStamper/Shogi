@@ -34,7 +34,7 @@ public abstract class Piece : MonoBehaviour {
 		y = (int)transform.position.z;
 	}
 
-	public virtual bool[,] LegalMoves(){
+	public virtual bool[,] LegalMoves(Board board){
 		return new bool[9,9];
 	}
 

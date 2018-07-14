@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bishop : Piece {
 
-	public override bool[,] LegalMoves (){
+	public override bool[,] LegalMoves (Board board){
 
 		// possible moves for the player to make are added to this
 		// array with index mapped with respect to coordinates
@@ -24,7 +24,7 @@ public class Bishop : Piece {
 				if (y - i <= 8 && y - i >= 0 && x - i <= 8 && x - i >= 0) { //move is within the board
 
 					//if blocker is an enemy
-					if (BoardManager.GetInstance ().pieces [x - i, y - i].isPlayerOne != isPlayerOne) {
+					if (board.pieces [x - i, y - i].isPlayerOne != isPlayerOne) {
 
 						// add one more move for attacking
 						moves [x - i, y - i] = true;
@@ -50,7 +50,7 @@ public class Bishop : Piece {
 				if (y - i <= 8 && y - i >= 0 && x + i <= 8 && x + i >= 0) { //move is within the board
 
 					//if blocker is an enemy
-					if (BoardManager.GetInstance ().pieces [x + i, y - i].isPlayerOne != isPlayerOne) {
+					if (board.pieces [x + i, y - i].isPlayerOne != isPlayerOne) {
 
 						// add one more move for attacking
 						moves [x + i, y - i] = true;
@@ -76,7 +76,7 @@ public class Bishop : Piece {
 				if (y + i <= 8 && y + i >= 0 && x - i <= 8 && x - i >= 0) { //move is within the board
 
 					//if blocker is an enemy
-					if (BoardManager.GetInstance ().pieces [x - i, y + i].isPlayerOne != isPlayerOne) {
+					if (board.pieces [x - i, y + i].isPlayerOne != isPlayerOne) {
 
 						// add one more move for attacking
 						moves [x - i, y + i] = true;
@@ -102,7 +102,7 @@ public class Bishop : Piece {
 				if (y + i <= 8 && y + i >= 0 && x + i <= 8 && x + i >= 0) { //move is within the board
 
 					//if blocker is an enemy
-					if (BoardManager.GetInstance ().pieces [x + i, y + i].isPlayerOne != isPlayerOne) {
+					if (board.pieces [x + i, y + i].isPlayerOne != isPlayerOne) {
 
 						// add one more move for attacking
 						moves [x + i, y + i] = true;

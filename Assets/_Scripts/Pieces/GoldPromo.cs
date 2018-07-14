@@ -6,7 +6,11 @@ public class GoldPromo : Piece {
 
 	bool[,] moves;
 
-	public override bool[,] LegalMoves (){
+	Board board;
+
+	public override bool[,] LegalMoves (Board board){
+
+		this.board = board;
 
 		moves = new bool[9, 9];
 
@@ -41,7 +45,7 @@ public class GoldPromo : Piece {
 			moves [x + xOffset, y + yOffset] = true;
 		} else { //is blocked
 			//if blocker is an enemy
-			if (BoardManager.GetInstance ().pieces [x + xOffset, y + yOffset].isPlayerOne != isPlayerOne) {
+			if (board.pieces [x + xOffset, y + yOffset].isPlayerOne != isPlayerOne) {
 				// add one more move to kill enemy/blocker
 				moves [x + xOffset, y + yOffset] = true;
 

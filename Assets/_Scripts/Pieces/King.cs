@@ -6,8 +6,7 @@ public class King : Piece {
 
 	bool[,] moves;
 
-	public override bool[,] LegalMoves ()
-	{
+	public override bool[,] LegalMoves (Board board) {
 		moves = new bool[9, 9];
 
 		SetMoveLegal (-1, 1);

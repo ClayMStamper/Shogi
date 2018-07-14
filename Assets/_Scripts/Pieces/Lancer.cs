@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Lancer : Piece {
 
-	public override bool[,] LegalMoves (){
+	public override bool[,] LegalMoves (Board board){
 		
 		// possible moves for the player to make are added to this
 		// array with index mapped with respect to coordinates

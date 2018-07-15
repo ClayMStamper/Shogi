@@ -56,7 +56,7 @@ public class Gryphon : Piece {
 				if (y - i <= 8 && y - i >= 0 && x + i <= 8 && x + i >= 0) { //move is within the board
 
 					//if blocker is an enemy
-					if (BoardManager.GetInstance ().pieces [x + i, y - i].isPlayerOne != isPlayerOne) {
+					if (board.pieces [x + i, y - i].isPlayerOne != isPlayerOne) {
 
 						// add one more move for attacking
 						moves [x + i, y - i] = true;
@@ -82,7 +82,7 @@ public class Gryphon : Piece {
 				if (y + i <= 8 && y + i >= 0 && x - i <= 8 && x - i >= 0) { //move is within the board
 
 					//if blocker is an enemy
-					if (BoardManager.GetInstance ().pieces [x - i, y + i].isPlayerOne != isPlayerOne) {
+					if (board.pieces [x - i, y + i].isPlayerOne != isPlayerOne) {
 
 						// add one more move for attacking
 						moves [x - i, y + i] = true;
@@ -108,7 +108,7 @@ public class Gryphon : Piece {
 				if (y + i <= 8 && y + i >= 0 && x + i <= 8 && x + i >= 0) { //move is within the board
 
 					//if blocker is an enemy
-					if (BoardManager.GetInstance ().pieces [x + i, y + i].isPlayerOne != isPlayerOne) {
+					if (board.pieces [x + i, y + i].isPlayerOne != isPlayerOne) {
 
 						// add one more move for attacking
 						moves [x + i, y + i] = true;
@@ -146,7 +146,7 @@ public class Gryphon : Piece {
 			moves [x + xOffset, y + yOffset] = true;
 		} else { //is blocked
 			//if blocker is an enemy
-			if (BoardManager.GetInstance ().pieces [x + xOffset, y + yOffset].isPlayerOne != isPlayerOne) {
+			if (board.pieces [x + xOffset, y + yOffset].isPlayerOne != isPlayerOne) {
 				// add one more move to kill enemy/blocker
 				moves [x + xOffset, y + yOffset] = true;
 

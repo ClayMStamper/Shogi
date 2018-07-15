@@ -38,6 +38,74 @@ public abstract class Piece : MonoBehaviour {
 		return new bool[9,9];
 	}
 
+	public virtual List <Square> LegalMovesList (Board board){
+		return coordsToMovesList (LegalMoves (board));
+	}
+
+	public bool[,] LegalDrops(Board board){
+
+		bool[,] legalMoves = new bool[9, 9];
+
+		if (name != "Pawn") { // not a pawn
+
+			for (int i = 0; i < 9; i++) {
+				for (int j = 0; j < 9; j++) {
+
+					if (!PosIsBlocked (i, j)) {
+
+						legalMoves [i, j] = true;
+
+						//Debug.Log (i + ", " + j + ": Is Moveable");
+
+					} else {
+
+						legalMoves [i, j] = false;
+
+					}
+				}
+			}
+
+		} else { //is a pawn: apply special rules
+			
+			for (int i = 0; i < 9; i++) {
+				for (int j = 0; j < 9; j++) {
+
+					if (PosIsBlocked (i, j)) {
+
+						legalMoves [i, j] = false;
+
+						if (board.pieces [i, j] is Pawn && 
+							board.pieces[i, j].isPlayerOne == isPlayerOne) {
+
+							for (int k = 0; k < 9; k++) {
+
+								//sets moves in the file to illegal if a friendly
+								//pawn is in that file
+								legalMoves [i, k] = false;
+
+							}
+
+							break;
+
+						}
+
+					} else {
+
+						legalMoves [i, j] = true;
+
+					}
+				}
+			}
+		}
+
+		return legalMoves;
+
+	}
+
+	public List <Square> LegalDropsList(Board board){
+		return coordsToMovesList (LegalDrops (board));
+	}
+
 	//check if passed in tile coord is blocked
 	public bool PosIsBlocked(int x, int y){
 
@@ -58,6 +126,25 @@ public abstract class Piece : MonoBehaviour {
 		}
 		// no piece on that tile
 		return false;
+	}
+
+	//converts vector array to Move array
+	private List<Square> coordsToMovesList(bool[,] moveIsLegalArr){
+
+		List <Square> newMovesList = new List<Square> ();
+
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+
+				if (moveIsLegalArr [i, j]) {
+					newMovesList.Add (new Square (new Vector2Int (i, j), this));
+				}
+
+			}
+		}
+
+		return newMovesList;
+
 	}
 
 }

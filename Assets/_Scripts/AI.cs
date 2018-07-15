@@ -103,7 +103,7 @@ public class AI : MonoBehaviour {
 
 			minEval = int.MaxValue;
 
-			allSquaresToMoveTo = board.GetAllLegalMoves (true);
+			allSquaresToMoveTo = board.playerOneMoves;
 
 			foreach (Square squareToMoveTo in allSquaresToMoveTo) {
 				
@@ -275,26 +275,14 @@ public struct Square{
 
 	}
 
-	public void SetPiece(Piece piece){
-		pieceMoving = piece;
-	}
+	public Square (Vector2Int move, Piece piece){
 
-	//converts vector array to Move array
-	public static List<Square> coordsToMovesList(bool[,] moveIsLegalArr){
+		x = move.x;
+		y = move.y;
 
-		List <Square> newMovesList = new List<Square> ();
+		this.pieceMoving = piece;
 
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 9; j++) {
-
-				if (moveIsLegalArr [i, j]) {
-					newMovesList.Add (new Square (new Vector2Int (i, j)));
-				}
-
-			}
-		}
-
-		return newMovesList;
+		//	Debug.Log ("Created new square at " + x + ", " + y);
 
 	}
 
@@ -387,51 +375,53 @@ public struct Board{
 
 		List <Square> allMoves = new List<Square> ();
 
-		if (isPlayerOnesTurn) { // is minimizing
+		//whos turn is it
+		if (isPlayerOnesTurn) {
 
+			//check every piece
+			for (int i = 0; i < 9; i++){
+				for (int j = 0; j < 9; j++) { 
+
+					Piece p = pieces [i, j];
+
+					//piece exists and piece is mine
+					if (p != null && p.isPlayerOne) { 
+
+						List <Square> thisPiecesMoves = new List<Square> ();
+
+						if (!p.isCaptured) {
+							thisPiecesMoves = p.LegalMovesList(this);
+						} else {
+							thisPiecesMoves = p.LegalDropsList(this);
+						}
+
+						allMoves.AddRange (thisPiecesMoves);
+
+					}
+				} 
+			}
+		} else { // is maximizing
 			for (int i = 0; i < 9; i++){
 				for (int j = 0; j < 9; j++) { //for each piece
-					
-					if (pieces[i,j] != null && pieces [i, j].isPlayerOne) {
+
+					Piece p = pieces [i, j];
+
+					//piece exists and piece is mine
+					if (p != null && !p.isPlayerOne) {
 
 						List <Square> thisPiecesMoves = new List<Square> ();
 
 						if (!pieces [i, j].isCaptured) {
-							thisPiecesMoves = Square.coordsToMovesList (pieces [i, j].LegalMoves (this));
+							thisPiecesMoves = p.LegalMovesList(this);
 						} else {
-							thisPiecesMoves = Square.coordsToMovesList (AI.GetInstance ().GetLegalDrops (pieces [i, j]));
+							thisPiecesMoves = p.LegalDropsList(this);
 						}
 
 						allMoves.AddRange (thisPiecesMoves);
-
 					}
 				}
+	
 			}
-
-		} else { // is maximizing
-
-			for (int i = 0; i < 9; i++){
-				for (int j = 0; j < 9; j++) {
-
-					if (pieces [i, j] == null)
-						break;
-
-					if (!pieces [i, j].isPlayerOne) {
-
-						List <Square> thisPiecesMoves = new List<Square> ();
-
-						if (!pieces [i, j].isCaptured) {
-							thisPiecesMoves = Square.coordsToMovesList (pieces [i, j].LegalMoves (this));
-						} else {
-							thisPiecesMoves = Square.coordsToMovesList (AI.GetInstance ().GetLegalDrops (pieces [i, j]));
-						}
-
-						allMoves.AddRange (thisPiecesMoves);
-
-					}
-				}
-			}
-
 		}
 
 		return allMoves;

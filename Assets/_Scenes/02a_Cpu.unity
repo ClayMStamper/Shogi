@@ -1380,6 +1380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recursionDepth: 2
   isActive: 1
+  goodEnoughEval: 10
   boardManager: {fileID: 1404062334}
   allPieces:
   - {fileID: 1124390074}

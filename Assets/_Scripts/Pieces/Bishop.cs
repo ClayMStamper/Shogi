@@ -32,7 +32,7 @@ public class Bishop : Piece {
 
 					}
 					} catch {
-						Debug.LogError (name + " at " + x + ", " + y + " is looking at the board wrong at recursion depth: " + AI.GetInstance ().currentRecursionDepth);
+						Debug.LogError (name + " at " + x + ", " + y + " is looking at the board"); // wrong at recursion depth: " + AI.GetInstance ().currentRecursionDepth);
 					}
 				}
 

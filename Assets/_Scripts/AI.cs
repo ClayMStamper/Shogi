@@ -34,16 +34,10 @@ public class AI : MonoBehaviour {
 
 	public int recursionDepth = 2;
 
-	[HideInInspector]
-	public int currentRecursionDepth;
-	[HideInInspector]// other scripts will reference this
-	public Board hypoBoard;
-	[HideInInspector]// other scripts will reference this
-	public Board currentBoard;
-
-	public delegate void OnMovePickedCallback(Square move); 
-
 	public bool isActive = true;
+
+	[Range (0, 100)]
+	public int goodEnoughEval;
 
 	[SerializeField]
 	BoardManager boardManager;
@@ -54,11 +48,11 @@ public class AI : MonoBehaviour {
 	public Piece selectedPiece = null;
 	Square selectedMove;
 
-	int maxEval, minEval;                 
+//	int maxEval, minEval;                 
 
 	public void Go(){
 
-		currentBoard = new Board (boardManager.pieces);
+		Board currentBoard = new Board (boardManager.pieces);
 		Minimax (currentBoard, recursionDepth, !boardManager.isPlayerOnesTurn, int.MinValue, int.MaxValue);
 
 		//selectedMove is set in minimax
@@ -95,10 +89,9 @@ public class AI : MonoBehaviour {
 
 	}
 
-	int Minimax(Board board, int depth, bool maximizing, int alpha, int beta){
+	List <Square> rootMoves = new List<Square> ();
 
-		currentRecursionDepth = depth;
-		hypoBoard = board;
+	int Minimax(Board board, int depth, bool maximizing, int alpha, int beta){
 
 		Debug.Log ("Running minimax");
 
@@ -111,7 +104,7 @@ public class AI : MonoBehaviour {
 		//is player 1s turn
 		if (!maximizing) {
 
-			minEval = int.MaxValue;
+			int minEval = int.MaxValue;
 
 			allSquaresToMoveTo = board.playerOneMoves;
 
@@ -121,39 +114,27 @@ public class AI : MonoBehaviour {
 				Square moveFrom = new Square (new Vector2Int (squareToMoveTo.pieceMoving.x, squareToMoveTo.pieceMoving.y));
 				Board newBoard = new Board (board, squareToMoveTo, moveFrom, squareToMoveTo.pieceMoving);
 
-				hypoBoard = newBoard;
+				//is move possible next turn then move is a root of
+				if (depth == recursionDepth) {
+					rootMoves.Add (squareToMoveTo);
+				}
 
 				int eval = Minimax (newBoard, depth - 1, true, alpha, beta);
+				minEval = Mathf.Min (eval, minEval);
 
-				Debug.Log ("Eval is: " + eval);
-				Debug.Log ("Min eval is: " + minEval);
+				if (minEval < beta) { //found the better move
 
-				if (eval < beta) { //found the better move
-					Debug.Log ("New piece should be selected");
-					minEval = eval;
+					selectedMove = rootMoves.Last();
+					selectedPiece = selectedMove.pieceMoving;
+
 					beta = minEval;
+					Debug.Log ("New piece: " + selectedPiece.name + " should be selected with eval = " + beta);
+
 					if (beta <= alpha) {
-						break;
+					//	if (beta <= 
+					//	break;
 					}
 
-					//at the root, set next move
-					//	if (depth == recursionDepth) {
-					selectedMove = squareToMoveTo;
-					selectedPiece = squareToMoveTo.pieceMoving;
-					//		}
-
-				} else if (eval == minEval) {
-					// this just adds in variability
-					if (Random.value > 0.5f) {
-						Debug.Log ("New piece should be selected");
-						minEval = eval;
-						//at the root
-						//			if (depth == recursionDepth) {
-						selectedMove = squareToMoveTo;
-						selectedPiece = squareToMoveTo.pieceMoving;
-
-
-					}
 				}
 			}
 
@@ -161,7 +142,7 @@ public class AI : MonoBehaviour {
 
 		} else {
 
-			maxEval = int.MinValue;
+			int maxEval = int.MinValue;
 
 			allSquaresToMoveTo = board.GetAllLegalMoves (false);
 
@@ -171,12 +152,13 @@ public class AI : MonoBehaviour {
 				Board newBoard = new Board (board, squareToMoveTo, moveFrom, squareToMoveTo.pieceMoving);
 
 				int eval = Minimax (newBoard, depth - 1, false, alpha, beta);
+		//		maxEval = Mathf.Max (eval, maxEval);
 
-				if (eval > alpha) { //found the better move
+				if (eval > maxEval) { //found the better move
 					maxEval = eval;
 					alpha = maxEval;
 					if (beta <= alpha) {
-						break;
+					//	break;
 					}
 				}
 

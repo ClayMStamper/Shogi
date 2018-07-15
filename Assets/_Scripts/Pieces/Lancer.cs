@@ -16,7 +16,7 @@ public class Lancer : Piece {
 			// add orthagonal - down moves until a blocker is found
 			for (int i = 1; i < 9; i++) {
 
-				if (!PosIsBlocked (x, y - i)) {
+				if (!PosIsBlocked (board, x, y - i)) {
 
 					//move at x,y is legal
 					moves [x, y - i] = true;
@@ -26,7 +26,7 @@ public class Lancer : Piece {
 					if (y - i <= 8 && y - i >= 0) { //move is within the board
 						
 						//if blocker is an enemy
-						if (BoardManager.GetInstance ().pieces [x, y - i].isPlayerOne != isPlayerOne) {
+						if (board.pieces [x, y - i].isPlayerOne != isPlayerOne) {
 							
 							// add one more move for attacking
 							moves [x, y - i] = true;
@@ -42,7 +42,7 @@ public class Lancer : Piece {
 			// add orthagonal - up moves until a blocker is found
 			for (int i = 1; i < 9; i++) {
 				
-				if (!PosIsBlocked (x, y + i)) {
+				if (!PosIsBlocked (board, x, y + i)) {
 
 					// move at x,y is legal
 					moves [x, y + i] = true;
@@ -52,7 +52,7 @@ public class Lancer : Piece {
 					if (y + i <= 8 && y + i >= 0) { //move is within the board
 						
 						//if blocker is an enemy
-						if (BoardManager.GetInstance ().pieces [x, y + i].isPlayerOne != isPlayerOne) {
+						if (board.pieces [x, y + i].isPlayerOne != isPlayerOne) {
 							
 							// add one more move for attacking
 							moves [x, y + i] = true;

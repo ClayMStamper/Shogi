@@ -13,7 +13,7 @@ public class Pawn : Piece {
 
 		if (isPlayerOne) {
 			
-			if (!PosIsBlocked (x, y - 1)) {
+			if (!PosIsBlocked (board, x, y - 1)) {
 				
 				moves [x, y - 1] = true;
 
@@ -22,7 +22,7 @@ public class Pawn : Piece {
 				if (y - 1  <= 8 && y - 1 >= 0) { //move is on board
 					
 					//if blocker is an enemy
-					if (BoardManager.GetInstance ().pieces [x, y - 1].isPlayerOne != isPlayerOne) {
+					if (board.pieces [x, y - 1].isPlayerOne != isPlayerOne) {
 						
 						// add one more move to kill enemy/blocker
 						moves [x, y - 1] = true;
@@ -33,7 +33,7 @@ public class Pawn : Piece {
 			}
 		} else { // is player two
 			
-			if (!PosIsBlocked (x, y + 1)) {
+			if (!PosIsBlocked (board, x, y + 1)) {
 				
 				moves [x, y + 1] = true;
 
@@ -42,7 +42,7 @@ public class Pawn : Piece {
 				if (y + 1 <= 8 && y + 1 >= 0) { //move is on board
 					
 					//if blocker is an enemy
-					if (BoardManager.GetInstance ().pieces [x, y + 1].isPlayerOne != isPlayerOne) {
+					if (board.pieces [x, y + 1].isPlayerOne != isPlayerOne) {
 						
 						// add one more move to kill enemy/blocker
 						moves [x, y + 1] = true;

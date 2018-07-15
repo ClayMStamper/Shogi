@@ -40,7 +40,7 @@ public class Gold : Piece {
 			return;
 		}
 
-		if (!PosIsBlocked (x + xOffset, y + yOffset)) {
+		if (!PosIsBlocked (board, x + xOffset, y + yOffset)) {
 			moves [x + xOffset, y + yOffset] = true;
 		} else { //is blocked
 			//if blocker is an enemy

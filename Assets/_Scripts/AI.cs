@@ -34,6 +34,13 @@ public class AI : MonoBehaviour {
 
 	public int recursionDepth = 2;
 
+	[HideInInspector]
+	public int currentRecursionDepth;
+	[HideInInspector]// other scripts will reference this
+	public Board hypoBoard;
+	[HideInInspector]// other scripts will reference this
+	public Board currentBoard;
+
 	public delegate void OnMovePickedCallback(Square move); 
 
 	public bool isActive = true;
@@ -51,7 +58,7 @@ public class AI : MonoBehaviour {
 
 	public void Go(){
 
-		Board currentBoard = new Board (boardManager.pieces);
+		currentBoard = new Board (boardManager.pieces);
 		Minimax (currentBoard, recursionDepth, !boardManager.isPlayerOnesTurn, int.MinValue, int.MaxValue);
 
 		//selectedMove is set in minimax
@@ -90,6 +97,9 @@ public class AI : MonoBehaviour {
 
 	int Minimax(Board board, int depth, bool maximizing, int alpha, int beta){
 
+		currentRecursionDepth = depth;
+		hypoBoard = board;
+
 		Debug.Log ("Running minimax");
 
 		if (depth == 0) {
@@ -107,39 +117,41 @@ public class AI : MonoBehaviour {
 
 			foreach (Square squareToMoveTo in allSquaresToMoveTo) {
 				
-					//the square that the piece hypothetically moves from
-					Square moveFrom = new Square (new Vector2Int (squareToMoveTo.pieceMoving.x, squareToMoveTo.pieceMoving.y));
-					Board newBoard = new Board (board, squareToMoveTo, moveFrom, squareToMoveTo.pieceMoving);
+				//the square that the piece hypothetically moves from
+				Square moveFrom = new Square (new Vector2Int (squareToMoveTo.pieceMoving.x, squareToMoveTo.pieceMoving.y));
+				Board newBoard = new Board (board, squareToMoveTo, moveFrom, squareToMoveTo.pieceMoving);
 
-					int eval = Minimax (newBoard, depth - 1, true, alpha, beta);
+				hypoBoard = newBoard;
 
-					Debug.Log ("Eval is: " + eval);
-					Debug.Log ("Min eval is: " + minEval);
+				int eval = Minimax (newBoard, depth - 1, true, alpha, beta);
 
-					if (eval < beta) { //found the better move
+				Debug.Log ("Eval is: " + eval);
+				Debug.Log ("Min eval is: " + minEval);
+
+				if (eval < beta) { //found the better move
+					Debug.Log ("New piece should be selected");
+					minEval = eval;
+					beta = minEval;
+					if (beta <= alpha) {
+						break;
+					}
+
+					//at the root, set next move
+					//	if (depth == recursionDepth) {
+					selectedMove = squareToMoveTo;
+					selectedPiece = squareToMoveTo.pieceMoving;
+					//		}
+
+				} else if (eval == minEval) {
+					// this just adds in variability
+					if (Random.value > 0.5f) {
 						Debug.Log ("New piece should be selected");
 						minEval = eval;
-						beta = minEval;
-						if (beta <= alpha) {
-							break;
-						}
+						//at the root
+						//			if (depth == recursionDepth) {
+						selectedMove = squareToMoveTo;
+						selectedPiece = squareToMoveTo.pieceMoving;
 
-						//at the root, set next move
-					//	if (depth == recursionDepth) {
-							selectedMove = squareToMoveTo;
-							selectedPiece = squareToMoveTo.pieceMoving;
-				//		}
-
-					} else if (eval == minEval) {
-						// this just adds in variability
-						if (Random.value > 0.5f) {
-							Debug.Log ("New piece should be selected");
-							minEval = eval;
-							//at the root
-				//			if (depth == recursionDepth) {
-								selectedMove = squareToMoveTo;
-								selectedPiece = squareToMoveTo.pieceMoving;
-							
 
 					}
 				}
@@ -395,7 +407,9 @@ public struct Board{
 							thisPiecesMoves = p.LegalDropsList(this);
 						}
 
-						allMoves.AddRange (thisPiecesMoves);
+						foreach (Square move in thisPiecesMoves) {
+							allMoves.Add (move);
+						}
 
 					}
 				} 
@@ -417,7 +431,10 @@ public struct Board{
 							thisPiecesMoves = p.LegalDropsList(this);
 						}
 
-						allMoves.AddRange (thisPiecesMoves);
+						foreach (Square move in thisPiecesMoves) {
+							allMoves.Add (move);
+						}
+
 					}
 				}
 	

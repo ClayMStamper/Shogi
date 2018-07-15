@@ -14,7 +14,7 @@ public class Bishop : Piece {
 		// add diagonal - down/left moves until a blocker is found
 		for (int i = 1; i < 9; i++) {
 
-			if (!PosIsBlocked (x - i, y - i)) {
+			if (!PosIsBlocked (board, x - i, y - i)) {
 
 				//move at x,y is legal
 				moves [x - i, y - i] = true;
@@ -23,12 +23,16 @@ public class Bishop : Piece {
 
 				if (y - i <= 8 && y - i >= 0 && x - i <= 8 && x - i >= 0) { //move is within the board
 
+					try {
 					//if blocker is an enemy
 					if (board.pieces [x - i, y - i].isPlayerOne != isPlayerOne) {
 
 						// add one more move for attacking
 						moves [x - i, y - i] = true;
 
+					}
+					} catch {
+						Debug.LogError (name + " at " + x + ", " + y + " is looking at the board wrong at recursion depth: " + AI.GetInstance ().currentRecursionDepth);
 					}
 				}
 
@@ -40,7 +44,7 @@ public class Bishop : Piece {
 		// add diagonal - down/right moves until a blocker is found
 		for (int i = 1; i < 9; i++) {
 
-			if (!PosIsBlocked (x + i, y - i)) {
+			if (!PosIsBlocked (board, x + i, y - i)) {
 
 				//move at x,y is legal
 				moves [x + i, y - i] = true;
@@ -66,7 +70,7 @@ public class Bishop : Piece {
 		// add diagonal - up/left moves until a blocker is found
 		for (int i = 1; i < 9; i++) {
 
-			if (!PosIsBlocked (x - i, y + i)) {
+			if (!PosIsBlocked (board, x - i, y + i)) {
 
 				//move at x,y is legal
 				moves [x - i, y + i] = true;
@@ -92,7 +96,7 @@ public class Bishop : Piece {
 		// add diagonal - up/right moves until a blocker is found
 		for (int i = 1; i < 9; i++) {
 
-			if (!PosIsBlocked (x + i, y + i)) {
+			if (!PosIsBlocked (board, x + i, y + i)) {
 
 				//move at x,y is legal
 				moves [x + i, y + i] = true;

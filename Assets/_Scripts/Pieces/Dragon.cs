@@ -20,7 +20,7 @@ public class Dragon : Piece {
 		// add orthagonal - down moves until a blocker is found
 		for (int i = 1; i < 9; i++) {
 
-			if (!PosIsBlocked (x, y - i)) {
+			if (!PosIsBlocked (board, x, y - i)) {
 
 				//move at x,y is legal
 				moves [x, y - i] = true;
@@ -46,7 +46,7 @@ public class Dragon : Piece {
 		// add orthagonal - up moves until a blocker is found
 		for (int i = 1; i < 9; i++) {
 
-			if (!PosIsBlocked (x, y + i)) {
+			if (!PosIsBlocked (board, x, y + i)) {
 
 				//move at x,y is legal
 				moves [x, y + i] = true;
@@ -72,7 +72,7 @@ public class Dragon : Piece {
 		// add orthagonal - right moves until a blocker is found
 		for (int i = 1; i < 9; i++) {
 
-			if (!PosIsBlocked (x + i, y)) {
+			if (!PosIsBlocked (board, x + i, y)) {
 
 				//move at x,y is legal
 				moves [x + i, y ] = true;
@@ -98,7 +98,7 @@ public class Dragon : Piece {
 		// add orthagonal - right moves until a blocker is found
 		for (int i = 1; i < 9; i++) {
 
-			if (!PosIsBlocked (x - i, y)) {
+			if (!PosIsBlocked (board, x - i, y)) {
 
 				//move at x,y is legal
 				moves [x - i, y ] = true;
@@ -142,7 +142,7 @@ public class Dragon : Piece {
 			return;
 		}
 
-		if (!PosIsBlocked (x + xOffset, y + yOffset)) {
+		if (!PosIsBlocked (board, x + xOffset, y + yOffset)) {
 			moves [x + xOffset, y + yOffset] = true;
 		} else { //is blocked
 			//if blocker is an enemy

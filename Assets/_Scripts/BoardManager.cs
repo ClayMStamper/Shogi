@@ -49,6 +49,9 @@ public class BoardManager : MonoBehaviour {
 	public Piece[,] pieces;
 
 	[HideInInspector]
+	public Board currentBoard;
+
+	[HideInInspector]
 	public bool isPlayerOnesTurn = false;
 
 	public bool[,] legalMoves;
@@ -85,7 +88,10 @@ public class BoardManager : MonoBehaviour {
 			//map 2d array coordinates to piece coordinates
 			pieces [piece.x, piece.y] = piece;
 		}
+			
+		currentBoard = new Board (pieces);
 
+		//currently always starts as player 2's turn (not AI's)
 		isPlayerOnesTurn = Random.value < 0.5f ?  false : false;
 			
 

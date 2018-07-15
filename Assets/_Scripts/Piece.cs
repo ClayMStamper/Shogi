@@ -10,7 +10,8 @@ public abstract class Piece : MonoBehaviour {
 	public int x { set; get;}
 	public int y { set; get;}
 
-	BoardManager board;
+	BoardManager boardManager;
+	AI ai;
 
 	[HideInInspector]
 	public Animator anim;
@@ -24,7 +25,8 @@ public abstract class Piece : MonoBehaviour {
 	}
 
 	void Start(){
-		board = BoardManager.GetInstance ();
+		boardManager = BoardManager.GetInstance ();
+		ai = AI.GetInstance ();
 		anim = GetComponent <Animator> ();
 	}
 
@@ -51,7 +53,7 @@ public abstract class Piece : MonoBehaviour {
 			for (int i = 0; i < 9; i++) {
 				for (int j = 0; j < 9; j++) {
 
-					if (!PosIsBlocked (i, j)) {
+					if (!PosIsBlocked (board, i, j)) {
 
 						legalMoves [i, j] = true;
 
@@ -70,7 +72,7 @@ public abstract class Piece : MonoBehaviour {
 			for (int i = 0; i < 9; i++) {
 				for (int j = 0; j < 9; j++) {
 
-					if (PosIsBlocked (i, j)) {
+					if (PosIsBlocked (board, i, j)) {
 
 						legalMoves [i, j] = false;
 
@@ -107,7 +109,10 @@ public abstract class Piece : MonoBehaviour {
 	}
 
 	//check if passed in tile coord is blocked
-	public bool PosIsBlocked(int x, int y){
+	public bool PosIsBlocked(Board board, int x, int y){
+		
+		boardManager = BoardManager.GetInstance ();
+		ai = AI.GetInstance ();
 
 		//piece is blocked by the edge of the board
 		if (x > 8 || x < 0 || y > 8 || y < 0) {

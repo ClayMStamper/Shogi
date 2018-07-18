@@ -2138,7 +2138,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4326512749496360, guid: 3e5feb0fdd1034a8e89821d0d2ad5bed, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.14
       objectReference: {fileID: 0}
     - target: {fileID: 4326512749496360, guid: 3e5feb0fdd1034a8e89821d0d2ad5bed, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2164,17 +2164,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 114087994112674884, guid: 3e5feb0fdd1034a8e89821d0d2ad5bed,
-        type: 2}
-      propertyPath: function.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1919597277}
     - target: {fileID: 114819713932736450, guid: 3e5feb0fdd1034a8e89821d0d2ad5bed,
         type: 2}
       propertyPath: function.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1919597277}
-    - target: {fileID: 114231586462735358, guid: 3e5feb0fdd1034a8e89821d0d2ad5bed,
+    - target: {fileID: 114087994112674884, guid: 3e5feb0fdd1034a8e89821d0d2ad5bed,
         type: 2}
       propertyPath: function.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

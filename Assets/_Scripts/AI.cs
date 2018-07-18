@@ -89,17 +89,19 @@ public class AI : MonoBehaviour {
 
 	}
 
-	List <Square> rootMoves = new List<Square> ();
+	//List <Square> rootMoves = new List<Square> ();
+	Dictionary <Square, int> rootValues = new Dictionary<Square, int>();
 
 	int Minimax(Board board, int depth, bool maximizing, int alpha, int beta){
 
-		Debug.Log ("Running minimax");
+//		Debug.Log ("Running minimax");
 
 		if (depth == 0) {
 			return board.eval;
 		}
-
+			
 		List <Square> allSquaresToMoveTo = new List<Square> ();
+
 
 		//is player 1s turn
 		if (!maximizing) {
@@ -114,28 +116,37 @@ public class AI : MonoBehaviour {
 				Square moveFrom = new Square (new Vector2Int (squareToMoveTo.pieceMoving.x, squareToMoveTo.pieceMoving.y));
 				Board newBoard = new Board (board, squareToMoveTo, moveFrom, squareToMoveTo.pieceMoving);
 
-				//is move possible next turn then move is a root of
-				if (depth == recursionDepth) {
-					rootMoves.Add (squareToMoveTo);
-				}
 
 				int eval = Minimax (newBoard, depth - 1, true, alpha, beta);
+
+				if (depth == recursionDepth) {
+					rootValues.Add (squareToMoveTo, eval);
+				}
+
 				minEval = Mathf.Min (eval, minEval);
 
-				if (minEval < beta) { //found the better move
+				if (eval < beta) { //found the better move
 
-					selectedMove = rootMoves.Last();
-					selectedPiece = selectedMove.pieceMoving;
+					SelectPieceAndSquare (squareToMoveTo);
 
 					beta = minEval;
 					Debug.Log ("New piece: " + selectedPiece.name + " should be selected with eval = " + beta);
 
 					if (beta <= alpha) {
-					//	if (beta <= 
-					//	break;
+						return board.eval;
 					}
-
+				} else if (eval == beta) {
+					
+					if ((selectedPiece is Pawn) && (squareToMoveTo.pieceMoving is Pawn)) {
+						if (Random.value < 0.5f) {
+							SelectPieceAndSquare (squareToMoveTo);
+						}
+					} else if (!(selectedPiece is Pawn) && (squareToMoveTo.pieceMoving is Pawn)) {
+						SelectPieceAndSquare (squareToMoveTo);
+					} 
 				}
+
+
 			}
 
 			return minEval;
@@ -158,7 +169,7 @@ public class AI : MonoBehaviour {
 					maxEval = eval;
 					alpha = maxEval;
 					if (beta <= alpha) {
-					//	break;
+						return board.eval;
 					}
 				}
 
@@ -229,6 +240,11 @@ public class AI : MonoBehaviour {
 
 	}
 
+	void SelectPieceAndSquare(Square square){
+		selectedMove = square;
+		selectedPiece = square.pieceMoving;
+	}
+
 	bool PosIsBlocked (int x, int y){
 
 		if (boardManager.pieces [x, y] != null) {
@@ -243,15 +259,43 @@ public class AI : MonoBehaviour {
 		this.isActive = isActive;
 	}
 
+	public Square BestMove (){
+
+		Square bestMove = rootValues.Keys.ToArray () [0];
+
+		for (int i = 1; i < rootValues.Count; i++) {
+			
+			Square square = rootValues.Keys.ToArray () [i];
+
+			if (rootValues [square] > rootValues [bestMove]) {
+				bestMove = square;
+			}
+
+		}
+
+		if (bestMove == null) {
+			Debug.LogError ("Returning null");
+		}
+
+		return bestMove;
+
+	}
+
 }
 
 // Abstraction of any coordinate on the board
-public struct Square{
+public class Square{
 
 	public int x, y;
 	public Piece pieceMoving;
 
 //	public Board currentBoard;
+
+	public Square (){
+		x = 0;
+		y = 0;
+		pieceMoving = null;
+	}
 
 	public Vector2Int pos{
 		get{return new Vector2Int (x, y);}
@@ -283,6 +327,11 @@ public struct Square{
 	public void Print(){
 		Debug.Log ("available move: " + x + ", " + y + ")");
 	}
+
+}
+	
+public class Root : Square {
+
 
 }
 
@@ -322,16 +371,16 @@ public struct Board{
 		playerTwoMoves = new List<Square> ();
 		eval = 0;
 
-		Debug.Log ("Created new board with piece: " + moved.name + "and moveTo: " + moveTo.x + ", " + moveTo.y);
+	//	Debug.Log ("Created new board with piece: " + moved.name + "and moveTo: " + moveTo.x + ", " + moveTo.y);
 
 		//adjust board and evaluate
 
 		if (moved.isCaptured) {
 			DropPiece (moveTo, moved);
 		} else {
-			Debug.Log ("Before move, " + moveTo.x + ", " + moveTo.y + " is: " + this.pieces[moveTo.x, moveTo.y]);
+	//		Debug.Log ("Before move, " + moveTo.x + ", " + moveTo.y + " is: " + this.pieces[moveTo.x, moveTo.y]);
 			MovePiece (moveTo, moveFrom, moved);
-			Debug.Log ("After move, " + moveTo.x + ", " + moveTo.y + " is: " + this.pieces[moveTo.x, moveTo.y]);
+	//		Debug.Log ("After move, " + moveTo.x + ", " + moveTo.y + " is: " + this.pieces[moveTo.x, moveTo.y]);
 		}
 
 		playerOneMoves = GetAllLegalMoves (isPlayerOnesTurn: true);

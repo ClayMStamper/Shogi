@@ -135,7 +135,7 @@ public class AI : MonoBehaviour {
 					if (beta <= alpha) {
 						return board.eval;
 					}
-				} else if (eval == beta) {
+				} else if (eval == beta) { //increase randomness in AI
 					
 					if ((selectedPiece is Pawn) && (squareToMoveTo.pieceMoving is Pawn)) {
 						if (Random.value < 0.5f) {

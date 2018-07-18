@@ -1131,6 +1131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recursionDepth: 2
   isActive: 0
+  goodEnoughEval: 0
   boardManager: {fileID: 1404062334}
   allPieces:
   - {fileID: 1124390074}
@@ -5477,11 +5478,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4326512749496360, guid: 3e5feb0fdd1034a8e89821d0d2ad5bed, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 2.57
       objectReference: {fileID: 0}
     - target: {fileID: 4326512749496360, guid: 3e5feb0fdd1034a8e89821d0d2ad5bed, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.14
       objectReference: {fileID: 0}
     - target: {fileID: 4326512749496360, guid: 3e5feb0fdd1034a8e89821d0d2ad5bed, type: 2}
       propertyPath: m_LocalPosition.z
@@ -5512,11 +5513,6 @@ Prefab:
       propertyPath: function.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1919597277}
-    - target: {fileID: 114087994112674884, guid: 3e5feb0fdd1034a8e89821d0d2ad5bed,
-        type: 2}
-      propertyPath: function.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadLevel
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e5feb0fdd1034a8e89821d0d2ad5bed, type: 2}
   m_IsPrefabParent: 0

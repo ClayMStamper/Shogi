@@ -48,6 +48,10 @@ public class MusicManager : MonoBehaviour {
 
 	}
 
+	void OnEnable(){
+		levelManager = LevelManager.GetInstance ();
+	}
+
 	void OnLevelLoaded(){
 
 		sceneIndex = levelManager.GetCurrentLevelIndex();

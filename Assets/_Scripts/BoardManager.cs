@@ -11,7 +11,7 @@ public class BoardManager : MonoBehaviour {
 
 	//ensure that there is only one of these in the scene
 
-	public static BoardManager instance;
+	private static BoardManager instance;
 
 	void Awake(){
 

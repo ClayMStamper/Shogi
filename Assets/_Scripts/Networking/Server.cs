@@ -29,12 +29,15 @@ public class Server : MonoBehaviour {
 
 			server = new TcpListener(IPAddress.Any, port);
 			server.Start();
+			serverStarted = true;
+			Debug.Log ("Server started");
 
 			//listen for incoming connection
 			StartListening();
 
 		} catch (System.Exception e){
 			Debug.Log ("Socket error: " + e.Message);
+			MultiplayerManager.GetInstance ().OnHostFailed ();
 		}
 
 	}

@@ -8,7 +8,7 @@ public class Button3D : MonoBehaviour {
 
 	public bool isActive = true;
 	[SerializeField]
-	private float clickToDragTolerance = 1.0f;
+	private float clickToDragTolerance = 20.0f;
 
 	public UnityEvent function;
 
@@ -65,7 +65,7 @@ public class Button3D : MonoBehaviour {
 
 	void DoEvent(){
 
-		Debug.Log ("doing event");
+	//	Debug.Log ("doing event");
 
 		if (name.Contains ("Profile") || (name.Contains ("Settings"))) {
 			//clicked a scroll
@@ -86,7 +86,7 @@ public class Button3D : MonoBehaviour {
 
 		while (beingClicked) {
 
-			Debug.Log ("Holding down: " + name);
+//			Debug.Log ("Holding down: " + name);
 
 			if (Input.GetMouseButtonUp (0)) {
 
@@ -99,7 +99,7 @@ public class Button3D : MonoBehaviour {
 
 					if (hit.transform == this.transform) {
 
-						Debug.Log ("Mouse is still on " + name + " on release");
+	//					Debug.Log ("Mouse is still on " + name + " on release");
 
 						if ((Input.mousePosition - clickPos).magnitude > clickToDragTolerance){
 							ToggleIsClicked (false);
@@ -120,6 +120,18 @@ public class Button3D : MonoBehaviour {
 
 		}
 
+	}
+
+	public void  LoadLevel(string levelName){
+
+		LevelManager levelManager = LevelManager.GetInstance ();
+
+		levelManager.LoadLevel (levelName);
+
+	}
+
+	public void Connect(){
+		MultiplayerManager.GetInstance ().Connect ();
 	}
 
 }

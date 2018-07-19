@@ -7,6 +7,8 @@ using System;
 
 public class Client : MonoBehaviour {
 
+	public int port = 6321;
+
 	private bool socketReady;
 	private TcpClient socket;
 	private NetworkStream stream;
@@ -14,23 +16,25 @@ public class Client : MonoBehaviour {
 	private StreamReader reader;
 
 	//entry point
-	public bool ConnectToServer (string host, int port){
+	public bool ConnectToServer (string hostAddress, int port, bool hostOnFail){
 
 		if (socketReady)
 			return false;
 
 		try {
 			
-			socket = new TcpClient (host, port);
+			socket = new TcpClient (hostAddress, port);
 			stream = socket.GetStream();
 			writer = new StreamWriter (stream);
 			reader = new StreamReader (stream);
 
 			socketReady = true;
+			DontDestroyOnLoad (gameObject);
 
 		} catch (Exception e) {
 
 			Debug.Log ("Socket error: " + e.Message);
+			MultiplayerManager.GetInstance ().OnJoinFailed (hostOnFail);
 
 		}
 

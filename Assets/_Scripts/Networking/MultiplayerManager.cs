@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Net;
 using System;
 
 public class MultiplayerManager : MonoBehaviour {
@@ -38,8 +39,12 @@ public class MultiplayerManager : MonoBehaviour {
 	LevelManager levelManager;
 
 	void Start(){
+
+		hostAddress = Network.player.ipAddress;
+
 		levelManager = LevelManager.GetInstance ();
 		levelManager.onLevelWasLoadedCallback += OnLoadedMenu;
+
 	}
 
 	public void Connect(){

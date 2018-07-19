@@ -60,6 +60,7 @@ public class MultiplayerManager : MonoBehaviour {
 //			Server.hostInstance = server;
 
 			client = Instantiate (clientPrefab).GetComponent <Client> ();
+			client.isHost = true;
 			client.ConnectToServer (hostAddress, client.port, false);
 //			Server.clientInstances.Add (client);
 
@@ -99,10 +100,10 @@ public class MultiplayerManager : MonoBehaviour {
 
 		if (levelManager.GetCurrentLevelName () == "01a_Menu") {
 			try {
-			Destroy (FindObjectOfType <Server> ().gameObject);
+				Destroy (FindObjectOfType <Server> ().gameObject);
 			} catch { }
 			try {
-			Destroy (FindObjectOfType <Server> ().gameObject);
+				Destroy (FindObjectOfType <Client> ().gameObject);
 			} catch { }
 		}
 	}

@@ -86,12 +86,19 @@ public class Server : MonoBehaviour {
 		//connection is live now: cache reference
 		TcpListener listener = (TcpListener)ar.AsyncState;
 
+		string allUsers = "";
+		foreach (ServerClient i in clients){
+			allUsers += i.clientName + '|';
+		}
+
 		ServerClient sc = new ServerClient (listener.EndAcceptTcpClient (ar));
 		clients.Add (sc);
 
 		StartListening ();
 
 		Debug.Log ("Somebody has connected!"); //another communication needs to be done before we know who
+
+		Broadcast ("SWHO|", clients[clients.Count - 1]);
 
 	}
 
@@ -115,7 +122,7 @@ public class Server : MonoBehaviour {
 		}
 	}
 
-	//server sebd
+	//server send all
 	private void Broadcast (string data, List <ServerClient> cl){
 		foreach (ServerClient sc in cl) {
 			try{
@@ -128,9 +135,74 @@ public class Server : MonoBehaviour {
 		}
 	}
 
+	//server send
+	private void Broadcast (string data, ServerClient c){
+		try{
+			StreamWriter writer = new StreamWriter (c.tcp.GetStream());
+			writer.WriteLine (data);
+			writer.Flush();
+		} catch (Exception e) {
+			Debug.Log ("Write error: " + e.Message);
+		}
+	}
+
 	//server read
 	private void OnIncomingData(ServerClient c, string data){
-		Debug.Log (c.clientName + ": " + data);
+
+		Debug.Log ("Server: " + data);
+
+		string[] aData = data.Split ('|');
+
+		switch (aData [0]) {
+		case "CWHO":
+			c.clientName = aData [1];
+			c.isHost = (aData [2] == "host") ? true : false;
+			Broadcast ("SCNN|" + c.clientName, clients);
+			break;
+		case "CMOV":
+
+			data = data.Replace ("CMOV", "SMOV");
+
+			if (c.isHost) {
+				Broadcast (data, clients[1]);
+			} else {
+				Broadcast (data, clients[0]);
+			}
+
+			break;
+		case "CDROP":
+
+			data = data.Replace ("CDROP", "SDROP");
+
+			if (c.isHost) {
+				Debug.Log ("Broadcasting " + data + " to host");
+				Broadcast (data, clients [1]);
+			} else {
+				Debug.Log ("Broadcasting " + data + " to non-host client");
+				Broadcast (data, clients [0]);
+			}
+			break;
+
+		}
+
+	}
+
+	private void OnApplicationQuit(){
+		stopServer ();
+	}
+
+	private void OnDisable(){
+		stopServer ();
+	}
+
+	private void stopServer(){
+
+		if (!serverStarted)
+			return;
+
+		server.Stop ();
+		serverStarted = false;
+
 	}
 
 }
@@ -140,6 +212,7 @@ public class ServerClient{
 
 	public string clientName;
 	public TcpClient tcp;
+	public bool isHost;
 
 	public ServerClient (TcpClient tcp){
 		this.tcp = tcp;

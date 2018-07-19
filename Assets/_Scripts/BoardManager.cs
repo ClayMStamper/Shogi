@@ -42,6 +42,9 @@ public class BoardManager : MonoBehaviour {
 	public int selectedX= -1, selectedY = -1;
 
 	[HideInInspector]
+	public Client client;
+
+	[HideInInspector]
 	public Piece selectedPiece;
 	[HideInInspector] 
 	public List <Piece> activePieces;
@@ -64,6 +67,7 @@ public class BoardManager : MonoBehaviour {
 
 	void Start(){
 		highlightManager = HighlightManager.GetInstance ();
+		client = FindObjectOfType <Client> ();
 		this.pieces = new Piece[9, 9];
 		SetUpBoard ();
 	}
@@ -161,6 +165,16 @@ public class BoardManager : MonoBehaviour {
 	//this happens if selectedPiece == null
 	public void SelectPiece (int x, int y){
 
+		if (client != null) {
+
+			bool isPlayerOne = client.isHost;
+
+			if (isPlayerOne != isPlayerOnesTurn) {
+				return;
+			} 
+
+		}
+
 		//selected coord is empty
 		if (pieces [x, y] == null) {
 			Debug.Log ("Slected Piece is null");
@@ -201,9 +215,13 @@ public class BoardManager : MonoBehaviour {
 	//this happens if selectedPiece != null
 	public void MovePiece (){
 
-
 		//check for move is legal
 		if (legalMoves [selectedX, selectedY]) {
+
+			if (client != null && client.isHost == isPlayerOnesTurn) {
+				NetworkedMovePiece (selectedX, selectedY);
+				return;
+			}
 
 			//if (MovedIntoCheck ()) { //move will result in a loss
 			//	Debug.Log ("MOVING INTO CHECK!!!");
@@ -229,6 +247,32 @@ public class BoardManager : MonoBehaviour {
 		highlightManager.HideMoves ();
 
 	}
+
+	void NetworkedMovePiece(int x, int y){
+
+		Debug.Log ("Networked move piece");
+
+		//enemy piece is here
+		if (pieces [x, y] != null) {
+			OnPieceWasCaptured (pieces [x, y]);
+		}
+
+		string msg = "CMOV|";
+		msg += selectedPiece.x.ToString () + "|";
+		msg += selectedPiece.y.ToString () + "|";
+		msg += x.ToString () + "|";
+		msg += y.ToString () + "|";
+
+		client.Send (msg);
+
+		OnPieceWasMoved ();
+
+		//un-select piece
+		selectedPiece = null;
+		highlightManager.HideMoves ();
+
+	}
+
 	public void MovePiece(Square move){
 
 		selectedX = move.x;

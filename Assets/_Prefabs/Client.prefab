@@ -51,3 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a544565814124f6cbc84807683728e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  port: 6321
+  clientName: man human

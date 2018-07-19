@@ -142,28 +142,20 @@ public class SideTableManager : MonoBehaviour {
 
 		if (Input.GetMouseButtonDown (0)) {
 
-			//Debug.Log ("Selected X: " + selectedX);
-			//Debug.Log ("Selected Y: " + selectedY);
-
 			// select piece
 			if (boardManager.selectedPiece == null) {
 				
 				if (selectedX >= 0 && selectedY >= 0) {
 
-					//Debug.Log ("Attempting to select piece: " + selectedX + ", " + selectedY);
-
 					SelectPiece ();
 			
 				} 
-
 			} 
-
 		}
-
 	}
 
 	//sets selectedPiece & legelMoves in BoardManager
-	void SelectPiece (){
+	public void SelectPiece (){
 
 		//Debug.Log ("Selecting piece at " + selectedX + ", " + selectedY);
 
@@ -196,11 +188,23 @@ public class SideTableManager : MonoBehaviour {
 		//check for move is legal
 		if (boardManager.legalMoves [x, y]) {
 
-			//pop top of stack
-			//Debug.Log ((int)board.selectedPiece.transform.localPosition.x);
-			//Debug.Log ((int)board.selectedPiece.transform.localPosition.y);
+			Debug.Log ("SHOULD BE SENDING DROP TO SERVER");
 
 			Vector3 coord = boardManager.selectedPiece.transform.localPosition;
+
+			if (boardManager.client != null && boardManager.client.isHost == boardManager.isPlayerOnesTurn) {
+
+				string msg = "CDROP|";
+
+				msg += coord.x.ToString () + "|";
+				msg += coord.y.ToString () + "|";
+				msg += x.ToString () + "|";
+				msg += y.ToString () + "|";
+
+				boardManager.client.Send (msg);
+
+			}
+					
 			pieceStacks [Mathf.RoundToInt(coord.x) , Mathf.RoundToInt(coord.y)].Pop();
 
 			//set newPos to selected coordinate

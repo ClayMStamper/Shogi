@@ -4075,6 +4075,7 @@ MonoBehaviour:
   gameOverPopup: {fileID: 1963436001}
   selectedX: -1
   selectedY: -1
+  client: {fileID: 0}
   selectedPiece: {fileID: 0}
   activePieces: []
   isPlayerOnesTurn: 1
@@ -5512,7 +5513,12 @@ Prefab:
         type: 2}
       propertyPath: function.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1919597277}
+      objectReference: {fileID: 1963436002}
+    - target: {fileID: 114087994112674884, guid: 3e5feb0fdd1034a8e89821d0d2ad5bed,
+        type: 2}
+      propertyPath: function.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadLevel
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e5feb0fdd1034a8e89821d0d2ad5bed, type: 2}
   m_IsPrefabParent: 0
@@ -5521,6 +5527,12 @@ GameObject:
   m_PrefabParentObject: {fileID: 1365473325012818, guid: 3e5feb0fdd1034a8e89821d0d2ad5bed,
     type: 2}
   m_PrefabInternal: {fileID: 1963436000}
+--- !u!114 &1963436002 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114087994112674884, guid: 3e5feb0fdd1034a8e89821d0d2ad5bed,
+    type: 2}
+  m_PrefabInternal: {fileID: 1963436000}
+  m_Script: {fileID: 11500000, guid: d57caf92f3b8845599008df3c4875da2, type: 3}
 --- !u!1 &2031047504
 GameObject:
   m_ObjectHideFlags: 0

@@ -4097,6 +4097,7 @@ MonoBehaviour:
   gameOverPopup: {fileID: 2146658232}
   selectedX: -1
   selectedY: -1
+  client: {fileID: 0}
   selectedPiece: {fileID: 0}
   activePieces: []
   isPlayerOnesTurn: 1

@@ -44,7 +44,11 @@ public class AccountManager : MonoBehaviour {
 
 	void Start(){
 
-		StartCoroutine (DataReader.GetAndPrint ("1"));
+		//check if user is registered with database
+		if (PlayerPrefsManager.GetUsername () == ""){
+			
+		}
+		StartCoroutine (DataReader.GetNewestUserID ());
 
 	}
 
@@ -54,24 +58,17 @@ public class AccountManager : MonoBehaviour {
 
 	}
 
-	//get my data
-	public void InvokeGetData(OnDataRecievedCallback onDataRecieved) {
-
-		StartCoroutine(GetData(onDataRecieved));
-
-	}
-
 	//get any player's data
-	public void InvokeGetData (string username, OnDataRecievedCallback onDataRecieved){
+	public void InvokeGetData (string user, OnDataRecievedCallback onDataRecieved){
 
-		StartCoroutine(GetData (username, onDataRecieved));
+		StartCoroutine(GetData (user, onDataRecieved));
 
 	}
 		
 
-	public void InvokeSetData(string data) {
+	public void InvokeSetData(string user, string data) {
 		
-		StartCoroutine(SetData(data));
+		StartCoroutine(SetData(user, data));
 
 	}
 
@@ -84,7 +81,7 @@ public class AccountManager : MonoBehaviour {
 
 		IEnumerator e = DCP.RunCS(databaseName, "Register", new string[2] { username, username });
 
-		StartCoroutine (Register());
+		StartCoroutine (Register(username));
 
 	}
 
@@ -93,12 +90,12 @@ public class AccountManager : MonoBehaviour {
     #region Run Command Sequences
 
 	//Run the command sequence to register a user
-	IEnumerator Register () {
+	IEnumerator Register (string user) {
 
-		print ("Registering " + username);
+		print ("Registering " + user);
 
 		//Run the command sequence called 'Register' on the database name which has been retrieved in the start method. Sends the username and password (from the ui input fields) as parameters
-		IEnumerator e = DCP.RunCS(databaseName, "Register", new string[2] { username, username });
+		IEnumerator e = DCP.RunCS(databaseName, "Register", new string[2] { user, user });
 
 		Debug.Log (e.ToString ());
 
@@ -114,11 +111,11 @@ public class AccountManager : MonoBehaviour {
 		Debug.Log (returnText);
 
 		if (returnText == "Success") {
-			Debug.Log ("Registered on database: " + username);
+			Debug.Log ("Registered on database: " + user);
 			//Registration was successful
-			string data = username + "|";
-			StartCoroutine (SetData (data));
-			StartCoroutine(Login());
+			string data = user + "|";
+			StartCoroutine (SetData (user, data));
+			StartCoroutine(Login(user));
 			yield return new WaitForSeconds(0.5f);
 		} else
 		{
@@ -127,7 +124,7 @@ public class AccountManager : MonoBehaviour {
 				//The username is already in use
 				registerError = "The username is in use. Logging in.";
 				//get data and then login
-				StartCoroutine(Login());
+				StartCoroutine(Login(user));
 			} else
 			{
 				//Some other error which is unlikely to happen but should be considered if it does
@@ -138,10 +135,10 @@ public class AccountManager : MonoBehaviour {
 	}
 
     //Run the command sequence to login a user
-    IEnumerator Login () {
+	IEnumerator Login (string user) {
 
         //Run the command sequence called 'Login' on the database name which has been retrieved in the start method. Sends the username and password (from the ui input fields) as parameters
-		IEnumerator e = DCP.RunCS(databaseName, "Login", new string[2] { username, username});
+		IEnumerator e = DCP.RunCS(databaseName, "Login", new string[2] { user, user});
 
         //wait for the command sequence to finish loading
         while (e.MoveNext())
@@ -154,7 +151,7 @@ public class AccountManager : MonoBehaviour {
 
         if (returnText == "Success")
         {
-			Debug.Log ("Logged in on database: " + username );
+			Debug.Log ("Logged in on database: " + user );
             //Login was successful
             loginError = ""; // << make ui text for login error disappear
 
@@ -181,12 +178,12 @@ public class AccountManager : MonoBehaviour {
     }
 
     //Run the command sequence to set user data
-	IEnumerator SetData (string data) {
+	IEnumerator SetData (string user, string data) {
 
 		isSettingData = true;
 
         //Run the command sequence called 'Set Data' on the database name which has been retrieved in the start method. Sends the username, password and data string (from the ui input fields) as parameters
-		IEnumerator e = DCP.RunCS(databaseName, "Set Data", new string[3] { username, username, data });
+		IEnumerator e = DCP.RunCS(databaseName, "Set Data", new string[3] { user, user, data });
 
         //wait for the command sequence to finish loading
         while (e.MoveNext())
@@ -209,42 +206,14 @@ public class AccountManager : MonoBehaviour {
         }
     }
 
-    //Run the command sequence to get user data
-	IEnumerator GetData(OnDataRecievedCallback onDataRecieved) {
+	IEnumerator GetData(string user, OnDataRecievedCallback onDataRecieved) {
+
+		Debug.Log ("Getting data for: " + user);
 
 		isGettingData = true;
 
 		//Run the command sequence called 'Get Data' on the database name which has been retrieved in the start method. Sends the username and password (from the ui input fields) as parameters
-		IEnumerator e = DCP.RunCS(databaseName, "Get Data", new string[2] { username, username });
-
-		//wait for the command sequence to finish loading
-		while (e.MoveNext())
-		{
-			yield return e.Current;
-		}
-
-		//get the command sequence result
-		string data = e.Current as string;
-
-		if (data != null) {
-			onDataRecieved.Invoke(data);
-		} else {
-			Debug.Log("Data null");
-		}
-		yield return new WaitForSeconds(0.5f);
-
-		isGettingData = false;
-
-    }
-
-	IEnumerator GetData(string username, OnDataRecievedCallback onDataRecieved) {
-
-		Debug.Log ("Getting data for: " + username);
-
-		isGettingData = true;
-
-		//Run the command sequence called 'Get Data' on the database name which has been retrieved in the start method. Sends the username and password (from the ui input fields) as parameters
-		IEnumerator e = DCP.RunCS(databaseName, "Get Data", new string[2] { username, username });
+		IEnumerator e = DCP.RunCS(databaseName, "Get Data", new string[2] { user, user });
 
 		//wait for the command sequence to finish loading
 		while (e.MoveNext())

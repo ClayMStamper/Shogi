@@ -7,19 +7,20 @@ public class DataReader : MonoBehaviour {
 	AccountManager accountManager;
 
 	public static string data = "";
-	public static bool isCurrent = false;
+
+	#region private static methods
 
 	static void FetchBegin(string key){
-
 		AccountManager.GetInstance().InvokeGetData (key, OnDataRecieved);
-
 	}
 
 	static void OnDataRecieved(string _data){
-
 		data = _data;
-
 	}
+
+	#endregion
+
+	#region coroutines
 
 	//waits until data is up to date with the server
 	static IEnumerator Wait(){
@@ -33,15 +34,11 @@ public class DataReader : MonoBehaviour {
 
 	public static IEnumerator Refresh(string key){
 
-		isCurrent = false;
-
 		FetchBegin (key);
 
 		IEnumerator e = Wait ();
 		while (e.MoveNext ())
 			yield return e.Current;
-		
-		isCurrent = true;
 
 	}
 
@@ -52,5 +49,22 @@ public class DataReader : MonoBehaviour {
 
 		Debug.Log (data);
 	}
+
+	public static IEnumerator GetNewestUserID(){
+
+		IEnumerator e = Refresh ("users");
+		while (e.MoveNext())
+			yield return e.Current;
+
+		//split to array of IDs
+		string[] dataSplits = DataReader.data.Split('|');
+
+		//set data to last ID
+		DataReader.data = dataSplits [dataSplits.Length - 2];
+		Debug.Log (DataReader.data);
+
+	}
+
+	#endregion
 
 }

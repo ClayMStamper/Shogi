@@ -22,14 +22,25 @@ public class DataReader : MonoBehaviour {
 
 	#region coroutines
 
+	void Stop(){
+		StopAllCoroutines ();
+	}
+
 	//waits until data is up to date with the server
 	static IEnumerator Wait(){
 
+		MenusManager.GetInstance ().ToggleLoading (true);
+		MenusManager.GetInstance ().loadMsg.text = "Fetching data";
+
 		string startData = data;
 
-		while (data == startData) 
+		while (data == startData) {
+
 			yield return new WaitForSeconds (0.1f);
-		
+		}
+
+		MenusManager.GetInstance ().ToggleLoading (false);
+
 	}
 
 	public static IEnumerator Refresh(string key){
@@ -43,7 +54,7 @@ public class DataReader : MonoBehaviour {
 	}
 
 	public static IEnumerator GetAndPrint(string key){
-		
+
 		IEnumerator e = Refresh (key);
 		while (e.MoveNext()) 
 			yield return e.Current;
@@ -55,6 +66,9 @@ public class DataReader : MonoBehaviour {
 
 	public static IEnumerator GetNewestUserID(){
 
+		MenusManager.GetInstance ().ToggleLoading (true);
+		MenusManager.GetInstance ().loadMsg.text = "Registering for online play";
+
 		IEnumerator e = Refresh ("users");
 		while (e.MoveNext())
 			yield return e.Current;
@@ -65,6 +79,7 @@ public class DataReader : MonoBehaviour {
 		//set data to last ID
 		DataReader.data = dataSplits [dataSplits.Length - 2];
 		Debug.Log (DataReader.data);
+		MenusManager.GetInstance ().ToggleLoading (false);
 		yield return null;
 
 	}

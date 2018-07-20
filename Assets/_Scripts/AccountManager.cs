@@ -37,12 +37,17 @@ public class AccountManager : MonoBehaviour {
     string registerError = "";
 
 	public static bool isSettingData, isGettingData = false;
+	public static bool isLoggedIn = false;
+
+	MenusManager menus;
 
 	public delegate void OnDataRecievedCallback(string data);
 
 	#region Public methods
 
 	void Start(){
+
+		menus = MenusManager.GetInstance ();
 
 		if (PlayerPrefsManager.GetIsUserInit ()) {
 			username = PlayerPrefsManager.GetUserID ().ToString ();
@@ -88,6 +93,9 @@ public class AccountManager : MonoBehaviour {
 	//Run the command sequence to register a user
 	public IEnumerator Register (string user) {
 
+		menus.ToggleLoading (true);
+		menus.loadMsg.text = "First time setup...";
+
 		print ("Registering " + user);
 
 		//Run the command sequence called 'Register' on the database name which has been retrieved in the start method. Sends the username and password (from the ui input fields) as parameters
@@ -128,10 +136,16 @@ public class AccountManager : MonoBehaviour {
 			}
 			yield return new WaitForSeconds(0.5f);
 		}
+
+		MenusManager.GetInstance ().ToggleLoading (false);
+
 	}
 
     //Run the command sequence to login a user
 	IEnumerator Login (string user) {
+
+		menus.ToggleLoading (true);
+		menus.loadMsg.text = "Getting Ready...";
 
         //Run the command sequence called 'Login' on the database name which has been retrieved in the start method. Sends the username and password (from the ui input fields) as parameters
 		IEnumerator e = DCP.RunCS(databaseName, "Login", new string[2] { user, user});
@@ -147,6 +161,7 @@ public class AccountManager : MonoBehaviour {
 
         if (returnText == "Success")
         {
+			isLoggedIn = true;
 			Debug.Log ("Logged in on database: " + user );
             //Login was successful
             loginError = ""; // << make ui text for login error disappear
@@ -171,6 +186,9 @@ public class AccountManager : MonoBehaviour {
             }
             yield return new WaitForSeconds(0.5f);
         }
+
+		MenusManager.GetInstance ().ToggleLoading (false);
+
     }
 
     //Run the command sequence to set user data
@@ -200,6 +218,7 @@ public class AccountManager : MonoBehaviour {
             //Either error with server or error with user's username and password so logout
             yield return new WaitForSeconds(0.5f);
         }
+
     }
 
 	IEnumerator GetData(string user, OnDataRecievedCallback onDataRecieved) {

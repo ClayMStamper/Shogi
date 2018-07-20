@@ -11,6 +11,9 @@ public class DataWriter : MonoBehaviour {
 	//adds on to the end of a given data string
 	public static IEnumerator AppendData (string key, string addition){
 
+		MenusManager.GetInstance ().ToggleLoading (true);
+		MenusManager.GetInstance ().loadMsg.text = "Sending data";
+
 		IEnumerator e = DataReader.Refresh (key);
 		while (e.MoveNext ())
 			yield return e.Current;
@@ -23,23 +26,23 @@ public class DataWriter : MonoBehaviour {
 
 		AccountManager.GetInstance ().InvokeSetData (key, DataReader.data);
 
+		MenusManager.GetInstance ().ToggleLoading (false);
 		yield return null;
 
 	}
 
 	public static IEnumerator UserInit(){
 
+		MenusManager.GetInstance ().ToggleLoading (true);
+		MenusManager.GetInstance ().loadMsg.text = "Performing first time setup";
+
 		//get data string
 		IEnumerator e = DataReader.GetNewestUserID ();
 		while (e.MoveNext())
 			yield return e.Current;
 
-		Debug.Log ("Old Data: " + DataReader.data);
-
 		//parse data for my unique identifier
 		string myID = ((int.Parse (DataReader.data)) + 1).ToString();
-
-		Debug.Log ("My ID: " + myID);
 
 		//edit and send data string with my user ID (key)
 		e = AppendData("users", (myID + "|"));
@@ -54,6 +57,8 @@ public class DataWriter : MonoBehaviour {
 		PlayerPrefsManager.SetIsUserID (int.Parse (myID));
 
 		Debug.Log ("User: " + myID + " should be init");
+
+		MenusManager.GetInstance ().ToggleLoading (false);
 
 	}
 	#endregion

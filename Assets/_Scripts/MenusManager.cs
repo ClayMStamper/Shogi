@@ -31,6 +31,7 @@ public class MenusManager : MonoBehaviour {
 	GameObject settingsContent = null, profileContent = null;
 	[SerializeField]
 	GameObject loading, netError;
+	public Text loadMsg;
 
 	[HideInInspector]
 	public Transform buttonPressed;
@@ -40,6 +41,7 @@ public class MenusManager : MonoBehaviour {
 	bool settingsOpen, profileOpen;
 
 	void Start(){
+
 		if (canvas == null) {
 			try {
 			canvas = WorldCanvas.GetInstance ().transform;
@@ -122,7 +124,13 @@ public class MenusManager : MonoBehaviour {
 	}
 
 	public void ToggleLoading(bool isLoading){
+		
 		loading.SetActive (isLoading);
+
+		if (!isLoading) {
+			loadMsg.text = "Loading...";
+		}
+
 	}
 
 	public void SetNetworkErrorActive(){

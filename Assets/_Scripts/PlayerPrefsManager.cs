@@ -30,23 +30,26 @@ public class PlayerPrefsManager : MonoBehaviour {
 		return PlayerPrefs.GetInt ("piecesSkin");
 	}
 
-	public static void SetIsUserInit(bool toggleValue){
+	//serialize later
+	public static void SetIsUserID(int userID){
 
-		if (toggleValue) {
-			PlayerPrefs.SetInt ("isInit", 1); // 1 for true
-		} else {
-			PlayerPrefs.SetInt ("isInit", 0); // 0 for false
-		}
+		PlayerPrefs.SetInt ("id", userID); // 1 for true
 
+	}
+
+	public static int GetUserID(){
+		return PlayerPrefs.GetInt ("id");
 	}
 
 	public static bool GetIsUserInit(){
 
-		int toggleValue = PlayerPrefs.GetInt ("isInit");
+		int toggleValue = PlayerPrefs.GetInt ("id");
 
 		return toggleValue == 0 ? false : true;
 
 	}
+
+
 		
 
 }

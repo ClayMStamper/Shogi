@@ -44,19 +44,15 @@ public class AccountManager : MonoBehaviour {
 
 	void Start(){
 
-		//check if user is registered with database
-		if (!PlayerPrefsManager.GetIsUserInit()){
-			//StartCoroutine (DataWriter.AppendData ("users", "3|"));
-			StartCoroutine (DataWriter.UserInit ());	
+		if (PlayerPrefsManager.GetIsUserInit ()) {
+			username = PlayerPrefsManager.GetUserID ().ToString ();
+			StartCoroutine (Login (username));
+		} else {
+			StartCoroutine (DataWriter.UserInit ());
 		}
 
 	}
-
-	void PrintData(string data){
-
-		Debug.Log (data);
-
-	}
+		
 
 	//get any player's data
 	public void InvokeGetData (string user, OnDataRecievedCallback onDataRecieved){

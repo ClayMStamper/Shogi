@@ -51,11 +51,9 @@ public class DataWriter : MonoBehaviour {
 		while (e.MoveNext ())
 			yield return e.Current;
 
-	//	PlayerPrefsManager.SetIsUserInit (true);
+		PlayerPrefsManager.SetIsUserID (int.Parse (myID));
 
 		Debug.Log ("User: " + myID + " should be init");
-
-
 
 	}
 	#endregion

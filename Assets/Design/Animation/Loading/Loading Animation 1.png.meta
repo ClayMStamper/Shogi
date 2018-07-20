@@ -1,19 +1,13 @@
 fileFormatVersion: 2
-guid: 5bd576ea01bfb43918cc5ed5adceac83
-timeCreated: 1532118315
+guid: 76b3b76759f9a4d92b5c873050e12a89
+timeCreated: 1532117919
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Shogi UI Elements _0
-    21300002: Shogi UI Elements _1
-    21300004: Shogi UI Elements _2
-    21300006: Shogi UI Elements _4
-    21300008: Shogi UI Elements _5
-    21300010: Shogi UI Elements _6
-    21300012: Shogi UI Elements _7
-    21300014: Shogi UI Elements _3
-    21300016: Shogi UI Elements _8
-    21300018: Shogi UI Elements _9
+    21300000: Loading Animation 1_0
+    21300002: Loading Animation 1_1
+    21300004: Loading Animation 1_2
+    21300006: Loading Animation 1_3
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -120,13 +114,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Shogi UI Elements _0
+      name: Loading Animation 1_0
       rect:
         serializedVersion: 2
-        x: 71
-        y: 386
-        width: 141
-        height: 67
+        x: 28
+        y: 468
+        width: 200
+        height: 310
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,13 +128,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Shogi UI Elements _1
+      name: Loading Animation 1_1
       rect:
         serializedVersion: 2
-        x: 810
-        y: 366
-        width: 143
-        height: 68
+        x: 305
+        y: 467
+        width: 200
+        height: 310
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -148,13 +142,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Shogi UI Elements _2
+      name: Loading Animation 1_2
       rect:
         serializedVersion: 2
-        x: 70
-        y: 321
-        width: 659
-        height: 21
+        x: 30
+        y: 136
+        width: 200
+        height: 310
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,83 +156,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Shogi UI Elements _3
+      name: Loading Animation 1_3
       rect:
         serializedVersion: 2
-        x: 70
-        y: 278
-        width: 659
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Shogi UI Elements _4
-      rect:
-        serializedVersion: 2
-        x: 807
-        y: 251
-        width: 143
-        height: 68
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Shogi UI Elements _6
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 151
-        width: 146
-        height: 65
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Shogi UI Elements _7
-      rect:
-        serializedVersion: 2
-        x: 293
-        y: 66
-        width: 248
-        height: 118
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Shogi UI Elements _8
-      rect:
-        serializedVersion: 2
-        x: 822
-        y: 102
-        width: 143
-        height: 68
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Shogi UI Elements _9
-      rect:
-        serializedVersion: 2
-        x: 821
-        y: 28
-        width: 61
-        height: 57
+        x: 305
+        y: 136
+        width: 200
+        height: 310
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

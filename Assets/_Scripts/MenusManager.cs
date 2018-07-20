@@ -17,8 +17,6 @@ public class MenusManager : MonoBehaviour {
 			Destroy (gameObject);
 		}
 
-	//	DontDestroyOnLoad (gameObject);
-	
 	}
 
 	public static MenusManager GetInstance(){
@@ -29,9 +27,10 @@ public class MenusManager : MonoBehaviour {
 
 	[SerializeField]
 	Transform canvas;
-
 	[SerializeField]
 	GameObject settingsContent = null, profileContent = null;
+	[SerializeField]
+	GameObject loading, netError;
 
 	[HideInInspector]
 	public Transform buttonPressed;
@@ -75,7 +74,7 @@ public class MenusManager : MonoBehaviour {
 	}
 
 	public void toggleMenu(){
-			
+
 		if (openMenu != null) { // toggle off
 			//StartCoroutine (FadeOut (openMenu, 0.01f, true));
 			Destroy (openMenu);
@@ -120,6 +119,14 @@ public class MenusManager : MonoBehaviour {
 
 		}
 
+	}
+
+	public void ToggleLoading(bool isLoading){
+		loading.SetActive (isLoading);
+	}
+
+	public void SetNetworkErrorActive(){
+		netError.SetActive (true);
 	}
 		
 }

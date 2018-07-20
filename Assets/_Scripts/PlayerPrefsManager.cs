@@ -34,5 +34,16 @@ public class PlayerPrefsManager : MonoBehaviour {
 		return PlayerPrefs.GetInt ("piecesSkin");
 	}
 		
+	public static void SetUsername(string username){
+
+		PlayerPrefs.SetString ("username", username);
+
+	}
+
+	public static string GetUsername(){
+
+		return PlayerPrefs.GetString ("username");
+
+	}
 
 }

@@ -133,7 +133,7 @@ public class MusicManager : MonoBehaviour {
 
 	public void Play(){
 
-		Debug.Log ("Should be playing");
+	//	Debug.Log ("Should be playing");
 
 		audioSource.volume = Settings.GetInstance ().volume;
 

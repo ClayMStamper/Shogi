@@ -42,12 +42,26 @@ public class AccountManager : MonoBehaviour {
 
 	#region Public methods
 
+	void Start(){
+
+		StartCoroutine (DataReader.GetAndPrint ("1"));
+
+	}
+
+	void PrintData(string data){
+
+		Debug.Log (data);
+
+	}
+
+	//get my data
 	public void InvokeGetData(OnDataRecievedCallback onDataRecieved) {
 
 		StartCoroutine(GetData(onDataRecieved));
 
 	}
-		
+
+	//get any player's data
 	public void InvokeGetData (string username, OnDataRecievedCallback onDataRecieved){
 
 		StartCoroutine(GetData (username, onDataRecieved));
@@ -58,16 +72,6 @@ public class AccountManager : MonoBehaviour {
 	public void InvokeSetData(string data) {
 		
 		StartCoroutine(SetData(data));
-
-	}
-
-	public void SetName(string name){
-
-		//check for valid net ID
-
-		username = name.ToLower ();
-
-//		print ("Username is " + username);
 
 	}
 
@@ -234,6 +238,8 @@ public class AccountManager : MonoBehaviour {
     }
 
 	IEnumerator GetData(string username, OnDataRecievedCallback onDataRecieved) {
+
+		Debug.Log ("Getting data for: " + username);
 
 		isGettingData = true;
 

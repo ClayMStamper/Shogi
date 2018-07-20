@@ -45,10 +45,10 @@ public class AccountManager : MonoBehaviour {
 	void Start(){
 
 		//check if user is registered with database
-		if (PlayerPrefsManager.GetUsername () == ""){
-			
+		if (!PlayerPrefsManager.GetIsUserInit()){
+			//StartCoroutine (DataWriter.AppendData ("users", "3|"));
+			StartCoroutine (DataWriter.UserInit ());	
 		}
-		StartCoroutine (DataReader.GetNewestUserID ());
 
 	}
 
@@ -90,7 +90,7 @@ public class AccountManager : MonoBehaviour {
     #region Run Command Sequences
 
 	//Run the command sequence to register a user
-	IEnumerator Register (string user) {
+	public IEnumerator Register (string user) {
 
 		print ("Registering " + user);
 

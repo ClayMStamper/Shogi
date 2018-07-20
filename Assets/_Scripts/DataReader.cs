@@ -27,9 +27,9 @@ public class DataReader : MonoBehaviour {
 
 		string startData = data;
 
-		while (data == startData) {
+		while (data == startData) 
 			yield return new WaitForSeconds (0.1f);
-		}
+		
 	}
 
 	public static IEnumerator Refresh(string key){
@@ -45,9 +45,12 @@ public class DataReader : MonoBehaviour {
 	public static IEnumerator GetAndPrint(string key){
 		
 		IEnumerator e = Refresh (key);
-		while (e.MoveNext()) yield return e.Current;
+		while (e.MoveNext()) 
+			yield return e.Current;
 
 		Debug.Log (data);
+		yield return null;
+
 	}
 
 	public static IEnumerator GetNewestUserID(){
@@ -62,6 +65,7 @@ public class DataReader : MonoBehaviour {
 		//set data to last ID
 		DataReader.data = dataSplits [dataSplits.Length - 2];
 		Debug.Log (DataReader.data);
+		yield return null;
 
 	}
 

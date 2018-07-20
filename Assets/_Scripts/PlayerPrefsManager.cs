@@ -18,11 +18,7 @@ public class PlayerPrefsManager : MonoBehaviour {
 		
 		int toggleValue = PlayerPrefs.GetInt (key);
 
-		if (toggleValue == 1) {
-			return true;
-		} else {
-			return false;
-		}
+		return toggleValue == 0 ? false : true;
 
 	}
 
@@ -33,17 +29,24 @@ public class PlayerPrefsManager : MonoBehaviour {
 	public static int GetSkin(){
 		return PlayerPrefs.GetInt ("piecesSkin");
 	}
+
+	public static void SetIsUserInit(bool toggleValue){
+
+		if (toggleValue) {
+			PlayerPrefs.SetInt ("isInit", 1); // 1 for true
+		} else {
+			PlayerPrefs.SetInt ("isInit", 0); // 0 for false
+		}
+
+	}
+
+	public static bool GetIsUserInit(){
+
+		int toggleValue = PlayerPrefs.GetInt ("isInit");
+
+		return toggleValue == 0 ? false : true;
+
+	}
 		
-	public static void SetUsername(string username){
-
-		PlayerPrefs.SetString ("username", username);
-
-	}
-
-	public static string GetUsername(){
-
-		return PlayerPrefs.GetString ("username");
-
-	}
 
 }

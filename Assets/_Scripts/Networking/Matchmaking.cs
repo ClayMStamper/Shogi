@@ -65,11 +65,15 @@ public class Matchmaking : MonoBehaviour {
 				Debug.Log ("Data split i: " + dataSplits [i]);
 			} 
 			menus.ToggleLoading (true, "Found a match: Connecting...");
-			//check that ip is in proper format
+			//check that ip is in proper format (todo)
 			multiplayer.hostAddress = dataSplits[1];
-			multiplayer.Connect ();
+			StartCoroutine(multiplayer.CloseRoomToGuests ());
+			e = multiplayer.JoinMatchRoom ();
+			while (e.MoveNext ())
+				yield return e.Current;
 		} else {
 			Debug.Log ("No hosts found");
+			menus.ToggleLoading (true, "Searching for a host");
 			StartCoroutine (BecomeHost ());
 		}
 
@@ -77,29 +81,23 @@ public class Matchmaking : MonoBehaviour {
 
 	IEnumerator BecomeHost(){
 
+		//start loading
 		Debug.Log ("Becoming host");
 		menus.ToggleLoading (true, "Becoming Host...");
 
+		//cache IP Address
 		string myIp = Network.player.ipAddress;
 		multiplayer.hostAddress = myIp;
 
-		Debug.Log ("Got my ip: " + myIp);
-
+		//Open room for guests by adding IP to the database
 		IEnumerator e = DataWriter.AppendData ("hosting", myIp + "|");
 		while (e.MoveNext ())
 			yield return e.Current;
 
 		Debug.Log ("appended data");
 
-		e = DataReader.Refresh ("hosting");
-		while (e.MoveNext ())
-			yield return e.Current;
-
-		if (!DataReader.data.Contains (myIp)) {
-			Debug.LogError ("Hosting data: " + DataReader.data + ", does not contain my IP after append");
-		}
-
-		multiplayer.Connect ();
+		//Go to room
+		StartCoroutine (multiplayer.HostMatchRoom ());
 
 		yield return null;
 

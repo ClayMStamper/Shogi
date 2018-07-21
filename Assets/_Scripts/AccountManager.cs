@@ -234,7 +234,7 @@ public class AccountManager : MonoBehaviour {
 		//wait for the command sequence to finish loading
 		while (e.MoveNext())
 		{
-			Debug.Log (e.Current as string);
+//			Debug.Log (e.Current as string);
 			yield return e.Current;
 		}
 

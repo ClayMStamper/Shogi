@@ -17,6 +17,8 @@ public class MenusManager : MonoBehaviour {
 			Destroy (gameObject);
 		}
 
+		DontDestroyOnLoad (gameObject);
+
 	}
 
 	public static MenusManager GetInstance(){
@@ -144,6 +146,7 @@ public class MenusManager : MonoBehaviour {
 
 	public void SetNetworkErrorActive(){
 		netError.SetActive (true);
+		ToggleLoading (false);
 	}
 		
 }

@@ -6,7 +6,7 @@ public class DataReader : MonoBehaviour {
 
 	AccountManager accountManager;
 
-	public static string data = "fuqwpfqpfhq";
+	public static string data = "random arbitrary string";
 
 	#region private static methods
 

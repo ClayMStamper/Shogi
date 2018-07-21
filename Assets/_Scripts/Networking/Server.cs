@@ -10,11 +10,11 @@ public class Server : MonoBehaviour {
 
 	public int port = 6321;
 
-	private List <ServerClient> clients;
+	public List <ServerClient> clients;
 	private List <ServerClient> disconnectList;
 
 	private TcpListener server;
-	private bool serverStarted;
+	public bool isStarted;
 
 	//call when server created
 	public void Init(){
@@ -29,14 +29,16 @@ public class Server : MonoBehaviour {
 
 			server = new TcpListener(IPAddress.Any, port);
 			server.Start();
-			serverStarted = true;
 			Debug.Log ("Server started");
 
 			//listen for incoming connection
 			StartListening();
 
+			isStarted = true;
+
 		} catch (System.Exception e){
 			Debug.Log ("Socket error: " + e.Message);
+			isStarted = false;
 			MultiplayerManager.GetInstance ().OnHostFailed ();
 		}
 
@@ -44,7 +46,7 @@ public class Server : MonoBehaviour {
 		
 	void Update(){
 
-		if (!serverStarted)
+		if (!isStarted)
 			return;
 
 		foreach (ServerClient c in clients) {
@@ -197,11 +199,11 @@ public class Server : MonoBehaviour {
 
 	private void stopServer(){
 
-		if (!serverStarted)
+		if (!isStarted)
 			return;
 
 		server.Stop ();
-		serverStarted = false;
+		isStarted = false;
 
 	}
 

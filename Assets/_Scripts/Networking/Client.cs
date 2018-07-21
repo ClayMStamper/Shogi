@@ -10,8 +10,8 @@ public class Client : MonoBehaviour {
 	public int port = 6321;
 	public string clientName;
 	public bool isHost;
+	public bool socketReady;
 
-	private bool socketReady;
 	private TcpClient socket;
 	private NetworkStream stream;
 	private StreamWriter writer;
@@ -22,7 +22,7 @@ public class Client : MonoBehaviour {
 	private List <GameClient> connectedPlayers = new List<GameClient>();
 
 	//entry point
-	public bool ConnectToServer (string hostAddress, int port, bool hostOnFail){
+	public bool ConnectToServer (string hostAddress, int port){
 
 		if (socketReady)
 			return false;
@@ -40,7 +40,8 @@ public class Client : MonoBehaviour {
 		} catch (Exception e) {
 
 			Debug.Log ("Socket error: " + e.Message);
-			MultiplayerManager.GetInstance ().OnJoinFailed (hostOnFail);
+			socketReady = false;
+			MultiplayerManager.GetInstance ().OnJoinFailed ();
 
 		}
 

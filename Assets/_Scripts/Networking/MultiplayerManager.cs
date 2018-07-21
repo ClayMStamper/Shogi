@@ -37,6 +37,7 @@ public class MultiplayerManager : MonoBehaviour {
 	Server server;
 
 	LevelManager levelManager;
+	MenusManager menus;
 
 	void Start(){
 
@@ -45,60 +46,132 @@ public class MultiplayerManager : MonoBehaviour {
 		levelManager = LevelManager.GetInstance ();
 		levelManager.onLevelWasLoadedCallback += OnLoadedMenu;
 
+		menus = MenusManager.GetInstance ();
+
 	}
 
 	public void Connect(){
 
 		// Try to join - Else become server
-		Join (hostOnFail: true);
-
-		levelManager.LoadLevel ("02c_Online");
+		//Join (hostOnFail: true);
 
 	}
 
-	void Host(){
+	public IEnumerator JoinMatchRoom(){
 
-		try {
+		menus.ToggleLoading (true, "Connecting...");
 
-			server = Instantiate (serverPrefab).GetComponent <Server>();
+		IEnumerator e = Join ();
+		while (e.MoveNext ())
+			yield return e.Current;
+
+		//Stop looking for guests
+		e = DataWriter.SubtractData ("hosting", hostAddress + "|");
+		while (e.MoveNext ())
+			yield return e.Current;
+
+		OnJoin ();
+
+	}
+
+	public IEnumerator HostMatchRoom(){
+
+		menus.ToggleLoading (true, "Connecting...");
+
+		//set up match with guest
+		IEnumerator e = Host ();
+		while (e.MoveNext ())
+			yield return e.Current;
+
+		//Stop looking for guests
+		e = DataWriter.SubtractData ("hosting", hostAddress + "|");
+		while (e.MoveNext ())
+			yield return e.Current;
+
+		OnHost ();
+
+	}
+
+	IEnumerator Host(){
+
+		menus.ToggleLoading (true, "Waiting for opponent...");
+
+		server = Instantiate (serverPrefab).GetComponent <Server>();
+
+		while (!server.isStarted) {
 			server.Init();
-//			Server.hostInstance = server;
+			yield return null;
+		}
 
-			client = Instantiate (clientPrefab).GetComponent <Client> ();
+		client = Instantiate (clientPrefab).GetComponent <Client> ();
+
+		while (!client.socketReady){
+			client.ConnectToServer (hostAddress, client.port);
 			client.isHost = true;
-			client.ConnectToServer (hostAddress, client.port, false);
-//			Server.clientInstances.Add (client);
+			yield return null;
+		}
 
-		} catch (Exception e){
-			Debug.Log (e.Message);
+		while (server.clients.Count < 2) {
+			yield return null;
 		}
 
 	}
 
-	void Join(bool hostOnFail){
+	IEnumerator Join(){
 
 		client = Instantiate (clientPrefab).GetComponent <Client> ();
-		client.ConnectToServer (hostAddress, client.port, hostOnFail);
+
+		while (!client.socketReady) {
+			client.ConnectToServer (hostAddress, client.port);
+			yield return new WaitForSeconds (1f);
+		}
 //		Server.clientInstances.Add (client);
 
 	}
 
-	public void OnJoinFailed(bool shouldHost){
+	public IEnumerator CloseRoomToGuests(){
+
+		IEnumerator e = DataWriter.SubtractData ("hosting", hostAddress + "|");
+		while (e.MoveNext ())
+			yield return e.Current;
+
+		Debug.Log ("Room closed to guests");
+
+	}
+
+	public void OnJoinFailed(){
 
 		Debug.Log ("Failed to join");
-		Destroy (client.gameObject);
-
-		if (shouldHost) {
-			Debug.Log ("Becoming new host on failed join");
-			Host ();
+		if (client != null) {
+			Destroy (client.gameObject);
 		}
+		menus.ToggleLoading (false);
+		menus.SetNetworkErrorActive ();
+		StopAllCoroutines ();
+
+		StartCoroutine(CloseRoomToGuests ());
 
 	}
 
 	public void OnHostFailed(){
 
 		Debug.Log ("Failed to host");
+		menus.SetNetworkErrorActive ();
+		menus.ToggleLoading (false);
+		StopAllCoroutines ();
 
+		StartCoroutine(CloseRoomToGuests ());
+
+	}
+
+	public void OnJoin(){
+		levelManager.LoadLevel ("02c_Online");
+		StartCoroutine(CloseRoomToGuests ());
+	}
+
+	public void OnHost(){
+		levelManager.LoadLevel ("02c_Online");
+		StartCoroutine(CloseRoomToGuests ());
 	}
 
 	void OnLoadedMenu(){

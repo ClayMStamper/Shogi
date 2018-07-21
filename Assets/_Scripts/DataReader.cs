@@ -6,7 +6,7 @@ public class DataReader : MonoBehaviour {
 
 	AccountManager accountManager;
 
-	public static string data = "";
+	public static string data = "fuqwpfqpfhq";
 
 	#region private static methods
 
@@ -22,10 +22,6 @@ public class DataReader : MonoBehaviour {
 
 	#region coroutines
 
-	void Stop(){
-		StopAllCoroutines ();
-	}
-
 	//waits until data is up to date with the server
 	static IEnumerator Wait(){
 
@@ -35,7 +31,7 @@ public class DataReader : MonoBehaviour {
 		string startData = data;
 
 		while (data == startData) {
-
+			Debug.Log ("waiting");
 			yield return new WaitForSeconds (0.1f);
 		}
 
@@ -45,11 +41,11 @@ public class DataReader : MonoBehaviour {
 
 	public static IEnumerator Refresh(string key){
 
-		FetchBegin (key);
-
-		IEnumerator e = Wait ();
+		IEnumerator e = AccountManager.GetInstance ().GetData (key, OnDataRecieved);
 		while (e.MoveNext ())
 			yield return e.Current;
+
+		Debug.Log ("Data refereshed");
 
 	}
 

@@ -134,4 +134,8 @@ public class Button3D : MonoBehaviour {
 		MultiplayerManager.GetInstance ().Connect ();
 	}
 
+	public void Queue(){
+		Matchmaking.GetInstance ().Queue ();
+	}
+
 }

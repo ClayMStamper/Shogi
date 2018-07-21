@@ -11,8 +11,7 @@ public class DataWriter : MonoBehaviour {
 	//adds on to the end of a given data string
 	public static IEnumerator AppendData (string key, string addition){
 
-		MenusManager.GetInstance ().ToggleLoading (true);
-		MenusManager.GetInstance ().loadMsg.text = "Sending data";
+		MenusManager.GetInstance ().ToggleLoading (true, "Sending Data");
 
 		IEnumerator e = DataReader.Refresh (key);
 		while (e.MoveNext ())
@@ -23,6 +22,31 @@ public class DataWriter : MonoBehaviour {
 		DataReader.data += addition;
 
 		Debug.Log ("Data after addition: " + DataReader.data);
+
+		AccountManager.GetInstance ().InvokeSetData (key, DataReader.data);
+
+		MenusManager.GetInstance ().ToggleLoading (false);
+		yield return null;
+
+	}
+
+	public static IEnumerator SubtractData (string key, string subtraction){
+
+		MenusManager.GetInstance ().ToggleLoading (true, "Sending Data...");
+
+		IEnumerator e = DataReader.Refresh (key);
+		while (e.MoveNext ())
+			yield return e.Current;
+
+		Debug.Log ("Data before subtraction: " + DataReader.data);
+
+		if (DataReader.data.Contains (subtraction)) {
+			DataReader.data = DataReader.data.Replace (subtraction, "");
+		} else {
+			Debug.LogError ("Data to remove: " + subtraction + ", was not found in data: " + DataReader.data);
+		}
+
+		Debug.Log ("Data after subtraction: " + DataReader.data);
 
 		AccountManager.GetInstance ().InvokeSetData (key, DataReader.data);
 

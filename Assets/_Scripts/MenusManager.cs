@@ -133,6 +133,15 @@ public class MenusManager : MonoBehaviour {
 
 	}
 
+	public void ToggleLoading(bool isLoading, string msg){
+
+		loading.SetActive (isLoading);
+
+		loadMsg.text = isLoading ? msg : "Loading...";
+		
+
+	}
+
 	public void SetNetworkErrorActive(){
 		netError.SetActive (true);
 	}

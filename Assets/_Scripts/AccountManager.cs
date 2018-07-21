@@ -13,10 +13,10 @@ public class AccountManager : MonoBehaviour {
 		if (instance == null) {
 			instance = this;
 		} else {
-			Debug.Log("More than one " + transform.name + " in the scene");
+
 			Destroy(gameObject);
 		}
-		DontDestroyOnLoad(instance);
+		DontDestroyOnLoad(gameObject);
 		instance = this;
 	}
 
@@ -49,13 +49,14 @@ public class AccountManager : MonoBehaviour {
 
 		menus = MenusManager.GetInstance ();
 
-		if (PlayerPrefsManager.GetIsUserInit ()) {
-			username = PlayerPrefsManager.GetUserID ().ToString ();
-			StartCoroutine (Login (username));
-		} else {
-			StartCoroutine (DataWriter.UserInit ());
+		if (!isLoggedIn) {
+			if (PlayerPrefsManager.GetIsUserInit ()) {
+				username = PlayerPrefsManager.GetUserID ().ToString ();
+				StartCoroutine (Login (username));
+			} else {
+				StartCoroutine (DataWriter.UserInit ());
+			}
 		}
-
 	}
 		
 
@@ -192,7 +193,7 @@ public class AccountManager : MonoBehaviour {
     }
 
     //Run the command sequence to set user data
-	IEnumerator SetData (string user, string data) {
+	public IEnumerator SetData (string user, string data) {
 
 		isSettingData = true;
 
@@ -221,7 +222,7 @@ public class AccountManager : MonoBehaviour {
 
     }
 
-	IEnumerator GetData(string user, OnDataRecievedCallback onDataRecieved) {
+	public IEnumerator GetData(string user, OnDataRecievedCallback onDataRecieved) {
 
 		Debug.Log ("Getting data for: " + user);
 
@@ -233,11 +234,14 @@ public class AccountManager : MonoBehaviour {
 		//wait for the command sequence to finish loading
 		while (e.MoveNext())
 		{
+			Debug.Log (e.Current as string);
 			yield return e.Current;
 		}
 
 		//get the command sequence result
 		string data = e.Current as string;
+
+		Debug.Log ("Got data: " + data);
 
 		if (data != null) {
 			onDataRecieved.Invoke(data);

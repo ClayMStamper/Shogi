@@ -8,6 +8,8 @@ public class DataWriter : MonoBehaviour {
 
 	#region coroutines
 
+	//***clean this methods***
+
 	//adds on to the end of a given data string
 	public static IEnumerator AppendData (string key, string addition){
 
@@ -17,13 +19,28 @@ public class DataWriter : MonoBehaviour {
 		while (e.MoveNext ())
 			yield return e.Current;
 
+		if (!addition.Contains ("|")) {
+			addition += "|";
+		}
+
 		Debug.Log ("Data before addition: " + DataReader.data);
 
 		DataReader.data += addition;
 
 		Debug.Log ("Data after addition: " + DataReader.data);
 
-		AccountManager.GetInstance ().InvokeSetData (key, DataReader.data);
+		if (!DataReader.data.Contains ("|")) {
+			DataReader.data += "|";
+		}
+		if (DataReader.data == "|") {
+			DataReader.data = "";
+		}
+
+		try {
+			AccountManager.GetInstance ().InvokeSetData (key, DataReader.data);
+		} catch {
+			FindObjectOfType <AccountManager> ().InvokeSetData (key, DataReader.data);
+		}
 
 		MenusManager.GetInstance ().ToggleLoading (false);
 		yield return null;
@@ -32,7 +49,7 @@ public class DataWriter : MonoBehaviour {
 
 	public static IEnumerator SubtractData (string key, string subtraction){
 
-		MenusManager.GetInstance ().ToggleLoading (true, "Sending Data...");
+		//MenusManager.GetInstance ().ToggleLoading (true, "Sending Data...");
 
 		IEnumerator e = DataReader.Refresh (key);
 		while (e.MoveNext ())
@@ -42,6 +59,9 @@ public class DataWriter : MonoBehaviour {
 
 		if (DataReader.data.Contains (subtraction)) {
 			DataReader.data = DataReader.data.Replace (subtraction, "");
+			if (DataReader.data.Contains ("||")) {
+				DataReader.data = DataReader.data.Replace ("||", "|");
+			}
 		} else {
 			Debug.LogError ("Data to remove: " + subtraction + ", was not found in data: " + DataReader.data);
 		}
@@ -50,7 +70,7 @@ public class DataWriter : MonoBehaviour {
 
 		AccountManager.GetInstance ().InvokeSetData (key, DataReader.data);
 
-		MenusManager.GetInstance ().ToggleLoading (false);
+		//MenusManager.GetInstance ().ToggleLoading (false);
 		yield return null;
 
 	}

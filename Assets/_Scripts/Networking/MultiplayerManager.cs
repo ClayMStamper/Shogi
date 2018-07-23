@@ -77,18 +77,17 @@ public class MultiplayerManager : MonoBehaviour {
 	public IEnumerator HostMatchRoom(){
 
 		menus.ToggleLoading (true, "Connecting...");
+		bool error = false;
 
 		//set up match with guest
 		IEnumerator e = Host ();
-		while (e.MoveNext ())
+		while (e.MoveNext () && !error) {
 			yield return e.Current;
-
-		//Stop looking for guests
-		e = DataWriter.SubtractData ("hosting", hostAddress + "|");
-		while (e.MoveNext ())
-			yield return e.Current;
-
-		OnHost ();
+			if (!server.isStarted)
+				error = true;
+		}
+		if (!error)
+			OnHost ();
 
 	}
 
@@ -97,41 +96,38 @@ public class MultiplayerManager : MonoBehaviour {
 		menus.ToggleLoading (true, "Waiting for opponent...");
 
 		server = Instantiate (serverPrefab).GetComponent <Server>();
+		server.Init ();
 
-		while (!server.isStarted) {
-			server.Init();
-			yield return null;
-		}
+		bool error = !(server.isStarted);
 
-		client = Instantiate (clientPrefab).GetComponent <Client> ();
-
-		while (!client.socketReady){
+		if (!error) {
+			client = Instantiate (clientPrefab).GetComponent <Client> ();
 			client.ConnectToServer (hostAddress, client.port);
 			client.isHost = true;
-			yield return null;
+
+
+			while (server.clients.Count < 2) {
+				yield return null;
+			}
 		}
 
-		while (server.clients.Count < 2) {
-			yield return null;
-		}
+		yield return null;
 
 	}
 
 	IEnumerator Join(){
 
 		client = Instantiate (clientPrefab).GetComponent <Client> ();
+		client.ConnectToServer (hostAddress, client.port);
 
-		while (!client.socketReady) {
-			client.ConnectToServer (hostAddress, client.port);
-			yield return new WaitForSeconds (1f);
-		}
-//		Server.clientInstances.Add (client);
+		yield return new WaitForSeconds (1f);
+
 
 	}
 
 	public IEnumerator CloseRoomToGuests(){
 
-		IEnumerator e = DataWriter.SubtractData ("hosting", hostAddress + "|");
+		IEnumerator e = DataWriter.SubtractData ("hosting", hostAddress);
 		while (e.MoveNext ())
 			yield return e.Current;
 
@@ -149,7 +145,7 @@ public class MultiplayerManager : MonoBehaviour {
 		menus.SetNetworkErrorActive ();
 		StopAllCoroutines ();
 
-		StartCoroutine(CloseRoomToGuests ());
+//		StartCoroutine(CloseRoomToGuests ());
 
 	}
 
@@ -160,16 +156,18 @@ public class MultiplayerManager : MonoBehaviour {
 		menus.ToggleLoading (false);
 		StopAllCoroutines ();
 
-		StartCoroutine(CloseRoomToGuests ());
+//		StartCoroutine(CloseRoomToGuests ());
 
 	}
 
 	public void OnJoin(){
+		menus.ToggleLoading (false);
 		levelManager.LoadLevel ("02c_Online");
 		StartCoroutine(CloseRoomToGuests ());
 	}
 
 	public void OnHost(){
+		menus.ToggleLoading (false);
 		levelManager.LoadLevel ("02c_Online");
 		StartCoroutine(CloseRoomToGuests ());
 	}

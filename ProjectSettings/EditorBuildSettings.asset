@@ -8,9 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/00a_Splash.unity
     guid: b500c42ecfedf4940a8a075a8be26284
-  - enabled: 0
-    path: Assets/_Scenes/00b_Intro.unity
-    guid: 28c5fa77893b64d5da96eb0ade99bc53
   - enabled: 1
     path: Assets/_Scenes/01a_Menu.unity
     guid: 8e402c31be0a5439d8091f5fd853c732
@@ -21,5 +18,5 @@ EditorBuildSettings:
     path: Assets/_Scenes/02b_Pvp.unity
     guid: 6e4b26c8ac09b471fb627cf0965930e4
   - enabled: 1
-    path: Assets/_Scenes/02c_Online.unity
-    guid: a16d086d429074498a21595282b4a427
+    path: Assets/_Scenes/02c_Server.unity
+    guid: 7c2bb8523fc434659b987eb9dbd8b8d0

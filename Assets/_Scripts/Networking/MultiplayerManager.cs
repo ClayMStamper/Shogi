@@ -41,7 +41,7 @@ public class MultiplayerManager : MonoBehaviour {
 
 	void Start(){
 
-		hostAddress = Network.player.ipAddress;
+	//	hostAddress = Network.player.ipAddress;
 
 		levelManager = LevelManager.GetInstance ();
 		levelManager.onLevelWasLoadedCallback += OnLoadedMenu;

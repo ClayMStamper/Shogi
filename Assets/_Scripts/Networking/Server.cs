@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Net.Sockets;
+using System.Linq;
 using System;
 using System.Net;
 using System.IO;
@@ -12,18 +13,20 @@ public class Server : MonoBehaviour {
 
 	public List <ServerClient> clients;
 	private List <ServerClient> disconnectList;
+	Dictionary <ServerClient, ServerClient> matches;
 
 	private TcpListener server;
 	public bool isStarted;
 
 	//call when server created
-	public void Init(){
+	private void Start(){
 
 		//starting from menu scene
 
 		DontDestroyOnLoad (gameObject);
 		clients = new List<ServerClient> ();
 		disconnectList = new List<ServerClient> ();
+		matches = new Dictionary<ServerClient, ServerClient> ();
 
 		try {
 
@@ -37,7 +40,7 @@ public class Server : MonoBehaviour {
 			isStarted = true;
 
 		} catch (System.Exception e){
-			Debug.Log ("Socket error: " + e.Message);
+			Debug.LogError ("Socket error: " + e.Message);
 			isStarted = false;
 			MultiplayerManager.GetInstance ().OnHostFailed ();
 		}
@@ -48,25 +51,27 @@ public class Server : MonoBehaviour {
 
 		if (!isStarted)
 			return;
+		
+		if (clients.Count == 0) {
+			Debug.Log ("still no clients");
+		}
 
-		foreach (ServerClient c in clients) {
+		//iterate matches and ping each client
+		foreach (KeyValuePair <ServerClient, ServerClient> match in matches) {
+
+			ServerClient c1 = match.Key;
+			ServerClient c2 = match.Value;
+
 			// is the client still connected?
-			if (!IsConnected (c.tcp)) {
-				c.tcp.Close ();
-				disconnectList.Add (c);
-				continue;
-			} else {
-				NetworkStream s = c.tcp.GetStream ();
-				if (s.DataAvailable) {
-					StreamReader reader = new StreamReader (s, true);
-					string data = reader.ReadLine ();
-
-					if (data != null) {
-						OnIncomingData (c, data);
-					}
-
-				}
+			if (PingClient (c2)) {
+				CheckForData (c2);
 			}
+			if (PingClient (c1)) {
+				CheckForData (c1);
+			} else {
+				continue;
+			}
+
 		}
 
 		for (int i = 0; i < disconnectList.Count - 1; i++) {
@@ -74,10 +79,39 @@ public class Server : MonoBehaviour {
 			// tell our player sombody has disconnected
 
 			clients.Remove (disconnectList [i]);
+			matches.Remove (disconnectList [i]);
 			disconnectList.RemoveAt (i);
 
 		}
 
+	}
+
+	bool PingClient(ServerClient c){
+		Debug.Log ("Pinging client: " + c.clientName);
+		if (!IsConnected (c.tcp)) {
+			c.tcp.Close ();
+			disconnectList.Add (c);
+			Debug.Log (c.clientName + " disconnected");
+			return false;
+		} else {
+			Debug.Log (c.clientName + " is still connected");
+			return true;
+		}
+	}
+
+	void CheckForData(ServerClient c){
+		
+		NetworkStream s = c.tcp.GetStream ();
+
+		if (s.DataAvailable) {
+			StreamReader reader = new StreamReader (s, true);
+			string data = reader.ReadLine ();
+
+			if (data != null) {
+				OnIncomingData (c, data);
+			}
+
+		}
 	}
 
 	private void StartListening(){
@@ -89,12 +123,23 @@ public class Server : MonoBehaviour {
 		TcpListener listener = (TcpListener)ar.AsyncState;
 
 		string allUsers = "";
-		foreach (ServerClient i in clients){
-			allUsers += i.clientName + '|';
+		foreach (ServerClient c in clients){
+			allUsers += c.clientName + '|';
 		}
 
 		ServerClient sc = new ServerClient (listener.EndAcceptTcpClient (ar));
 		clients.Add (sc);
+
+		//if empty make first entry
+		if (matches.Count == 0) {
+			matches.Add (sc, null);
+			sc.isPlayerOne = true;
+		} else if (matches.Keys.ToArray () [matches.Count] != null) { //if match is full make new entry
+			matches.Add (sc, null);
+			sc.isPlayerOne = true;
+		} else {
+			matches.Keys.ToArray()[matches.Count] = sc; //else add to newest match
+		}
 
 		StartListening ();
 
@@ -158,14 +203,14 @@ public class Server : MonoBehaviour {
 		switch (aData [0]) {
 		case "CWHO":
 			c.clientName = aData [1];
-			c.isHost = (aData [2] == "host") ? true : false;
+			c.isPlayerOne = (aData [2] == "host") ? true : false;
 			Broadcast ("SCNN|" + c.clientName, clients);
 			break;
 		case "CMOV":
 
 			data = data.Replace ("CMOV", "SMOV");
 
-			if (c.isHost) {
+			if (c.isPlayerOne) {
 				Broadcast (data, clients[1]);
 			} else {
 				Broadcast (data, clients[0]);
@@ -176,7 +221,7 @@ public class Server : MonoBehaviour {
 
 			data = data.Replace ("CDROP", "SDROP");
 
-			if (c.isHost) {
+			if (c.isPlayerOne) {
 				Debug.Log ("Broadcasting " + data + " to host");
 				Broadcast (data, clients [1]);
 			} else {
@@ -214,7 +259,7 @@ public class ServerClient{
 
 	public string clientName;
 	public TcpClient tcp;
-	public bool isHost;
+	public bool isPlayerOne;
 
 	public ServerClient (TcpClient tcp){
 		this.tcp = tcp;

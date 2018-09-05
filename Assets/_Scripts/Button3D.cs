@@ -131,7 +131,7 @@ public class Button3D : MonoBehaviour {
 	}
 
 	public void Connect(){
-		MultiplayerManager.GetInstance ().Connect ();
+		MultiplayerManager.GetInstance ().Join ();
 	}
 
 	public void Queue(){

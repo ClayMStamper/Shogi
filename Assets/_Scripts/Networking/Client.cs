@@ -36,6 +36,7 @@ public class Client : MonoBehaviour {
 
 			socketReady = true;
 			DontDestroyOnLoad (gameObject);
+			MultiplayerManager.GetInstance().OnJoin();
 
 		} catch (Exception e) {
 
@@ -169,6 +170,6 @@ public class Client : MonoBehaviour {
 public class GameClient {
 
 	public string name;
-	public bool isHost;
+	public bool isPlayerOne;
 
 }

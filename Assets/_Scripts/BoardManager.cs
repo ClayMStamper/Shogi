@@ -31,12 +31,6 @@ public class BoardManager : MonoBehaviour {
 
 	#endregion
 
-	[SerializeField]
-	AudioClip clickSound;
-
-	[SerializeField]
-	GameObject gameOverPopup;
-
 	//the points that your mouse / finger are hovered over
 	// defaulted to negative to indicate not being on the board
 	public int selectedX= -1, selectedY = -1;
@@ -48,6 +42,10 @@ public class BoardManager : MonoBehaviour {
 	public Piece selectedPiece;
 	[HideInInspector] 
 	public List <Piece> activePieces;
+	[SerializeField]
+	AudioClip clickSound;
+	[SerializeField]
+	GameObject gameOverPopup;
 
 	public Piece[,] pieces;
 

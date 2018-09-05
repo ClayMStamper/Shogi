@@ -15,15 +15,19 @@ public class Board{
 
 		pieces = new Piece[,] { 
 			{new Lancer(), new Knight(), new Silver(), new Gold(), new King(), new Gold(), new Silver(), new Knight(), new Lancer()},
-			{null, new Rook(), null, null, null, null, null, new Bishop(), null},
+			{null, new Bishop(), null, null, null, null, null, new Rook(), null},
+			{new Pawn(), new Pawn(), new Pawn(), new Pawn(), new Pawn(), new Pawn(), new Pawn(), new Pawn(), new Pawn()}, 
 			{null, null, null, null, null, null, null, null, null},
 			{null, null, null, null, null, null, null, null, null},
 			{null, null, null, null, null, null, null, null, null},
+			{new Pawn(), new Pawn(), new Pawn(), new Pawn(), new Pawn(), new Pawn(), new Pawn(), new Pawn(), new Pawn()},
 			{null, new Bishop(), null, null, null, null, null, new Rook(), null},
 			{new Lancer(), new Knight(), new Silver(), new Gold(), new King(), new Gold(), new Silver(), new Knight(), new Lancer()} };
 
-		playerOneMoves = new List <Square> ();
-		playerTwoMoves = new List <Square> ();
+		playerOneMoves = GetAllLegalMoves (true); // {new Square()};
+		playerTwoMoves = GetAllLegalMoves (false);
+
+		sideTable = new SideTable (BoardManager.GetInstance().table1);
 	}
 
 	//evaluate current board

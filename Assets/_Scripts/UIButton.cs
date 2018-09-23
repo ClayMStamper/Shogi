@@ -10,10 +10,10 @@ public class UIButton : MonoBehaviour {
 		settings = Settings.GetInstance ();
 	}
 
-	public void SetSkin(int index){
+/*	public void SetSkin(int index){
 
-		settings.chosenSkin = settings.PiecesSkins [index];
-		PlayerPrefsManager.SetSkin (index);
+		settings.chosenSkin = settings.piecesSkins [index];
+//		PlayerPrefsManager.SetSkin (index);
 
 		settings.piecesMat.mainTexture = settings.chosenSkin;
 
@@ -22,5 +22,7 @@ public class UIButton : MonoBehaviour {
 	public void SetSkin(){
 		settings.piecesMat.mainTexture = settings.chosenSkin;
 	}
+*/
+
 
 }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIToggle : MonoBehaviour {
 
 	[SerializeField]
+    [Tooltip ("highlight, checkWarning, fingerMarker, showScore, sound, music")]
 	private string key = "";
 	public bool value;
 
@@ -19,7 +20,9 @@ public class UIToggle : MonoBehaviour {
 
 		Debug.Log (myImg);
 
-		value = PlayerPrefsManager.GetToggleIsOn (key);
+        if (PlayerPrefs.HasKey(key))
+		    value = PlayerPrefsManager.GetToggleIsOn (key);
+        
 		myImg.sprite = value ? settings.toggleOn : settings.toggleOff;
 
 	}

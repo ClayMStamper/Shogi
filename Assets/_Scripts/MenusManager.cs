@@ -86,15 +86,15 @@ public class MenusManager : MonoBehaviour {
     }
 
     IEnumerator SwitchMenus(){
-
+        
         Debug.Log("Switching menus");
 
         anim.SetBool("isOpen", false);
 
         yield return new WaitForSeconds(scrollSpeed);
 
-        SetMenu();
         anim.SetBool("isOpen", true);
+        SetMenu();
 
     }
 

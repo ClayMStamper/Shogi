@@ -26,9 +26,9 @@ public class PlayerPrefsManager : MonoBehaviour {
 
 	}
 
-	public static void SetSkin(int index){
-		PlayerPrefs.SetInt ("piecesSkin", index);
-	}
+//	public static void SetSkin(int index){
+//		PlayerPrefs.SetInt ("piecesSkin", index);
+//	}
 
 	public static int GetSkin(){
 		return PlayerPrefs.GetInt ("piecesSkin");

@@ -366,7 +366,7 @@ public class BoardManager : MonoBehaviour {
 		//Debug.Log ("Y pos: " + selectedPiece.y);
 
 		CheckForPromotion ();
-
+/*
 		if (Settings.GetInstance ().showScore) {
 			try{
 				Score.GetInstance ().UpdateScore ();
@@ -374,7 +374,7 @@ public class BoardManager : MonoBehaviour {
 				Debug.LogError ("Trying to update the score while disabled");
 			}
 		}
-
+*/
 		//switch turns
 		isPlayerOnesTurn = !isPlayerOnesTurn;
 
@@ -390,7 +390,8 @@ public class BoardManager : MonoBehaviour {
 
 		//king was captured
 		if (piece.GetComponent<King> ()) {
-			gameOverPopup.SetActive (true);
+            LevelManager.GetInstance().LoadLevel("01a_Menu");
+            return;
 		}
 
 		//any captured piece is demoted if it was promoted

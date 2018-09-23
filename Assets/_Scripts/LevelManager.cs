@@ -13,7 +13,7 @@ public class LevelManager : MonoBehaviour {
             instance = this;
         } else {
             //Debug.LogError("More than one " + transform.name + " in the scene");
-            Destroy(gameObject);
+            Destroy(instance.gameObject);
         }
         DontDestroyOnLoad(gameObject);
     }

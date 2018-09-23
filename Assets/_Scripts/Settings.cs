@@ -70,7 +70,7 @@ public class Settings : MonoBehaviour {
             case JAPANESE_KEY:
                 japanese = !japanese;
                 PlayerPrefsManager.SetToggleIsOn(JAPANESE_KEY, japanese);
-                piecesMat.mainTexture = japanese ? piecesSkins[0] : piecesSkins[1];
+                piecesMat.mainTexture = japanese ? piecesSkins[1] : piecesSkins[0];
                 return japanese;
             case HIGHLIGHT_KEY:
                 highlightMoves = !highlightMoves;

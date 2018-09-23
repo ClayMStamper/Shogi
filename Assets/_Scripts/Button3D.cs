@@ -18,13 +18,13 @@ public class Button3D : MonoBehaviour {
 		ToggleShaded (!isActive);
 	}
 
-	MenusManager menusManager;
+//	MenusManager menusManager;
 
 	public void OnClick(){
 
-		if (menusManager == null) {
-			menusManager = MenusManager.GetInstance ();
-		}
+//		if (menusManager == null) {
+//			menusManager = MenusManager.GetInstance ();
+//		}
 
 		if (isActive) {
 			ToggleIsClicked (true);
@@ -71,8 +71,8 @@ public class Button3D : MonoBehaviour {
 			//clicked a scroll
 
 			GetComponent <Animator> ().SetTrigger ("toggleOpen");
-			menusManager.buttonPressed = transform;
-			menusManager.toggleMenu ();
+//			menusManager.buttonPressed = transform;
+//			menusManager.toggleMenu ();
 
 		} 
 

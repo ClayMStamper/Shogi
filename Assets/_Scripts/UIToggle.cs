@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIToggle : MonoBehaviour {
 
 	[SerializeField]
-	private string key;
+	private string key = "";
 	public bool value;
 
 	public Settings settings;

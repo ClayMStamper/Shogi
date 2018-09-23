@@ -25,101 +25,77 @@ public class MenusManager : MonoBehaviour {
 		return instance;
 	}
 
-#endregion
+    #endregion
 
-	[SerializeField]
-	Transform canvas;
+    List<GameObject> menus = new List<GameObject>();
+    Animator anim;
 
-	[SerializeField]
-	GameObject settingsContent = null, profileContent = null;
+    [SerializeField]
+    int currentMenu = 0;
 
-	[HideInInspector]
-	public Transform buttonPressed;
-	[HideInInspector]
-	public GameObject openMenu;
+    [Range(0, 1f)]
+    float scrollSpeed;
 
-	bool settingsOpen, profileOpen;
+    private void Start()
+    {
 
-	void Start(){
-		if (canvas == null) {
-			try {
-			canvas = WorldCanvas.GetInstance ().transform;
-			} catch {
-				//this scene doesnt need a canvas refernce
-			}
-		}
-	}
+        anim = transform.parent.gameObject.GetComponent<Animator>();
 
-	void Update(){
+        GetMenus();
+        SetMenu();
 
-		if (Input.GetMouseButtonDown (0)) {
+    }
 
-			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+    private void GetMenus(){
+        
+        menus = new List<GameObject>();
 
-			if (Physics.Raycast (ray, out hit, 100f)){
+        foreach (Transform child in transform){
+            menus.Add(child.gameObject);
+        }
 
-				Debug.Log (hit.transform);
+    }
 
-				if (hit.transform.GetComponent<Button3D> ()) {
+    private void SetMenu(){
 
-					Button3D button = hit.transform.GetComponent<Button3D> ();
-					button.OnClick ();
+        for (int i = 0; i < menus.Count; i++){
 
-				}
+            if (i == currentMenu){
+                menus[i].SetActive(true);
+            } else {
+                menus[i].SetActive(false);
+            }
+        }
 
-			}
+    }
 
-		}
+    private void SetMenu(int i){
+        currentMenu = i;
+        SetMenu();
+    }
 
-	}
+    //incr menu index or reset to 0 if busts
+    public void NextMenu(){
+        currentMenu = ++currentMenu >= menus.Count ? 0 : currentMenu++;
+        StartCoroutine(SwitchMenus());
+    }
 
-	public void toggleMenu(){
-			
-		if (openMenu != null) { // toggle off
-			//StartCoroutine (FadeOut (openMenu, 0.01f, true));
-			Destroy (openMenu);
-		} else { //toggle on
+    public void BackMenu(){
+        currentMenu = --currentMenu < 0 ? (menus.Count - 1) : currentMenu--;
+        StartCoroutine(SwitchMenus());
+    }
 
-			switch (buttonPressed.name) {
-			
-			case "Profile Button":
-				openMenu = Instantiate (profileContent, canvas);
-				break;
-			case "Settings Button":
-				openMenu = Instantiate (settingsContent, canvas);
-				break;
-			default:
-				Debug.LogError ("Button name: \"" + buttonPressed.name + "\" was not recognized");
-				break;
+    IEnumerator SwitchMenus(){
 
-			}
+        Debug.Log("Switching menus");
 
-		}
-	}
+        anim.SetBool("isOpen", false);
 
-	public IEnumerator FadeOut (GameObject obj, float fadeSpeed, bool destroy){
+        yield return new WaitForSeconds(scrollSpeed);
 
-		SpriteRenderer img = obj.GetComponent <SpriteRenderer> ();
+        SetMenu();
+        anim.SetBool("isOpen", true);
 
-		while (img.color.a > 0 && img != null) {
+    }
 
-			Color newColor = img.color;
-			newColor.a -= fadeSpeed * Time.deltaTime;
-
-			img.color = newColor;
-
-			yield return null;
-
-			if (destroy) {
-				Destroy (obj);
-			} else { //reset
-				newColor.a = 1;
-				img.color = newColor;
-			}
-
-		}
-
-	}
-		
 }

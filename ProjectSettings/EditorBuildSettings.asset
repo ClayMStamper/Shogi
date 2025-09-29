@@ -14,15 +14,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/01a_Menu.unity
     guid: 8e402c31be0a5439d8091f5fd853c732
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/_Scenes/02a_Cpu.unity
     guid: 26f76495cec0b4dd89b34302802168dd
   - enabled: 1
-    path: Assets/_Scenes/02b_Pvp.unity
+    path: Assets/_Scenes/02b_Pvp_Local.unity
     guid: 6e4b26c8ac09b471fb627cf0965930e4
+  m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

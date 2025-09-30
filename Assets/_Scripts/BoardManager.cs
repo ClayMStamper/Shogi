@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using _Scripts;
+using Mirror;
 
 //On the "Board" object
 [RequireComponent (typeof (AudioSource))]
-public class BoardManager : MonoBehaviour {
+public class BoardManager : NetworkBehaviour {
 
 	#region singleton
 
@@ -15,13 +17,14 @@ public class BoardManager : MonoBehaviour {
 
 	void Awake(){
 
+		
 		if (instance == null) {
 			instance = this;
 		} else {
 			Destroy (gameObject);
 		}
 
-	//	DontDestroyOnLoad (gameObject);
+		//	DontDestroyOnLoad (gameObject);
 
 	}
 
@@ -31,6 +34,8 @@ public class BoardManager : MonoBehaviour {
 
 	#endregion
 
+	private ShogiPlayer localPlayer;
+	
 	[SerializeField]
 	AudioClip clickSound;
 
@@ -86,9 +91,9 @@ public class BoardManager : MonoBehaviour {
 			pieces [piece.x, piece.y] = piece;
 		}
 
+		// this makes sense
 		isPlayerOnesTurn = Random.value < 0.5f ?  false : false;
-			
-
+		
 	}
 
 	//keeps track of what piece you have selected
@@ -112,8 +117,7 @@ public class BoardManager : MonoBehaviour {
 			selectedX = -1;
 			selectedY = -1;
 		}
-			
-
+		
 	}
 
 	void OnClick(){
@@ -154,6 +158,12 @@ public class BoardManager : MonoBehaviour {
 	//sets var "selectedPiece" to piece at clicked on coord
 	//this happens if selectedPiece == null
 	public void SelectPiece (int x, int y){
+		
+		if (!IsLocalPlayerTurn())
+		{
+			Debug.Log("Not your turn!");
+			return;
+		}
 
 		//selected coord is empty
 		if (pieces [x, y] == null) {
@@ -167,7 +177,7 @@ public class BoardManager : MonoBehaviour {
 
 		legalMoves = pieces [x, y].LegalMoves ();
 		selectedPiece = pieces [x, y];
-	//	SideTableManager.selectedPiece = selectedPiece;
+		//	SideTableManager.selectedPiece = selectedPiece;
 		if (Settings.GetInstance ().highlightMoves) {
 			highlightManager.ShowLegalMoves (legalMoves);
 		}
@@ -488,4 +498,26 @@ public class BoardManager : MonoBehaviour {
 
 	}
 
+	// Add this method to check if it's the local player's turn
+	public bool IsLocalPlayerTurn()
+	{
+		if (!localPlayer)
+		{
+			localPlayer = FindObjectOfType<ShogiPlayer>();
+			if (localPlayer && localPlayer.isLocalPlayer)
+			{
+				return true;
+			}
+		}
+		return localPlayer && localPlayer.CanMove();
+	}
+
+	public bool TryMovePiece(int fromX, int fromY, int toX, int toY) {
+		SelectPiece(fromX, fromY);
+		if (selectedPiece.LegalMoves()[toX, toY]) {
+			MovePiece(new Square(new Vector2Int(toX, toY)));
+			return true;
+		}
+		return false;
+	}
 }

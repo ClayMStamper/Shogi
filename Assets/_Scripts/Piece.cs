@@ -1,14 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
-public abstract class Piece : MonoBehaviour {
+public abstract class Piece : NetworkBehaviour {
 
 	public bool isPlayerOne;
 	public bool isCaptured;
 
-	public int x { set; get;}
-	public int y { set; get;}
+	[SyncVar]
+	public int x;
+
+	[SyncVar]
+	public int y;
 
 	BoardManager board;
 
@@ -19,6 +23,7 @@ public abstract class Piece : MonoBehaviour {
 
 	void Awake(){
 
+		
 		GetCurrentPos (); //references position on board as variable x & y
 
 	}
@@ -45,7 +50,7 @@ public abstract class Piece : MonoBehaviour {
 		if (x > 8 || x < 0 || y > 8 || y < 0) {
 			return true;
 		}
-		if (board.pieces [x, y] != null) {
+		if (board.pieces [x, y]) {
 			//there is a piece on that tile
 			if (board.pieces [x, y].isPlayerOne == this.isPlayerOne) {
 				//it's a friendly piece

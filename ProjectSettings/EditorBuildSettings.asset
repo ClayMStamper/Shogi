@@ -23,5 +23,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Scenes/02b_Pvp_Remote.unity
     guid: d2d18f8e985ed9d43831fb2c9e6d61d6
+  - enabled: 0
+    path: Assets/Mirror/Examples/Tanks/Scenes/MirrorTanks.unity
+    guid: 83f9d2fb76f5742448c6e51f258327a2
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

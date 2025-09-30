@@ -166,8 +166,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70c699df69f5840d38aa529b35e92c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 1
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &19592261
 MeshRenderer:
@@ -271,8 +276,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09f2e0d08a924531be1fc14308aa326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 1
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &78141638
 MeshRenderer:
@@ -376,8 +386,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70c699df69f5840d38aa529b35e92c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 0
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &117736036
 MeshRenderer:
@@ -729,8 +744,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c69c38ab8c4466798de59dfa19b7c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 1
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &255196923
 MeshRenderer:
@@ -834,8 +854,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09f2e0d08a924531be1fc14308aa326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 1
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &290525410
 MeshRenderer:
@@ -1029,8 +1054,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5bdfc2696034f0aad83fe2e8f2ff66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 0
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &334931903
 MeshRenderer:
@@ -1134,8 +1164,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a622efa877767499f8cff7e1d136c3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 0
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &385291375
 MeshRenderer:
@@ -1239,8 +1274,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 587d01b92be674b9cb3553a5ee08a019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 1
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &385601580
 MeshRenderer:
@@ -1344,8 +1384,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc4f623df7e0d404fa8b2fae1bbe0b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 0
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &434311604
 MeshRenderer:
@@ -1449,8 +1494,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a622efa877767499f8cff7e1d136c3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 0
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &442109189
 MeshRenderer:
@@ -1556,47 +1606,47 @@ MonoBehaviour:
   isActive: 1
   boardManager: {fileID: 1404062334}
   allPieces:
-  - {fileID: 1124390074}
-  - {fileID: 1131758587}
-  - {fileID: 1915703569}
-  - {fileID: 490090230}
-  - {fileID: 1002927825}
-  - {fileID: 944846680}
-  - {fileID: 1306808907}
-  - {fileID: 793850071}
-  - {fileID: 2031047504}
-  - {fileID: 1885385731}
-  - {fileID: 1322618966}
-  - {fileID: 19592258}
-  - {fileID: 1226313680}
-  - {fileID: 1778052649}
-  - {fileID: 1347677301}
-  - {fileID: 385601577}
-  - {fileID: 255196920}
-  - {fileID: 710043726}
-  - {fileID: 78141635}
-  - {fileID: 290525407}
-  - {fileID: 385291372}
-  - {fileID: 1347991168}
-  - {fileID: 547205586}
-  - {fileID: 442109186}
-  - {fileID: 1163944246}
-  - {fileID: 1682087655}
-  - {fileID: 1110379097}
-  - {fileID: 825088265}
-  - {fileID: 809646121}
-  - {fileID: 334931900}
-  - {fileID: 1318567105}
-  - {fileID: 434311601}
-  - {fileID: 117736033}
-  - {fileID: 1007433233}
-  - {fileID: 529073473}
-  - {fileID: 1664068298}
-  - {fileID: 1072732257}
-  - {fileID: 509066791}
-  - {fileID: 1314279815}
-  - {fileID: 2104770291}
-  selectedPiece: {fileID: 1124390076}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  selectedPiece: {fileID: 0}
 --- !u!1 &479675220
 GameObject:
   m_ObjectHideFlags: 0
@@ -1678,8 +1728,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a622efa877767499f8cff7e1d136c3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 1
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &490090233
 MeshRenderer:
@@ -1783,8 +1838,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c69c38ab8c4466798de59dfa19b7c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 0
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &509066794
 MeshRenderer:
@@ -1888,8 +1948,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 587d01b92be674b9cb3553a5ee08a019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 0
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &529073476
 MeshRenderer:
@@ -1993,8 +2058,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a622efa877767499f8cff7e1d136c3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 0
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &547205589
 MeshRenderer:
@@ -2380,8 +2450,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c69c38ab8c4466798de59dfa19b7c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 1
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &710043729
 MeshRenderer:
@@ -2545,8 +2620,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a622efa877767499f8cff7e1d136c3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 1
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &793850074
 MeshRenderer:
@@ -2656,8 +2736,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a622efa877767499f8cff7e1d136c3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 0
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &809646124
 MeshRenderer:
@@ -2761,8 +2846,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a622efa877767499f8cff7e1d136c3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 0
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &825088268
 MeshRenderer:
@@ -2929,8 +3019,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a622efa877767499f8cff7e1d136c3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 1
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &944846683
 MeshRenderer:
@@ -3034,8 +3129,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a622efa877767499f8cff7e1d136c3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 1
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &1002927828
 MeshRenderer:
@@ -3139,8 +3239,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a734a9656cd0c4bc6adcda04ba12a6ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 0
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &1007433236
 MeshRenderer:
@@ -3244,8 +3349,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c69c38ab8c4466798de59dfa19b7c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 0
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &1072732260
 MeshRenderer:
@@ -3349,8 +3459,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a622efa877767499f8cff7e1d136c3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 0
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &1110379100
 MeshRenderer:
@@ -3454,8 +3569,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a622efa877767499f8cff7e1d136c3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 1
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &1124390077
 MeshRenderer:
@@ -3559,8 +3679,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a622efa877767499f8cff7e1d136c3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 1
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &1131758590
 MeshRenderer:
@@ -3713,8 +3838,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a622efa877767499f8cff7e1d136c3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 0
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &1163944249
 MeshRenderer:
@@ -3818,8 +3948,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc4f623df7e0d404fa8b2fae1bbe0b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 1
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &1226313683
 MeshRenderer:
@@ -3923,8 +4058,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a622efa877767499f8cff7e1d136c3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 1
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &1306808910
 MeshRenderer:
@@ -4028,8 +4168,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09f2e0d08a924531be1fc14308aa326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 0
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &1314279818
 MeshRenderer:
@@ -4133,8 +4278,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5bdfc2696034f0aad83fe2e8f2ff66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 0
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &1318567108
 MeshRenderer:
@@ -4238,8 +4388,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5bdfc2696034f0aad83fe2e8f2ff66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 1
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &1322618969
 MeshRenderer:
@@ -4343,8 +4498,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 587d01b92be674b9cb3553a5ee08a019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 1
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &1347677304
 MeshRenderer:
@@ -4448,8 +4608,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a622efa877767499f8cff7e1d136c3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 0
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &1347991171
 MeshRenderer:
@@ -4547,11 +4712,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1404062333}
+  - component: {fileID: 1404062334}
+  - component: {fileID: 1404062340}
   - component: {fileID: 1404062338}
   - component: {fileID: 1404062337}
   - component: {fileID: 1404062336}
   - component: {fileID: 1404062335}
-  - component: {fileID: 1404062334}
   - component: {fileID: 1404062332}
   - component: {fileID: 1404062339}
   m_Layer: 8
@@ -4605,6 +4771,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b62699a1f424e709ea1c8db111c781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   clickSound: {fileID: 8300000, guid: d21007ff3d1ea4a3dba2a18d9b63706e, type: 3}
   gameOverPopup: {fileID: 2146658232}
   selectedX: -1
@@ -4817,6 +4986,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1404062340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404062331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Mirror::Mirror.NetworkIdentity
+  sceneId: 3415862208
+  _assetId: 0
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &1457306043
 GameObject:
   m_ObjectHideFlags: 0
@@ -5175,8 +5361,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 587d01b92be674b9cb3553a5ee08a019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 0
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &1664068301
 MeshRenderer:
@@ -5280,8 +5471,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a622efa877767499f8cff7e1d136c3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 0
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &1682087658
 MeshRenderer:
@@ -5486,8 +5682,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a734a9656cd0c4bc6adcda04ba12a6ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 1
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &1778052652
 MeshRenderer:
@@ -5802,8 +6003,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5bdfc2696034f0aad83fe2e8f2ff66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 1
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &1885385734
 MeshRenderer:
@@ -6166,8 +6372,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a622efa877767499f8cff7e1d136c3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 1
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &1915703572
 MeshRenderer:
@@ -6317,8 +6528,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a622efa877767499f8cff7e1d136c3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 1
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &2031047507
 MeshRenderer:
@@ -6422,8 +6638,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09f2e0d08a924531be1fc14308aa326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   isPlayerOne: 0
   isCaptured: 0
+  x: 0
+  y: 0
   anim: {fileID: 0}
 --- !u!23 &2104770294
 MeshRenderer:
